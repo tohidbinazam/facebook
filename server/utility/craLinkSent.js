@@ -17,8 +17,8 @@ const craLinkSent = async (user, subject, jwt_exp) => {
     // Previous token remove
     await Token.findOneAndRemove({ userId: _id, reason })
     
-    // Create token    ?? Check it after
-    const token = createJWT({ _id }, jwt_exp)
+    // Create token
+    const token = createJWT({ _id, reason }, jwt_exp)
     
     // Sent token
     await Token.create({ userId: _id, reason, code, token })

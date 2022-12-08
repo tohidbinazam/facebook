@@ -1,8 +1,22 @@
 import axios from "axios";
 import numOrEmail from "../../utility/numOrEmail";
 import toaster from "../../utility/toaster";
-import { LOGGED_IN, LOGGED_OUT, REGISTER } from "./types";
+import { DATA_ADD, LOGGED_IN, LOGGED_OUT } from "./types";
 
+
+export const isLoggedIn = (token) => async (dispatch) => {
+    
+    const { data } = await axios.get(`/api/v1/auth/me`, {
+      headers : {
+        authorization : token
+      }
+    });
+    dispatch({
+      type: DATA_ADD,
+      payload: data,
+    });
+    
+}
 
 export const register = (all_data, setShow, navigate) => async (dispatch) => {
 
@@ -15,7 +29,7 @@ export const register = (all_data, setShow, navigate) => async (dispatch) => {
     const { data } = await axios.post(`/api/v1/auth/register-${isData}`, all_data);
 
     dispatch({
-      type: REGISTER,
+      type: DATA_ADD,
       payload: data,
     });
     toaster("Registration successful", "success");
@@ -61,26 +75,6 @@ export const verifyCode = (code, navigate) => async (dispatch, getState) => {
   }
 };
 
-
-export const isLoggedIn = (token) => async (dispatch) => {
-    if (token) {
-      
-      await axios.get('/api/v1/auth/me',{
-        headers : {
-            authorization : token
-        }
-      }).then(res => {
-        dispatch(loggedIn(res.data))
-      })
-      .catch(() => {
-        dispatch(loggedOut())
-      })
-      
-    }else{
-      dispatch(loggedOut())
-    }
-    
-}
 
 export const loggedIn = (payload) => ({
     type: LOGGED_IN,

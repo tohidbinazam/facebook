@@ -94,12 +94,18 @@ export const loggedInUser = async (req, res, next) => {
     const token = req.headers.authorization
     
     try {
+
+        const data = await Token.findOne({ token })
+
+        if (!data) {
+            return createError(401, 'Unauthorized')
+        }
         // Token verify
-        const token_info = jwt.verify(token, process.env.SECRET_KEY)
+        const { _id, reason } = jwt.verify(token, process.env.SECRET_KEY)
 
         // Get logged in user
-        const user = await User.findById(token_info.id)
-        res.status(200).json(user)
+        const user = await User.findById(_id)
+        res.status(200).json({ user, reason })
     
     } catch (error) {
         next(error)

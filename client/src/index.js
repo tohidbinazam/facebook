@@ -13,8 +13,8 @@ root.render(
   <React.StrictMode>
     <BrowserRouter>
       <Provider store={ store }>
-        <ToastContainer theme="dark"/>
         <App />
+        <ToastContainer theme="dark"/>
       </Provider>
     </BrowserRouter>
   </React.StrictMode>

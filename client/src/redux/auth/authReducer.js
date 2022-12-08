@@ -1,11 +1,11 @@
 import initialState from "./initialState";
-import { LOGGED_IN, LOGGED_OUT, REGISTER } from "./types";
+import { DATA_ADD, LOGGED_IN, LOGGED_OUT } from "./types";
 
 
 const authReducer = ( state = initialState , { type, payload }) => {
     
     switch (type) {
-        case REGISTER:
+        case DATA_ADD:
             return {
                     ...state,
                     user: payload.user,
@@ -14,7 +14,7 @@ const authReducer = ( state = initialState , { type, payload }) => {
         case LOGGED_IN:
             return {
                     isLoggedIn: true,
-                    user: payload 
+                    user: payload
                 }
 
         case LOGGED_OUT:
