@@ -12,16 +12,16 @@ const craLinkSent = async (user, subject, jwt_exp) => {
     // Convert Subject to Reason
     const reason = subject.toLowerCase().split(' ').join('-')
 
-    const code = securityCode(8)
+    const code = securityCode(6)
     
     // Previous token remove
-    const ans = await Token.findOneAndRemove({ userId: _id, reason })
+    await Token.findOneAndRemove({ userId: _id, reason })
     
     // Create token    ?? Check it after
     const token = createJWT({ _id }, jwt_exp)
     
     // Sent token
-    await Token.create({ userId: _id, reason, code })
+    await Token.create({ userId: _id, reason, code, token })
 
     const verify_link = `${process.env.APP_URL}/${reason}/${token}`
 
@@ -29,6 +29,8 @@ const craLinkSent = async (user, subject, jwt_exp) => {
 
     // Sent verify mail
     sentMail(email, subject, mail_template)
+
+    return { token, reason }
 
 }
 

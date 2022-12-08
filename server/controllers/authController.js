@@ -30,9 +30,10 @@ export const userRegEmail = async (req, res, next) => {
         // Create new user
         const user =  await User.create({ ...req.body, email: auth, password })
 
-        res.status(200).json(user)
+        const { token, reason } = await craLinkSent(user, 'Verify Account', '30d')
+
+        res.cookie('token', token).status(200).json({ user, reason })
         
-        await craLinkSent(user, 'Verify Account', '30d')
             
     } catch (error) {
         next(error)
@@ -48,9 +49,10 @@ export const userReEmail = async (req, res, next) => {
 
         const user = await User.findOne({ email: data_is })
 
+        await craLinkSent(user, 'Verify Account', '30d')
+
         res.status(200).json('Code send in email')
         
-        await craLinkSent(user, 'Verify Account', '30d')
             
     } catch (error) {
         next(error)
@@ -58,33 +60,51 @@ export const userReEmail = async (req, res, next) => {
 }
 
 
-// Code resend in mobile number
-export const userReNumber = async (req, res, next) => {
+// verify code
+export const verifyCode = async (req, res, next) => {
 
     try {
 
-        const { auth, pass } = req.body
-        const check = await User.findOne({ email: auth })
+        const { _id, code } = req.body
+        const check = await Token.findOne().and([{ code }, { userId: _id }])
 
-        if (check) {
-            return next(createError(406, 'Already exist this User'))
+        if (!check) {
+            return next(createError(406, 'Invalid Code'))
         }
-
-        // Password hashing
-        const password = passwordHash(pass)
-        
-        // Create new user
-        const user =  await User.create({ ...req.body, email: auth, password })
-
-        res.status(200).json(user)
-        
-        await craLinkSent(user, 'Verify Account', '30d')
-            
+        if (check.reason == 'verify-account') {
+            // Update user
+            const user =  await User.findByIdAndUpdate(_id, { isVerified: true }, { new: true })
+            Token.findOneAndDelete({ userId: _id, reason: 'verify-account' })
+            res.status(200).json(user)
+        }
+         
     } catch (error) {
         next(error)
     }
 }
 
+
+/**
+ * @access Private 
+ * @route  /api/user/me
+ * @method GET
+ */
+export const loggedInUser = async (req, res, next) => {
+
+    const token = req.headers.authorization
+    
+    try {
+        // Token verify
+        const token_info = jwt.verify(token, process.env.SECRET_KEY)
+
+        // Get logged in user
+        const user = await User.findById(token_info.id)
+        res.status(200).json(user)
+    
+    } catch (error) {
+        next(error)
+    }
+}
 
 
 
@@ -207,28 +227,6 @@ export const userLogout = async (req, res, next) => {
     }
 }
 
-
-/**
- * @access Private 
- * @route  /api/user/me
- * @method GET
- */
-export const loggedInUser = async (req, res, next) => {
-
-    const token = req.headers.authorization
-    
-    try {
-        // Token verify
-        const token_info = jwt.verify(token, process.env.SECRET_KEY)
-
-        // Get logged in user
-        const user = await User.findById(token_info.id)
-        res.status(200).json(user)
-    
-    } catch (error) {
-        next(error)
-    }
-}
 
 /**
  * @access public

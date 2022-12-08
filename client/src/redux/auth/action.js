@@ -30,7 +30,7 @@ export const register = (all_data, setShow, navigate) => async (dispatch) => {
 export const resendCode = () => async (dispatch, getState) => {
 
   const { email, mobile } = getState().auth.user;
-  const data_is = email || mobile;
+  const data_is = email ?? mobile;
 
   try {
     const { data } = await axios.post(`/api/v1/auth/resend-${ email ? 'email' : 'number' }`, {
@@ -44,7 +44,22 @@ export const resendCode = () => async (dispatch, getState) => {
 };
 
 
+export const verifyCode = (code, navigate) => async (dispatch, getState) => {
 
+  const { _id } = getState().auth.user;
+
+  try {
+    const { data } = await axios.post(`/api/v1/auth/verify-code`, {
+      _id,
+      code
+    });
+    toaster('Code verify successfully', "success" );
+    navigate(`/${data}`);
+
+  } catch (error) {
+    toaster(error.response.data.message, "error");
+  }
+};
 
 
 export const isLoggedIn = (token) => async (dispatch) => {

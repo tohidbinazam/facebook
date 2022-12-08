@@ -1,19 +1,27 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import AuthFooter from '../../components/Footer/AuthFooter';
 import AuthHeader from '../../components/Header/AuthHeader';
-import { resendCode } from '../../redux/auth/action';
+import { resendCode, verifyCode } from '../../redux/auth/action';
 
 const CodeCheck = () => {
 
     const dispatch = useDispatch()
+    const navigate = useNavigate()
 
    const { email, mobile } = useSelector(state => state.auth.user)
+
+   const [code, setCode] = useState('')
 
    const handleResend = (e) => {
         e.preventDefault()
         dispatch(resendCode())
+    }
+
+    const handleCode = (e) => {
+        e.preventDefault()
+        dispatch(verifyCode(code, navigate))
     }
 
   return (
@@ -31,7 +39,7 @@ const CodeCheck = () => {
                     is 6 numbers long.
                     </p>
                     <div className="code-box">
-                    <input type="number" />
+                    <input type="number" onChange={ e => setCode(e.target.value) } />
                     <div className="code-text">
                         <span>We sent your code to: </span>
                         <span>{ email || mobile }</span>
@@ -42,7 +50,7 @@ const CodeCheck = () => {
                     <a onClick={ handleResend } href="http">Resend code</a>
                     <div className="reset-btn">
                     <Link className="cancel" to="/">Cancel</Link>
-                    <a className="continue" href="http">Continue</a>
+                    <a onClick={ handleCode } className="continue" href="http">Continue</a>
                     </div>
                 </div>
                 </div>

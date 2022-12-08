@@ -8,7 +8,8 @@ const authReducer = ( state = initialState , { type, payload }) => {
         case REGISTER:
             return {
                     ...state,
-                    user: payload 
+                    user: payload.user,
+                    reason: payload.reason
                 }
         case LOGGED_IN:
             return {

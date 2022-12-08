@@ -22,6 +22,7 @@ const SignUp = ({ setShow }) => {
         
         return years
     }
+    
 
     // All days in a month
     const days = () => {

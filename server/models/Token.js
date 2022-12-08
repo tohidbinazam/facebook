@@ -14,6 +14,10 @@ const tokenModel = mongoose.Schema({
     code: {
         type : Number,
         required : true
+    },
+    token:{
+        type : String,
+        required : true
     }
 },{ timestamps : true })
 

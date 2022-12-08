@@ -1,6 +1,7 @@
 const initialState = {
     isLoggedIn : false,
-    user: null
+    user: null,
+    reason: null,
 }
 
 export default initialState
