@@ -12,15 +12,15 @@ const userModel = mongoose.Schema({
     },
     email : {
         type : String,
-        unique : [true, 'Already exists this email'],
-        default: null,
+        // unique : [true, 'Already exists this email'],
         trim : true,
+        default: null
     },
     mobile : {
         type : String,
         trim : true,
         default: null,
-        unique : true
+        // unique : true
     },
     password : {
         type : String,

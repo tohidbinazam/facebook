@@ -68,7 +68,8 @@ export const verifyCode = (code, navigate) => async (dispatch, getState) => {
       code
     });
     toaster('Code verify successfully', "success" );
-    navigate(`/${data}`);
+    dispatch(loggedIn(data));
+    navigate('/');
 
   } catch (error) {
     toaster(error.response.data.message, "error");

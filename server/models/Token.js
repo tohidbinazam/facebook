@@ -13,7 +13,7 @@ const tokenModel = mongoose.Schema({
     },
     code: {
         type : Number,
-        required : true
+        default : null
     },
     token:{
         type : String,

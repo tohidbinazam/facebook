@@ -9,12 +9,14 @@ const authReducer = ( state = initialState , { type, payload }) => {
             return {
                     ...state,
                     user: payload.user,
-                    reason: payload.reason
+                    reason: payload.reason,
+                    isLoggedIn: payload.reason === 'login' ? true : false,
                 }
         case LOGGED_IN:
             return {
+                    ...initialState,
                     isLoggedIn: true,
-                    user: payload
+                    user: payload.user
                 }
 
         case LOGGED_OUT:

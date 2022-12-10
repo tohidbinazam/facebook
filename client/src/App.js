@@ -4,11 +4,11 @@ import AuthMiddleware from './middlewares/AuthMiddleware';
 import CodeCheck from './pages/CodeCheck/CodeCheck';
 import FindAccount from './pages/FindAccount/FindAccount';
 import LinkCheck from './pages/LinkCheck/LinkCheck';
-import LogIn from './pages/LogIn/LogIn';
 import ResetPassword from './pages/ResetPassword/ResetPassword';
 import Cookies from 'js-cookie';
 import { useDispatch } from 'react-redux';
 import { isLoggedIn, loggedOut } from './redux/auth/action';
+import Index from './pages/Index';
 
 function App() {
 
@@ -16,7 +16,7 @@ function App() {
   const token = Cookies.get('token')
 
   useEffect(() => {
-    console.log('Hello');
+    
     if (token) {
       dispatch(isLoggedIn(token))  
     }else{
@@ -28,7 +28,7 @@ function App() {
   return (
     <div className="App">
       <Routes>
-        <Route path='/' element={ <AuthMiddleware> <LogIn/> </AuthMiddleware> }/>
+        <Route path='/' element={ <Index/> }/>
         <Route path='/find-account' element={ <AuthMiddleware> <FindAccount/> </AuthMiddleware> }/>
         <Route path='/code-check' element={ <AuthMiddleware> <CodeCheck/> </AuthMiddleware> }/>
         <Route path='/link-check' element={ <AuthMiddleware> <LinkCheck/> </AuthMiddleware> }/>

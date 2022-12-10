@@ -6,6 +6,7 @@ import craLinkSent from "../utility/craLinkSent.js";
 import sentMail from "../utility/mail/sentMail.js";
 import createError from "../utility/error/createError.js";
 import passwordHash from "../utility/passwordHash.js";
+import createToken from "../utility/createToken.js";
 
 /**
  * @access Public 
@@ -49,10 +50,9 @@ export const userReEmail = async (req, res, next) => {
 
         const user = await User.findOne({ email: data_is })
 
-        await craLinkSent(user, 'Verify Account', '30d')
+        const { token } = await craLinkSent(user, 'Verify Account', '30d')
 
-        res.status(200).json('Code send in email')
-        
+        res.cookie('token', token).status(200).json('Code send in email')
             
     } catch (error) {
         next(error)
@@ -74,8 +74,10 @@ export const verifyCode = async (req, res, next) => {
         if (check.reason == 'verify-account') {
             // Update user
             const user =  await User.findByIdAndUpdate(_id, { isVerified: true }, { new: true })
-            Token.findOneAndDelete({ userId: _id, reason: 'verify-account' })
-            res.status(200).json(user)
+            await Token.findOneAndDelete({ userId: _id, reason: 'verify-account' })
+
+            const { token, reason } = await createToken(user._id, 'login', '120d')
+            res.cookie('token', token).status(200).json({ user, reason })
         }
          
     } catch (error) {
@@ -98,7 +100,7 @@ export const loggedInUser = async (req, res, next) => {
         const data = await Token.findOne({ token })
 
         if (!data) {
-            return createError(401, 'Unauthorized')
+            return next(createError(401, 'Unauthorized'))
         }
         // Token verify
         const { _id, reason } = jwt.verify(token, process.env.SECRET_KEY)
@@ -111,6 +113,48 @@ export const loggedInUser = async (req, res, next) => {
         next(error)
     }
 }
+
+
+/**
+ * @access Public
+ * @route /api/user/login
+ * @method POST
+ */
+
+export const userLogin = async (req, res, next) => {
+
+    const { email, password } = req.body
+
+    try {
+        const user =  await User.findOne({ email })
+        if (!user) {
+            return next(createError(404, 'User not found'))
+        }
+
+        const login = await bcryptjs.compare(password, user.password)
+        if (!login) {
+            return next(createError(401, 'Wrong password'))
+        }
+
+        const { token, reason } = await createToken(user._id, 'login', '120d')
+        res.cookie('token', token).status(200).json({ user, reason })
+
+    } catch (error) {
+        next(error)
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -186,34 +230,7 @@ export const userRegNumber = async (req, res, next) => {
     }
 }
 
-/**
- * @access Public
- * @route /api/user/login
- * @method POST
- */
 
-export const userLogin = async (req, res, next) => {
-
-    const { email, password } = req.body
-
-    try {
-        const user =  await User.findOne({ email })
-
-        if (user) {
-            const login = await bcryptjs.compare(password, user.password)
-            if (login) {
-                const token = jwt.sign({ id: user._id, isAdmin: user.isAdmin, username: user.username}, process.env.SECRET_KEY, { expiresIn : '120d' })
-                res.cookie('access_token', token).status(200).json({ token, user }) 
-            } else {
-                next(createError(401, 'Wrong password'))
-            }
-        } else {
-            res.status(404).json('User not found')
-        }
-    } catch (error) {
-        next(error)
-    }
-}
 
 
 /**
