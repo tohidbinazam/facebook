@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import AuthFooter from '../../components/Footer/AuthFooter';
 import AuthHeader from '../../components/Header/AuthHeader';
 import { resendCode, verifyCode } from '../../redux/auth/action';
+import toaster from '../../utility/toaster';
 
 const CodeCheck = () => {
 
@@ -21,6 +22,9 @@ const CodeCheck = () => {
 
     const handleCode = (e) => {
         e.preventDefault()
+        if (!code) {
+            return toaster('Please Give the code')
+        }
         dispatch(verifyCode(code, navigate))
     }
 

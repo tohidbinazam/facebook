@@ -59,7 +59,7 @@ const SignUp = ({ setShow }) => {
         e.preventDefault()
 
         if (!input.fs_name || !input.sur_name || !input.auth || !input.pass || !input.day || !input.month || !input.year || !input.gender) {
-            return toaster('Please fill all the fields', 'error')
+            return toaster('Please fill all the fields')
         }
         dispatch(register(input, setShow, navigate))
     }

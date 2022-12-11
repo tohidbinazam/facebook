@@ -76,8 +76,8 @@ export const verifyCode = async (req, res, next) => {
             const user =  await User.findByIdAndUpdate(_id, { isVerified: true }, { new: true })
             await Token.findOneAndDelete({ userId: _id, reason: 'verify-account' })
 
-            const { token, reason } = await createToken(user._id, 'login', '120d')
-            res.cookie('token', token).status(200).json({ user, reason })
+            const token = await createToken(user._id, 'login', '120d')
+            res.cookie('token', token).status(200).json(user)
         }
          
     } catch (error) {
@@ -123,21 +123,25 @@ export const loggedInUser = async (req, res, next) => {
 
 export const userLogin = async (req, res, next) => {
 
-    const { email, password } = req.body
+    const { auth, password } = req.body
 
     try {
-        const user =  await User.findOne({ email })
+        const user =  await User.findOne().or([{email: auth}, {mobile : auth}])
         if (!user) {
             return next(createError(404, 'User not found'))
+        }
+
+        if (!user.isVerified) {
+            return res.status(200).json({ user })
         }
 
         const login = await bcryptjs.compare(password, user.password)
         if (!login) {
             return next(createError(401, 'Wrong password'))
         }
-
-        const { token, reason } = await createToken(user._id, 'login', '120d')
-        res.cookie('token', token).status(200).json({ user, reason })
+        console.log("Hello");
+        const token = await createToken(user._id, 'login', '120d')
+        res.cookie('token', token).status(200).json(user)
 
     } catch (error) {
         next(error)

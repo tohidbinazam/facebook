@@ -1,11 +1,31 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
 import AuthFooter from '../../components/Footer/AuthFooter';
+import { login } from '../../redux/auth/action';
+import toaster from '../../utility/toaster';
 import SignUp from '../sign-up/SignUp';
 
 const LogIn = () => {
 
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
+
+    const [input, setInput] = useState('')
     const [show, setShow] = useState(false);
+
+    const handleInput = (e) => {
+        setInput((prev) => ({ ...prev, [e.target.name]: e.target.value }))
+    }
+
+    const handleLogin = (e) => {
+        e.preventDefault()
+        if (!input.auth || !input.password) {
+            return toaster('All fields are required')
+        }
+            
+        dispatch(login(input, navigate))
+    }
 
   return (
     <div>
@@ -20,15 +40,17 @@ const LogIn = () => {
                 </div>
                 <div className="auth-right">
                 <div className="auth-box">
-                    <form action="">
+                    <form onSubmit={ handleLogin }>
                     <div className="auth-form">
                         <input
+                        name='auth'
+                        onChange={ handleInput }
                         type="text"
                         placeholder="Email address or phone number"
                         />
                     </div>
                     <div className="auth-form">
-                        <input type="password" placeholder="Password" />
+                        <input name='password' onChange={ handleInput } type="password" placeholder="Password" />
                     </div>
                     <div className="auth-form">
                         <button type="submit">Log In</button>

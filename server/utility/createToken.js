@@ -8,7 +8,7 @@ const createToken = async (_id, reason, jwt_exp) => {
     // Sent token
     await Token.create({ userId: _id, reason, token })
 
-    return { token, reason }
+    return token
 }
 
 export default createToken

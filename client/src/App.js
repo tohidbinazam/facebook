@@ -7,7 +7,7 @@ import LinkCheck from './pages/LinkCheck/LinkCheck';
 import ResetPassword from './pages/ResetPassword/ResetPassword';
 import Cookies from 'js-cookie';
 import { useDispatch } from 'react-redux';
-import { isLoggedIn, loggedOut } from './redux/auth/action';
+import { isLoggedIn } from './redux/auth/action';
 import Index from './pages/Index';
 
 function App() {
@@ -19,9 +19,8 @@ function App() {
     
     if (token) {
       dispatch(isLoggedIn(token))  
-    }else{
-      dispatch(loggedOut())
     }
+    
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token]);
 

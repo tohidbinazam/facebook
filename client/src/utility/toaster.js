@@ -1,13 +1,13 @@
 import { toast } from 'react-toastify';
 
-const toaster = (msg, reason) => {
+const toaster = (msg, reason = 'error') => {
     switch (reason) {
-        case 'success':
-        return toast.success(msg);
-        
         case 'error':
         return toast.error(msg);
 
+        case 'success':
+        return toast.success(msg);
+        
         case 'warning':
         return toast.warning(msg);
 
@@ -15,7 +15,7 @@ const toaster = (msg, reason) => {
         return toast.info(msg);
         
         default:
-        toast(msg);
+        return toast(msg);
     }
 }
 

@@ -4,9 +4,39 @@ import toaster from "../../utility/toaster";
 import { DATA_ADD, LOGGED_IN, LOGGED_OUT } from "./types";
 
 
+export const login = (all_data, navigate) => async (dispatch) => {
+
+  const isData = numOrEmail(all_data.auth);
+  if (!isData) {
+    return toaster("Invalid email or phone number");
+  }
+
+  try {
+    const { data } = await axios.post('/api/v1/auth/login', all_data);
+
+    if (!data.isVerified) {
+      toaster("Please verify your account", "info");
+      dispatch({
+        type: DATA_ADD,
+        payload: data,
+      });
+      dispatch(resendCode())
+      navigate('/code-check')
+      return
+    }
+    toaster("Login successful", "success");
+    dispatch(loggedIn(data));
+
+  } catch (error) {
+    toaster(error.response.data.message);
+  }
+}
+
 export const isLoggedIn = (token) => async (dispatch) => {
     
-    const { data } = await axios.get(`/api/v1/auth/me`, {
+  try {  
+    
+    const { data } = await axios.get('/api/v1/auth/me', {
       headers : {
         authorization : token
       }
@@ -16,13 +46,17 @@ export const isLoggedIn = (token) => async (dispatch) => {
       payload: data,
     });
     
+  } catch ({ response }) {
+    // toaster(response.data.message);
+  }    
+    
 }
 
 export const register = (all_data, setShow, navigate) => async (dispatch) => {
 
   const isData = numOrEmail(all_data.auth);
   if (!isData) {
-    return toaster("Invalid email or phone number", "error");
+    return toaster("Invalid email or phone number");
   }
 
   try {
@@ -37,7 +71,7 @@ export const register = (all_data, setShow, navigate) => async (dispatch) => {
     setShow(false);
 
   } catch (error) {
-    toaster(error.response.data.message, "error");
+    toaster(error.response.data.message);
   }
 };
 
@@ -53,7 +87,7 @@ export const resendCode = () => async (dispatch, getState) => {
     toaster( data, "success");
 
   } catch (error) {
-    toaster(error.response.data.message, "error");
+    toaster(error.response.data.message);
   }
 };
 
@@ -72,7 +106,7 @@ export const verifyCode = (code, navigate) => async (dispatch, getState) => {
     navigate('/');
 
   } catch (error) {
-    toaster(error.response.data.message, "error");
+    toaster(error.response.data.message);
   }
 };
 
