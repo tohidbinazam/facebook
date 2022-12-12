@@ -43,6 +43,10 @@ const userModel = mongoose.Schema({
         required : true,
         enum : ['Male', 'Female', 'Other']
     },
+    photo:{
+        type : String,
+        default : null
+    },
     isVerified:{
         type : Boolean,
         default : false

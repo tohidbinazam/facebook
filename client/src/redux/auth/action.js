@@ -16,12 +16,9 @@ export const login = (all_data, navigate) => async (dispatch) => {
 
     if (!data.isVerified) {
       toaster("Please verify your account", "info");
-      dispatch({
-        type: DATA_ADD,
-        payload: data,
-      });
-      dispatch(resendCode())
+      dispatch(dataAdd(data));
       navigate('/code-check')
+      dispatch(resendCode())
       return
     }
     toaster("Login successful", "success");
@@ -41,10 +38,7 @@ export const isLoggedIn = (token) => async (dispatch) => {
         authorization : token
       }
     });
-    dispatch({
-      type: DATA_ADD,
-      payload: data,
-    });
+    dispatch(dataAdd(data));
     
   } catch ({ response }) {
     // toaster(response.data.message);
@@ -62,10 +56,7 @@ export const register = (all_data, setShow, navigate) => async (dispatch) => {
   try {
     const { data } = await axios.post(`/api/v1/auth/register-${isData}`, all_data);
 
-    dispatch({
-      type: DATA_ADD,
-      payload: data,
-    });
+    dispatch(dataAdd(data));
     toaster("Registration successful", "success");
     navigate('/code-check');
     setShow(false);
@@ -109,7 +100,23 @@ export const verifyCode = (code, navigate) => async (dispatch, getState) => {
     toaster(error.response.data.message);
   }
 };
+export const findUser = (data, navigate) => async (dispatch) => {
+  
+  await axios.post('/api/v1/auth/find-user', { data })
+    .then(({ data }) => {
+      dispatch(dataAdd(data));
+      navigate('/user-account');
+      
+    }).catch(({ response }) => {
+      toaster(response.data.message);
+    })
+}
 
+
+export const dataAdd = (payload) => ({
+      type: DATA_ADD,
+      payload,
+})
 
 export const loggedIn = (payload) => ({
     type: LOGGED_IN,

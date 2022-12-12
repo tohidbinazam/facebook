@@ -139,7 +139,7 @@ export const userLogin = async (req, res, next) => {
         if (!login) {
             return next(createError(401, 'Wrong password'))
         }
-        console.log("Hello");
+
         const token = await createToken(user._id, 'login', '120d')
         res.cookie('token', token).status(200).json(user)
 
@@ -150,6 +150,22 @@ export const userLogin = async (req, res, next) => {
 
 
 
+export const findUser = async (req, res, next) => {
+
+    const { data } = req.body
+
+    try {
+        const user =  await User.findOne().or([{email: data}, {mobile : data}])
+        if (!user) {
+            return next(createError(404, 'User not found'))
+        }
+
+        res.status(200).json({ user })
+
+    } catch (error) {
+        next(error)
+    }
+}
 
 
 

@@ -1,5 +1,5 @@
 import express from "express";
-import { userLogin, loggedInUser, verifyAccount, resentVerify, forgotPassword, resetPassword, userLogout, userRegEmail, userRegNumber, userReEmail, verifyCode } from "../controllers/authController.js";
+import { userLogin, loggedInUser, verifyAccount, resentVerify, forgotPassword, resetPassword, userLogout, userRegEmail, userRegNumber, userReEmail, verifyCode, findUser } from "../controllers/authController.js";
 
 
 // Router init
@@ -13,6 +13,10 @@ router.post('/resend-number', userRegNumber)
 router.post('/verify-code', verifyCode)
 router.get('/me', loggedInUser)
 router.post('/login', userLogin)
+router.post('/find-user', findUser)
+
+
+
 router.post('/logout', userLogout)
 router.post('/verify', verifyAccount)
 router.post('/resent-verify', resentVerify)

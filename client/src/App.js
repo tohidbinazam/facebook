@@ -9,6 +9,7 @@ import Cookies from 'js-cookie';
 import { useDispatch } from 'react-redux';
 import { isLoggedIn } from './redux/auth/action';
 import Index from './pages/Index';
+import PasswordUser from './pages/PasswordUser/PasswordUser';
 
 function App() {
 
@@ -29,6 +30,7 @@ function App() {
       <Routes>
         <Route path='/' element={ <Index/> }/>
         <Route path='/find-account' element={ <AuthMiddleware> <FindAccount/> </AuthMiddleware> }/>
+        <Route path='/user-account' element={ <AuthMiddleware> <PasswordUser/> </AuthMiddleware> }/>
         <Route path='/code-check' element={ <AuthMiddleware> <CodeCheck/> </AuthMiddleware> }/>
         <Route path='/link-check' element={ <AuthMiddleware> <LinkCheck/> </AuthMiddleware> }/>
         <Route path='/reset-password' element={ <AuthMiddleware> <ResetPassword/> </AuthMiddleware> }/>

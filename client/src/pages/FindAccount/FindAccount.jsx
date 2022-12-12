@@ -1,9 +1,28 @@
 import React from 'react'
-import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
 import AuthFooter from '../../components/Footer/AuthFooter';
 import AuthHeader from '../../components/Header/AuthHeader';
+import { findUser } from '../../redux/auth/action';
+import toaster from '../../utility/toaster';
 
 const FindAccount = () => {
+
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
+
+    const [input, setInput] = useState('')
+
+
+    const handleSearch = (e) => {
+        e.preventDefault()
+        if (!input) {
+            return toaster('Enter your email or number')
+        }
+        dispatch(findUser(input, navigate))
+    }
+
   return (
     <div>
         <AuthHeader />
@@ -22,6 +41,7 @@ const FindAccount = () => {
                     <input
                         className="w-100"
                         type="text"
+                        onChange={e => setInput(e.target.value)}
                         placeholder="Email address or mobile number"
                     />
                     </div>
@@ -30,7 +50,7 @@ const FindAccount = () => {
                     <div></div>
                     <div className="reset-btn">
                     <Link className="cancel" to="/">Cancel</Link>
-                    <a className="continue" href="http">Search</a>
+                    <a className="continue" onClick={ handleSearch } href="http">Search</a>
                     </div>
                 </div>
                 </div>
