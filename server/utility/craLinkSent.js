@@ -30,7 +30,7 @@ const craLinkSent = async (user, subject, jwt_exp) => {
     // Sent verify mail
     sentMail(email, subject, mail_template)
 
-    return { token, reason }
+    return { token, subject }
 
 }
 

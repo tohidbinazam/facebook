@@ -1,7 +1,7 @@
 import axios from "axios";
 import numOrEmail from "../../utility/numOrEmail";
 import toaster from "../../utility/toaster";
-import { DATA_ADD, LOGGED_IN, LOGGED_OUT } from "./types";
+import { DATA_ADD, LOGGED_IN, LOGGED_OUT, REASON_ADD } from "./types";
 
 
 export const login = (all_data, navigate) => async (dispatch) => {
@@ -66,16 +66,18 @@ export const register = (all_data, setShow, navigate) => async (dispatch) => {
   }
 };
 
-export const resendCode = () => async (dispatch, getState) => {
+export const resendCode = (reason) => async (dispatch, getState) => {
 
   const { email, mobile } = getState().auth.user;
   const data_is = email ?? mobile;
 
   try {
     const { data } = await axios.post(`/api/v1/auth/resend-${ email ? 'email' : 'number' }`, {
-      data_is
+      data_is,
+      reason
     });
-    toaster( data, "success");
+    toaster( data.msg, "success");
+    dispatch(reasonAdd(data.subject))
 
   } catch (error) {
     toaster(error.response.data.message);
@@ -112,6 +114,11 @@ export const findUser = (data, navigate) => async (dispatch) => {
     })
 }
 
+
+export const reasonAdd = (payload) => ({
+      type: REASON_ADD,
+      payload,
+})
 
 export const dataAdd = (payload) => ({
       type: DATA_ADD,

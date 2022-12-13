@@ -11,13 +11,13 @@ const CodeCheck = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
-   const data = useSelector(state => state.auth.user)
+   const { user, reason } = useSelector(state => state.auth)
 
    const [code, setCode] = useState('')
 
    const handleResend = (e) => {
         e.preventDefault()
-        dispatch(resendCode())
+        dispatch(resendCode(reason))
     }
 
     const handleCode = (e) => {
@@ -46,7 +46,7 @@ const CodeCheck = () => {
                     <input type="number" onChange={ e => setCode(e.target.value) } />
                     <div className="code-text">
                         <span>We sent your code to: </span>
-                        <span>{ data && ( data.email ?? data.mobile )}</span>
+                        <span>{ user && (user.email ?? user.mobile)}</span>
                     </div>
                     </div>
                 </div>

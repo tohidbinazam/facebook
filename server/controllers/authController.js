@@ -46,13 +46,13 @@ export const userReEmail = async (req, res, next) => {
 
     try {
 
-        const { data_is } = req.body
+        const { data_is, reason } = req.body
 
         const user = await User.findOne({ email: data_is })
 
-        const { token } = await craLinkSent(user, 'Verify Account', '30d')
+        const { token, subject } = await craLinkSent(user, reason)
 
-        res.cookie('token', token).status(200).json('Code send in email')
+        res.cookie('token', token).status(200).json({subject, msg:'Code send in email'})
             
     } catch (error) {
         next(error)
