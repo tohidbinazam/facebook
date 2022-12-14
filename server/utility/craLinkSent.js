@@ -4,13 +4,18 @@ import securityCode from "./securityCode.js";
 import sentMail from "./mail/sentMail.js";
 import mailTemplate from "./mail/mail-template/mailTemplate.js";
 
-const craLinkSent = async (user, subject, jwt_exp) => {
+const craLinkSent = async (user, reason, jwt_exp) => {
 
     const { _id, email, fs_name, sur_name } = user
     const name = `${fs_name} ${sur_name}`
 
+    // covert reason string to capitalize and replace dash with space
+    // Convert reason to Subject
+    const subject = reason.replace(/-/g, ' ').replace(/\w\S*/g, (w) => (w.replace(/^\w/, (c) => c.toUpperCase())))
+
+    // covert reason string to lowercase and replace space with dash
     // Convert Subject to Reason
-    const reason = subject.toLowerCase().split(' ').join('-')
+    // const subject = reason.toLowerCase().split(' ').join('-')
 
     const code = securityCode(6)
     
@@ -30,7 +35,7 @@ const craLinkSent = async (user, subject, jwt_exp) => {
     // Sent verify mail
     sentMail(email, subject, mail_template)
 
-    return { token, subject }
+    return { token, reason }
 
 }
 

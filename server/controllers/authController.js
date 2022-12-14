@@ -31,9 +31,9 @@ export const userRegEmail = async (req, res, next) => {
         // Create new user
         const user =  await User.create({ ...req.body, email: auth, password })
 
-        const { token, reason } = await craLinkSent(user, 'Verify Account', '30d')
+        const { token, reason } = await craLinkSent(user, 'verify-account', '30d')
 
-        res.cookie('token', token).status(200).json({ user, reason })
+        res.cookie('fbstk', token).status(200).json({ user, reason })
         
             
     } catch (error) {
@@ -50,9 +50,9 @@ export const userReEmail = async (req, res, next) => {
 
         const user = await User.findOne({ email: data_is })
 
-        const { token, subject } = await craLinkSent(user, reason)
+        const { token } = await craLinkSent(user, reason)
 
-        res.cookie('token', token).status(200).json({subject, msg:'Code send in email'})
+        res.cookie('fbstk', token).status(200).json('Code send in email')
             
     } catch (error) {
         next(error)
@@ -71,13 +71,21 @@ export const verifyCode = async (req, res, next) => {
         if (!check) {
             return next(createError(406, 'Invalid Code'))
         }
+        // Delete token
+        await Token.findOneAndDelete({ userId: _id, reason: check.reason })
+
         if (check.reason == 'verify-account') {
             // Update user
             const user =  await User.findByIdAndUpdate(_id, { isVerified: true }, { new: true })
-            await Token.findOneAndDelete({ userId: _id, reason: 'verify-account' })
 
+            // Create Login token
             const token = await createToken(user._id, 'login', '120d')
-            res.cookie('token', token).status(200).json(user)
+            res.cookie('fbstk', token).status(200).json(user)
+        }
+        
+        if (check.reason == 'forgot-password') {
+            const token = await createToken(_id, 'reset-password')
+            res.cookie('fbstk', token).status(200).json('ok')
         }
          
     } catch (error) {
@@ -141,7 +149,7 @@ export const userLogin = async (req, res, next) => {
         }
 
         const token = await createToken(user._id, 'login', '120d')
-        res.cookie('token', token).status(200).json(user)
+        res.cookie('fbstk', token).status(200).json(user)
 
     } catch (error) {
         next(error)

@@ -18,7 +18,7 @@ export const login = (all_data, navigate) => async (dispatch) => {
       toaster("Please verify your account", "info");
       dispatch(dataAdd(data));
       navigate('/code-check')
-      dispatch(resendCode())
+      dispatch(resendCode('verify-account'))
       return
     }
     toaster("Login successful", "success");
@@ -76,8 +76,8 @@ export const resendCode = (reason) => async (dispatch, getState) => {
       data_is,
       reason
     });
-    toaster( data.msg, "success");
-    dispatch(reasonAdd(data.subject))
+    toaster( data, "success");
+    dispatch(reasonAdd(reason))
 
   } catch (error) {
     toaster(error.response.data.message);
@@ -87,16 +87,22 @@ export const resendCode = (reason) => async (dispatch, getState) => {
 
 export const verifyCode = (code, navigate) => async (dispatch, getState) => {
 
-  const { _id } = getState().auth.user;
+  const { user, reason } = getState().auth;
 
   try {
     const { data } = await axios.post(`/api/v1/auth/verify-code`, {
-      _id,
+      _id: user._id,
       code
     });
     toaster('Code verify successfully', "success" );
-    dispatch(loggedIn(data));
-    navigate('/');
+
+    if (reason === 'verify-account') {
+      dispatch(loggedIn(data));
+      navigate('/');
+    }
+    if (reason === 'forgot-password') {
+      navigate('/reset-password');
+    }
 
   } catch (error) {
     toaster(error.response.data.message);

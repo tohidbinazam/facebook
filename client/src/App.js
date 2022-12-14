@@ -14,7 +14,7 @@ import PasswordUser from './pages/PasswordUser/PasswordUser';
 function App() {
 
   const dispatch = useDispatch()
-  const token = Cookies.get('token')
+  const token = Cookies.get('fbstk')
 
   useEffect(() => {
     

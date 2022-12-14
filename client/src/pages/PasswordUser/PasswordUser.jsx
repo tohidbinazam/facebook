@@ -14,7 +14,7 @@ const PasswordUser = () => {
 
     const forgotPass = (e) => {
         e.preventDefault()
-        dispatch(resendCode('Forgot Password'))
+        dispatch(resendCode('forgot-password'))
         navigate('/code-check')
     }
 
