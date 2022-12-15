@@ -33,7 +33,7 @@ export const userRegEmail = async (req, res, next) => {
 
         const { token, reason } = await craLinkSent(user, 'verify-account', '30d')
 
-        res.cookie('fbstk', token).status(200).json({ user, reason })
+        res.cookie('fbstk', token, { expires: new Date(Date.now() + 2592000000) }).status(200).json({ user, reason })
         
             
     } catch (error) {
@@ -52,7 +52,7 @@ export const userReEmail = async (req, res, next) => {
 
         const { token } = await craLinkSent(user, reason)
 
-        res.cookie('fbstk', token).status(200).json('Code send in email')
+        res.cookie('fbstk', token, { expires: new Date(Date.now() + 600000) }).status(200).json('Code send in email')
             
     } catch (error) {
         next(error)
@@ -80,12 +80,12 @@ export const verifyCode = async (req, res, next) => {
 
             // Create Login token
             const token = await createToken(user._id, 'login', '120d')
-            res.cookie('fbstk', token).status(200).json(user)
+            res.cookie('fbstk', token, { expires: new Date(Date.now() + 10368000000) }).status(200).json(user)
         }
         
         if (check.reason == 'forgot-password') {
             const token = await createToken(_id, 'reset-password')
-            res.cookie('fbstk', token).status(200).json('ok')
+            res.cookie('fbstk', token, { expires: new Date(Date.now() + 600000) }).status(200).json('ok')
         }
          
     } catch (error) {
@@ -106,15 +106,20 @@ export const loggedInUser = async (req, res, next) => {
     try {
 
         const data = await Token.findOne({ token })
-
         if (!data) {
             return next(createError(401, 'Unauthorized'))
         }
+        const { userId, reason } = data
+
         // Token verify
-        const { _id, reason } = jwt.verify(token, process.env.SECRET_KEY)
+        const verify = jwt.verify(token, process.env.SECRET_KEY)
+        if (!verify) {
+            await Token.findOneAndRemove({ token })
+            return next(createError(401, 'Unauthorized'))
+        }
 
         // Get logged in user
-        const user = await User.findById(_id)
+        const user = await User.findById(userId)
         res.status(200).json({ user, reason })
     
     } catch (error) {
@@ -136,7 +141,7 @@ export const userLogin = async (req, res, next) => {
     try {
         const user =  await User.findOne().or([{email: auth}, {mobile : auth}])
         if (!user) {
-            return next(createError(404, 'User not found'))
+            return next(createError(404, 'Wrong Email or Number'))
         }
 
         if (!user.isVerified) {
@@ -149,7 +154,7 @@ export const userLogin = async (req, res, next) => {
         }
 
         const token = await createToken(user._id, 'login', '120d')
-        res.cookie('fbstk', token).status(200).json(user)
+        res.cookie('fbstk', token, { expires: new Date(Date.now() + 10368000000) }).status(200).json(user)
 
     } catch (error) {
         next(error)
@@ -175,6 +180,33 @@ export const findUser = async (req, res, next) => {
     }
 }
 
+
+
+/**
+ * @access public
+ * @route /api/user/reset-password
+ * @method PATCH
+ */
+export const resetPassword = async (req, res, next) => {
+
+    const { _id, pass, reason } = req.body
+    
+    try {
+
+        await Token.findOneAndRemove().and([{ userId: _id }, { reason }])
+
+        // Password hashing and update
+        const password = passwordHash(pass)
+        const user = await User.findByIdAndUpdate(_id, { password })
+        
+        // Login Token
+        const login_token = await createToken(_id, 'login', '120d')
+        res.cookie('fbstk', login_token, { expires: new Date(Date.now() + 10368000000) }).status(200).json(user)
+
+    } catch (error) {
+        next(error)
+    }
+}
 
 
 
@@ -368,25 +400,4 @@ export const forgotPassword = async (req, res, next) => {
     
 }
 
-
-/**
- * @access public
- * @route /api/user/reset-password
- * @method PATCH
- */
-export const resetPassword = async (req, res, next) => {
-
-    const { token, user_id, pass } = req.body
-    
-    try {
-        await Token.findOneAndRemove({ token })
-
-        const password = await bcryptjs.hash(pass, 12)
-        await User.findByIdAndUpdate(user_id, { password }, { new: true })
-        
-        res.status(200).json('Successfully update your password')
-    } catch (error) {
-        next(error)
-    }
-}
 

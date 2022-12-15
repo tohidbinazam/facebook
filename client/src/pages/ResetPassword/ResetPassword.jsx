@@ -1,9 +1,25 @@
-import React from 'react'
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react'
+import { useDispatch } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
 import AuthFooter from '../../components/Footer/AuthFooter';
 import AuthHeader from '../../components/Header/AuthHeader';
+import { resetPassword } from '../../redux/auth/action';
+import toaster from '../../utility/toaster';
 
 const ResetPassword = () => {
+
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+    const [input, setInput] = useState('')
+
+    const handleReset = (e) => {
+        e.preventDefault();
+        if (!input) {
+            return toaster('Please give the password')
+        }
+        dispatch(resetPassword(input, navigate))
+    }
   return (
     <div>
         <AuthHeader />
@@ -20,14 +36,14 @@ const ResetPassword = () => {
                     marks.
                     </p>
                     <div className="code-box">
-                    <input className="w-100" type="text" placeholder="New password" />
+                    <input onChange={ e => setInput(e.target.value) } className="w-100" type="text" placeholder="New password" />
                     </div>
                 </div>
                 <div className="reset-footer">
                     <div></div>
                     <div className="reset-btn">
                     <Link className="cancel" to="/">Skip</Link>
-                    <a className="continue" href="http">Continue</a>
+                    <a className="continue" onClick={ handleReset } href="http">Continue</a>
                     </div>
                 </div>
                 </div>

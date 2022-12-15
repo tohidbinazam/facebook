@@ -19,7 +19,7 @@ function App() {
   useEffect(() => {
     
     if (token) {
-      dispatch(isLoggedIn(token))  
+      dispatch(isLoggedIn(token))
     }
     
   // eslint-disable-next-line react-hooks/exhaustive-deps

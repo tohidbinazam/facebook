@@ -41,6 +41,7 @@ export const isLoggedIn = (token) => async (dispatch) => {
     dispatch(dataAdd(data));
     
   } catch ({ response }) {
+    dispatch(loggedOut());
     // toaster(response.data.message);
   }    
     
@@ -120,6 +121,20 @@ export const findUser = (data, navigate) => async (dispatch) => {
     })
 }
 
+export const resetPassword = (pass, navigate) => async (dispatch, getState) => {
+
+  const { user, reason } = getState().auth;
+
+  try {
+    const { data } = await axios.patch('/api/v1/auth/reset-password', { _id: user._id, pass, reason })
+    toaster( 'Password Change Successfully', "success" );
+    dispatch(loggedIn(data));
+    navigate('/');
+
+  } catch ({ response }) {
+    toaster(response.data.message);
+  }
+}
 
 export const reasonAdd = (payload) => ({
       type: REASON_ADD,

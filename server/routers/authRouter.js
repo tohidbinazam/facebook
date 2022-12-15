@@ -14,14 +14,16 @@ router.post('/verify-code', verifyCode)
 router.get('/me', loggedInUser)
 router.post('/login', userLogin)
 router.post('/find-user', findUser)
+router.patch('/reset-password', resetPassword)
 
 
 
 router.post('/logout', userLogout)
+
 router.post('/verify', verifyAccount)
 router.post('/resent-verify', resentVerify)
 router.post('/forgot-password', forgotPassword)
-router.patch('/reset-password', resetPassword)
+
 
 // Export router
 export default router;
