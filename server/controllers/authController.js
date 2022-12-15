@@ -109,17 +109,17 @@ export const loggedInUser = async (req, res, next) => {
         if (!data) {
             return next(createError(401, 'Unauthorized'))
         }
-        const { userId, reason } = data
-
+        
         // Token verify
         const verify = jwt.verify(token, process.env.SECRET_KEY)
         if (!verify) {
             await Token.findOneAndRemove({ token })
             return next(createError(401, 'Unauthorized'))
         }
+        const { _id, reason } = verify
 
         // Get logged in user
-        const user = await User.findById(userId)
+        const user = await User.findById(_id)
         res.status(200).json({ user, reason })
     
     } catch (error) {
