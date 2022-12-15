@@ -21,9 +21,8 @@ function App() {
     if (token) {
       dispatch(isLoggedIn(token))
     }
-    
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [token]);
+
+  }, [dispatch, token]);
 
   return (
     <div className="App">
