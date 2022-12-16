@@ -47,7 +47,7 @@ const craLinkSent = async (user, reason, jwt_exp) => {
         const msg = allMsg(name, code, reason)
         
         // Sent SMS
-        await sentSMS(mobile, msg)
+        sentSMS(mobile, msg)
     }
 
     return { token, reason }
