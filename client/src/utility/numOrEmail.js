@@ -8,7 +8,7 @@ const numOrEmail = (auth) => {
     if (mailCheck.test(auth)) {
         return "email";
     }else if(numberCheck.test(auth)){
-        return "number";
+        return "mobile";
     }else{
         return null
     }

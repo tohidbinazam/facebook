@@ -47,6 +47,8 @@ export const isLoggedIn = (token) => async (dispatch) => {
     
 }
 
+
+// User register
 export const register = (all_data, setShow, navigate) => async (dispatch) => {
 
   const isData = numOrEmail(all_data.auth);
@@ -55,7 +57,7 @@ export const register = (all_data, setShow, navigate) => async (dispatch) => {
   }
 
   try {
-    const { data } = await axios.post(`/api/v1/auth/register-${isData}`, all_data);
+    const { data } = await axios.post(`/api/v1/auth/register/${isData}`, all_data);
 
     dispatch(dataAdd(data));
     toaster("Registration successful", "success");
@@ -67,14 +69,15 @@ export const register = (all_data, setShow, navigate) => async (dispatch) => {
   }
 };
 
+// User resend verification code
 export const resendCode = (reason) => async (dispatch, getState) => {
 
   const { email, mobile } = getState().auth.user;
-  const data_is = email ?? mobile;
+  const auth = email ?? mobile;
 
   try {
-    const { data } = await axios.post(`/api/v1/auth/resend-${ email ? 'email' : 'number' }`, {
-      data_is,
+    const { data } = await axios.post(`/api/v1/auth/resend/${ email ? 'email' : 'mobile' }`, {
+      auth,
       reason
     });
     toaster( data, "success");

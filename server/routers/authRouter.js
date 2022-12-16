@@ -1,15 +1,13 @@
 import express from "express";
-import { userLogin, loggedInUser, verifyAccount, resentVerify, forgotPassword, resetPassword, userLogout, userRegEmail, userRegNumber, userReEmail, verifyCode, findUser } from "../controllers/authController.js";
+import { userLogin, loggedInUser, verifyAccount, resentVerify, forgotPassword, resetPassword, userLogout, userRegEmail, userReEmail, verifyCode, findUser } from "../controllers/authController.js";
 
 
 // Router init
 const router = express.Router()
 
 // user auth routers
-router.post('/register-email', userRegEmail)
-router.post('/register-number', userRegNumber)
-router.post('/resend-email', userReEmail)
-router.post('/resend-number', userRegNumber)
+router.post('/register/:auth', userRegEmail)
+router.post('/resend/:auth', userReEmail)
 router.post('/verify-code', verifyCode)
 router.get('/me', loggedInUser)
 router.post('/login', userLogin)

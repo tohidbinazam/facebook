@@ -16,26 +16,27 @@ import createToken from "../utility/createToken.js";
 
 export const userRegEmail = async (req, res, next) => {
 
-    try {
 
-        const { auth, pass } = req.body
-        const check = await User.findOne({ email: auth })
+    const key = req.params.auth    
+    const { auth, pass } = req.body
+
+    try {
+        const check = await User.findOne({ [key]: auth })
 
         if (check) {
             return next(createError(406, 'Already exist this User'))
         }
 
         // Password hashing
-        const password = passwordHash(pass)
+        const password = await passwordHash(pass)
         
         // Create new user
-        const user =  await User.create({ ...req.body, email: auth, password })
-
+        const user =  await User.create({ ...req.body, [key]: auth, password })
+        
         const { token, reason } = await craLinkSent(user, 'verify-account', '30d')
 
         res.cookie('fbstk', token, { expires: new Date(Date.now() + 2592000000) }).status(200).json({ user, reason })
-        
-            
+                    
     } catch (error) {
         next(error)
     }
@@ -44,15 +45,16 @@ export const userRegEmail = async (req, res, next) => {
 // Code resend in email
 export const userReEmail = async (req, res, next) => {
 
+    const key = req.params.auth
+    const { auth, reason } = req.body
+
     try {
 
-        const { data_is, reason } = req.body
-
-        const user = await User.findOne({ email: data_is })
+        const user = await User.findOne({ [key]: auth })
 
         const { token } = await craLinkSent(user, reason)
 
-        res.cookie('fbstk', token, { expires: new Date(Date.now() + 600000) }).status(200).json('Code send in email')
+        res.cookie('fbstk', token, { expires: new Date(Date.now() + 600000) }).status(200).json(`Code send in ${key}`)
             
     } catch (error) {
         next(error)
