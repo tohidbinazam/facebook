@@ -172,7 +172,7 @@ export const findUser = async (req, res, next) => {
     try {
         const user =  await User.findOne().or([{email: data}, {mobile : data}])
         if (!user) {
-            return next(createError(404, 'User not found'))
+            return next(createError(404, 'Wrong Email or Number'))
         }
 
         res.status(200).json({ user })
@@ -198,7 +198,7 @@ export const resetPassword = async (req, res, next) => {
         await Token.findOneAndRemove().and([{ userId: _id }, { reason }])
 
         // Password hashing and update
-        const password = passwordHash(pass)
+        const password = await passwordHash(pass)
         const user = await User.findByIdAndUpdate(_id, { password })
         
         // Login Token
