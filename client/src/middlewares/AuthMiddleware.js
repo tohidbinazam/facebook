@@ -6,17 +6,19 @@ const AuthMiddleware = ({ children }) => {
 
     // Get targeted page
     const file = children[1].type.name
+    console.log(file);
     
     // This is authContext
-    const { isLoggedIn } = useSelector(state => state.auth)
+    const { user, reason } = useSelector(state => state.auth)
     
-    if (file === 'Room') {
-        return isLoggedIn ? children : <Navigate to='/login' />
-    } else if ( file === 'Login' || file === 'SignUp') {
-        return !isLoggedIn ? children : <Navigate to='/' />
+    if ( file === 'PasswordUser') {
+        return user ? children : <Navigate to='/' />
+    } else if ( file === 'CodeCheck' ) {
+        return (reason === 'forgot-password' || reason === 'verify-account') ? children : <Navigate to='/' />
+    } else if ( file === 'ResetPassword' ) {
+        return reason === 'reset-password' ? children : <Navigate to='/' />
     }else{
-        // This is temporary
-        return children
+        return <Navigate to='/' />
     }
     
 }

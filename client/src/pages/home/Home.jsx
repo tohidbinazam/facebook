@@ -1,8 +1,19 @@
-import React from 'react'
-import user from '../../assets/images/user.png'
+import React, { useState } from 'react'
+import user_img from '../../assets/images/user.png'
 import logo from '../../assets/icons/favicon.ico'
+import { useDispatch } from 'react-redux';
+import { logout } from '../../redux/auth/action';
 
 const Home = () => {
+
+  const dispatch = useDispatch()
+  const [user, setUser] = useState(false)
+
+  const handleLogout = (e) => {
+    e.preventDefault()
+    dispatch(logout())
+  }
+
   return (
     <div>
       <div className="fb-home-header">
@@ -166,63 +177,64 @@ const Home = () => {
             ></a>
           </div>
           <div className="fb-user-item">
-            <div className="user-menu-dropdown">
-              <div className="user-menu-box">
-                <div className="user-data-box">
-                  <div className="user-data-box-item">
-                    <img src={ user } alt="" />
-                    <span>Asraful Haque</span>
+            { user && <div className="user-menu-dropdown">
+                <div className="user-menu-box">
+                  <div className="user-data-box">
+                    <div className="user-data-box-item">
+                      <img src={ user_img } alt="" />
+                      <span>Asraful Haque</span>
+                    </div>
+                    <div className="divider-0"></div>
+                    <a href="http">See all profiles</a>
                   </div>
-                  <div className="divider-0"></div>
-                  <a href="http">See all profiles</a>
+                </div>
+                <div className="user-menu-list">
+                  <ul>
+                    <li>
+                      <a href="http">
+                        <div className="user-menu-icon"></div>
+                        <div className="user-menu-item">
+                          <span>Settings & privacy</span>
+                        </div>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="http">
+                        <div className="user-menu-icon"></div>
+                        <div className="user-menu-item">
+                          <span>Help & support</span>
+                        </div>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="http">
+                        <div className="user-menu-icon"></div>
+                        <div className="user-menu-item">
+                          <span>Display & accessibility</span>
+                        </div>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="http">
+                        <div className="user-menu-icon"></div>
+                        <div className="user-menu-item">
+                          <span>Give feedback</span>
+                        </div>
+                      </a>
+                    </li>
+                    <li>
+                      <a onClick={ handleLogout } href="http">
+                        <div className="user-menu-icon"></div>
+                        <div className="user-menu-item">
+                          <span>Logout</span>
+                        </div>
+                      </a>
+                    </li>
+                  </ul>
                 </div>
               </div>
-              <div className="user-menu-list">
-                <ul>
-                  <li>
-                    <a href="http">
-                      <div className="user-menu-icon"></div>
-                      <div className="user-menu-item">
-                        <span>Settings & privacy</span>
-                      </div>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="http">
-                      <div className="user-menu-icon"></div>
-                      <div className="user-menu-item">
-                        <span>Help & support</span>
-                      </div>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="http">
-                      <div className="user-menu-icon"></div>
-                      <div className="user-menu-item">
-                        <span>Display & accessibility</span>
-                      </div>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="http">
-                      <div className="user-menu-icon"></div>
-                      <div className="user-menu-item">
-                        <span>Give feedback</span>
-                      </div>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="http">
-                      <div className="user-menu-icon"></div>
-                      <div className="user-menu-item">
-                        <span>Logout</span>
-                      </div>
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <img src={ user } alt="" />
+            }
+              <img onClick={ () => setUser(!user) } src={ user_img } alt="" />
           </div>
         </div>
       </div>
@@ -233,7 +245,7 @@ const Home = () => {
             <li>
               <a href="http">
                 <div className="body-icon">
-                  <img src={ user } alt="" />
+                  <img src={ user_img } alt="" />
                 </div>
                 <span>Asraful Haque</span>
               </a>
@@ -360,7 +372,7 @@ const Home = () => {
                     }}
                   >
                     <div className="story-user">
-                      <img src={ user } alt="" />
+                      <img src={ user_img } alt="" />
                     </div>
                     <span>Asraful Haque</span>
                   </div>
@@ -372,7 +384,7 @@ const Home = () => {
                     }}
                   >
                     <div className="story-user">
-                      <img src={ user } alt="" />
+                      <img src={ user_img } alt="" />
                     </div>
                     <span>Asraful Haque</span>
                   </div>
@@ -384,7 +396,7 @@ const Home = () => {
                     }}
                   >
                     <div className="story-user">
-                      <img src={ user } alt="" />
+                      <img src={ user_img } alt="" />
                     </div>
                     <span>Asraful Haque</span>
                   </div>
@@ -396,7 +408,7 @@ const Home = () => {
                     }}
                   >
                     <div className="story-user">
-                      <img src={ user } alt="" />
+                      <img src={ user_img } alt="" />
                     </div>
                     <span>Asraful Haque</span>
                   </div>
@@ -407,7 +419,7 @@ const Home = () => {
             {/* Create Post Box  */}
             <div className="create-post">
               <div className="create-post-header">
-                <img src={ user } alt="" />
+                <img src={ user_img } alt="" />
                 <button>Whats on your mind ?</button>
               </div>
               <div className="divider-0"></div>
@@ -423,7 +435,7 @@ const Home = () => {
                   </li>
                   <li>
                     <div className="post-icon"></div>
-                    Feeling/ctivity
+                    Feeling/Activity
                   </li>
                 </ul>
               </div>
@@ -433,7 +445,7 @@ const Home = () => {
             <div className="user-post">
               <div className="user-post-header">
                 <div className="post-info">
-                  <img src={ user } alt="" />
+                  <img src={ user_img } alt="" />
                   <div className="user-details">
                     <a className="author" href="http">Asraful Haque</a>
                     <span
@@ -468,7 +480,7 @@ const Home = () => {
                   </div>
                 </div>
                 <div className="post-menu">
-                  <div className="post-dropdown-menu">
+                  {/* <div className="post-dropdown-menu">
                     <ul>
                       <li>
                         <a href="http">
@@ -480,7 +492,7 @@ const Home = () => {
                       <li>
                         <a href="http">
                           <div className="menu-icon"></div>
-                          <span>Embeded</span>
+                          <span>Embed</span>
                         </a>
                       </li>
                       <li>
@@ -527,7 +539,7 @@ const Home = () => {
                         </a>
                       </li>
                     </ul>
-                  </div>
+                  </div> */}
                   <button>
                     <svg
                       fill="currentColor"
@@ -554,10 +566,7 @@ const Home = () => {
                 </div>
               </div>
               <div className="post-media">
-                <imge
-                  src="https://embedsocial.com/wp-content/uploads/2020/10/add-links-instagram-posts.jpg"
-                  alt=""
-                />
+                <img src="https://embedsocial.com/wp-content/uploads/2020/10/add-links-instagram-posts.jpg" alt=""/>
               </div>
               <div className="post-comments">
                 <div className="comments-header">

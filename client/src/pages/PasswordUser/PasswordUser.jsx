@@ -4,7 +4,7 @@ import AuthHeader from '../../components/Header/AuthHeader';
 import avatar from '../../assets/images/profile_avatar.png'
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
-import { resendCode } from '../../redux/auth/action';
+import { reasonAdd, resendCode } from '../../redux/auth/action';
 
 const PasswordUser = () => {
     
@@ -42,8 +42,9 @@ const PasswordUser = () => {
 
     const forgotPass = (e) => {
         e.preventDefault()
-        dispatch(resendCode('forgot-password'))
+        dispatch(reasonAdd('forgot-password'))
         navigate('/code-check')
+        dispatch(resendCode('forgot-password'))
     }
 
   return (

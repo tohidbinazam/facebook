@@ -18,6 +18,7 @@ const CodeCheck = () => {
    const handleResend = (e) => {
         e.preventDefault()
         dispatch(resendCode(reason))
+        handleDisable()
     }
 
     const handleCode = (e) => {
@@ -26,6 +27,22 @@ const CodeCheck = () => {
             return toaster('Please Give the code')
         }
         dispatch(verifyCode(code, navigate))
+    }
+
+    // Resent code after 60 seconds
+    const [disable, setDisable] = useState(false)
+    const [time, setTime] = useState(60)
+
+    const handleDisable = () => {
+        setDisable(true)
+        const interval = setInterval(() => {
+            setTime(time => time - 1)
+        }, 1000)
+        setTimeout(() => {
+            clearInterval(interval)
+            setDisable(false)
+            setTime(60)
+        }, 60000)
     }
 
   return (
@@ -51,7 +68,7 @@ const CodeCheck = () => {
                     </div>
                 </div>
                 <div className="reset-footer">
-                    <a onClick={ handleResend } href="http">Resend code</a>
+                    <a onClick={ handleResend } style={{ pointerEvents: disable && 'none' }} href="http">Resend code { disable && `after ${time} seconds`}</a>
                     <div className="reset-btn">
                     <Link className="cancel" to="/">Cancel</Link>
                     <a onClick={ handleCode } className="continue" href="http">Continue</a>

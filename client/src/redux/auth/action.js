@@ -1,9 +1,36 @@
 import axios from "axios";
+import Cookies from "js-cookie";
 import numOrEmail from "../../utility/numOrEmail";
 import toaster from "../../utility/toaster";
+import { loadStart } from "../loading/action";
 import { DATA_ADD, LOGGED_IN, LOGGED_OUT, REASON_ADD } from "./types";
 
 
+// Add reason to redux store
+export const reasonAdd = (payload) => ({
+      type: REASON_ADD,
+      payload,
+})
+
+// Add data to redux store
+export const dataAdd = (payload) => ({
+      type: DATA_ADD,
+      payload,
+})
+
+// Add loggedIn user data to redux store
+export const loggedIn = (payload) => ({
+    type: LOGGED_IN,
+    payload
+})
+
+// Set loggedOut in redux store
+export const loggedOut = () => ({
+    type: LOGGED_OUT
+})
+
+// User login
+// If login user is not verified then sent to code check page
 export const login = (all_data, navigate) => async (dispatch) => {
 
   const isData = numOrEmail(all_data.auth);
@@ -12,11 +39,11 @@ export const login = (all_data, navigate) => async (dispatch) => {
   }
 
   try {
+    dispatch(loadStart())
     const { data } = await axios.post('/api/v1/auth/login', all_data);
 
     if (!data.isVerified) {
-      toaster("Please verify your account", "info");
-      dispatch(dataAdd(data));
+      dispatch(dataAdd({ ...data, reason: 'verify-account' }));
       navigate('/code-check')
       dispatch(resendCode('verify-account'))
       return
@@ -29,6 +56,7 @@ export const login = (all_data, navigate) => async (dispatch) => {
   }
 }
 
+// Check token data and sent to redux store
 export const isLoggedIn = (token) => async (dispatch) => {
     
   try {  
@@ -47,8 +75,7 @@ export const isLoggedIn = (token) => async (dispatch) => {
     
 }
 
-
-// User register
+// New user registration
 export const register = (all_data, setShow, navigate) => async (dispatch) => {
 
   const isData = numOrEmail(all_data.auth);
@@ -69,7 +96,7 @@ export const register = (all_data, setShow, navigate) => async (dispatch) => {
   }
 };
 
-// User resend verification code
+// Sent and Resend verification code in mobile or email(with verification link) for account verification, forgot password etc
 export const resendCode = (reason) => async (dispatch, getState) => {
 
   const { email, mobile } = getState().auth.user;
@@ -81,14 +108,13 @@ export const resendCode = (reason) => async (dispatch, getState) => {
       reason
     });
     toaster( data, "success");
-    dispatch(reasonAdd(reason))
 
   } catch (error) {
     toaster(error.response.data.message);
   }
 };
 
-
+// Verify code for account account verification, forgot password etc
 export const verifyCode = (code, navigate) => async (dispatch, getState) => {
 
   const { user, reason } = getState().auth;
@@ -98,20 +124,25 @@ export const verifyCode = (code, navigate) => async (dispatch, getState) => {
       _id: user._id,
       code
     });
-    toaster('Code verify successfully', "success" );
+    toaster('Code verify successfully', "success");
 
+    dispatch(reasonAdd(data));
     if (reason === 'verify-account') {
-      dispatch(loggedIn(data));
       navigate('/');
     }
     if (reason === 'forgot-password') {
-      navigate('/reset-password');
+      // setTimeout(() => {
+      //   navigate(`/${data}`);
+      // }, 10);
+      navigate(`/${data}`);
     }
 
   } catch (error) {
     toaster(error.response.data.message);
   }
 };
+
+// Find user by email or mobile
 export const findUser = (data, navigate) => async (dispatch) => {
   
   await axios.post('/api/v1/auth/find-user', { data })
@@ -124,6 +155,7 @@ export const findUser = (data, navigate) => async (dispatch) => {
     })
 }
 
+// Set new password
 export const resetPassword = (pass, navigate) => async (dispatch, getState) => {
 
   const { user, reason } = getState().auth;
@@ -131,7 +163,7 @@ export const resetPassword = (pass, navigate) => async (dispatch, getState) => {
   try {
     const { data } = await axios.patch('/api/v1/auth/reset-password', { _id: user._id, pass, reason })
     toaster( 'Password Change Successfully', "success" );
-    dispatch(loggedIn(data));
+    dispatch(reasonAdd(data));
     navigate('/');
 
   } catch ({ response }) {
@@ -139,21 +171,25 @@ export const resetPassword = (pass, navigate) => async (dispatch, getState) => {
   }
 }
 
-export const reasonAdd = (payload) => ({
-      type: REASON_ADD,
-      payload,
-})
+// User logout
+export const logout = () => async (dispatch) => {
 
-export const dataAdd = (payload) => ({
-      type: DATA_ADD,
-      payload,
-})
+  const token = Cookies.get('fbstk')
 
-export const loggedIn = (payload) => ({
-    type: LOGGED_IN,
-    payload
-})
+  if (!token) {
+    return dispatch(loggedOut());
+  }
+  try {
+    dispatch(loadStart())
+    const { data } = await axios.get('/api/v1/auth/logout', {
+      headers : {
+        authorization : token
+      }
+    });
+    dispatch(loggedOut())
+    toaster( data, "success" );
 
-export const loggedOut = () => ({
-    type: LOGGED_OUT
-})
+  } catch ({ response }) {
+    toaster(response.data.message);
+  }
+}

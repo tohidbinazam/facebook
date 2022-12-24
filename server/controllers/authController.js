@@ -33,9 +33,9 @@ export const userRegEmail = async (req, res, next) => {
         // Create new user
         const user =  await User.create({ ...req.body, [key]: auth, password })
         
-        const { token, reason } = await craLinkSent(user, 'verify-account', '30d')
+        const { token, reason } = await craLinkSent(user, 'verify-account', '1d')
 
-        res.cookie('fbstk', token, { expires: new Date(Date.now() + 2592000000) }).status(200).json({ user, reason })
+        res.cookie('fbstk', token, { expires: new Date(Date.now() + 86400000) }).status(200).json({ user, reason })
                     
     } catch (error) {
         next(error)
@@ -81,13 +81,13 @@ export const verifyCode = async (req, res, next) => {
             const user =  await User.findByIdAndUpdate(_id, { isVerified: true }, { new: true })
 
             // Create Login token
-            const token = await createToken(user._id, 'login', '120d')
-            res.cookie('fbstk', token, { expires: new Date(Date.now() + 10368000000) }).status(200).json(user)
+            const { token, reason } = await createToken(user._id, 'login', '120d')
+            res.cookie('fbstk', token, { expires: new Date(Date.now() + 10368000000) }).status(200).json(reason)
         }
         
         if (check.reason == 'forgot-password') {
-            const token = await createToken(_id, 'reset-password')
-            res.cookie('fbstk', token, { expires: new Date(Date.now() + 600000) }).status(200).json('ok')
+            const { token, reason } = await createToken(_id, 'reset-password')
+            res.cookie('fbstk', token, { expires: new Date(Date.now() + 600000) }).status(200).json(reason)
         }
          
     } catch (error) {
@@ -155,7 +155,7 @@ export const userLogin = async (req, res, next) => {
             return next(createError(401, 'Wrong password'))
         }
 
-        const token = await createToken(user._id, 'login', '120d')
+        const { token } = await createToken(user._id, 'login', '120d')
         res.cookie('fbstk', token, { expires: new Date(Date.now() + 10368000000) }).status(200).json(user)
 
     } catch (error) {
@@ -199,12 +199,31 @@ export const resetPassword = async (req, res, next) => {
 
         // Password hashing and update
         const password = await passwordHash(pass)
-        const user = await User.findByIdAndUpdate(_id, { password })
+        await User.findByIdAndUpdate(_id, { password })
         
         // Login Token
-        const login_token = await createToken(_id, 'login', '120d')
-        res.cookie('fbstk', login_token, { expires: new Date(Date.now() + 10368000000) }).status(200).json(user)
+        const auth = await createToken(_id, 'login', '120d')
+        res.cookie('fbstk', auth.token, { expires: new Date(Date.now() + 10368000000) }).status(200).json(auth.reason)
 
+    } catch (error) {
+        next(error)
+    }
+}
+
+
+/**
+ * @access Private 
+ * @route  /api/v1/auth/logout
+ * @method DELETE
+ */
+
+export const userLogout = async (req, res, next) => {
+
+    const token = req.headers.authorization
+
+    try {
+        await Token.findOneAndDelete({ token })
+        res.clearCookie('fbstk').status(200).json('Successfully logged out')
     } catch (error) {
         next(error)
     }
@@ -292,25 +311,6 @@ export const userRegNumber = async (req, res, next) => {
     }
 }
 
-
-
-
-/**
- * @access Private 
- * @route  /api/user/logout
- * @method DELETE
- */
-
-export const userLogout = async (req, res, next) => {
-
-    try {
-        await User.findByIdAndUpdate(req.body.id, { callId: null })
-        const users = await User.find()
-        res.clearCookie('access_token').status(200).json(users)
-    } catch (error) {
-        next(error)
-    }
-}
 
 
 /**

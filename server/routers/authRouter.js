@@ -13,10 +13,10 @@ router.get('/me', loggedInUser)
 router.post('/login', userLogin)
 router.post('/find-user', findUser)
 router.patch('/reset-password', resetPassword)
+router.get('/logout', userLogout)
 
 
 
-router.post('/logout', userLogout)
 
 router.post('/verify', verifyAccount)
 router.post('/resent-verify', resentVerify)
