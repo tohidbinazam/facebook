@@ -4,6 +4,7 @@ import cross_btn from '../../assets/icons/cross.png'
 import { register } from '../../redux/auth/action';
 import toaster from '../../utility/toaster';
 import { useNavigate } from 'react-router-dom'
+import { AiOutlineEye } from 'react-icons/ai';
 
 const SignUp = ({ setShow }) => {
 
@@ -64,6 +65,12 @@ const SignUp = ({ setShow }) => {
         dispatch(register(input, setShow, navigate))
     }
 
+    // Password view and hide
+    const [type, setType] = useState(true);
+    const togglePassword = () => {
+        setType(!type);
+    };
+
 
   return (
     <div className='SignUp'>
@@ -86,7 +93,8 @@ const SignUp = ({ setShow }) => {
                 <input onChange={ handleInput } onBlur={ handleError } name='auth' type="text" placeholder="Mobile number or email address" />
                 </div>
                 <div className="reg-form">
-                <input onChange={ handleInput } onBlur={ handleError } name='pass' type="password" placeholder="New password" />
+                <input onChange={ handleInput } onBlur={ handleError } name='pass' type={ type ? 'password' : 'text' } placeholder="New password" />
+                <AiOutlineEye onClick={ togglePassword } />
                 </div>
                 <div className="reg-form">
                 <span>Date of birth</span>

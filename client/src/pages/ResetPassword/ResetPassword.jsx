@@ -5,6 +5,7 @@ import AuthFooter from '../../components/Footer/AuthFooter';
 import AuthHeader from '../../components/Header/AuthHeader';
 import { resetPassword } from '../../redux/auth/action';
 import toaster from '../../utility/toaster';
+import { AiOutlineEye } from "react-icons/ai";
 
 const ResetPassword = () => {
 
@@ -20,6 +21,14 @@ const ResetPassword = () => {
         }
         dispatch(resetPassword(input, navigate))
     }
+
+    // Password view and hide
+    const [type, setType] = useState(true);
+    const togglePassword = () => {
+        setType(!type);
+    };
+    
+
   return (
     <div>
         <AuthHeader />
@@ -36,7 +45,8 @@ const ResetPassword = () => {
                     marks.
                     </p>
                     <div className="code-box">
-                    <input onChange={ e => setInput(e.target.value) } className="w-100" type="text" placeholder="New password" />
+                    <input onChange={ e => setInput(e.target.value) } className="w-100" type={ type ? 'password' : 'text' } placeholder="New password" />
+                    <AiOutlineEye onClick={ togglePassword } />
                     </div>
                 </div>
                 <div className="reset-footer">

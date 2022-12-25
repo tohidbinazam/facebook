@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { AiOutlineEye } from 'react-icons/ai';
 import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import AuthFooter from '../../components/Footer/AuthFooter';
@@ -27,6 +28,12 @@ const LogIn = () => {
         dispatch(login(input, navigate))
     }
 
+    // Password view and hide
+    const [type, setType] = useState(true);
+    const togglePassword = () => {
+        setType(!type);
+    };
+
   return (
     <div>
         { show && <SignUp setShow={ setShow } /> }
@@ -50,7 +57,8 @@ const LogIn = () => {
                         />
                     </div>
                     <div className="auth-form">
-                        <input name='password' onChange={ handleInput } type="password" placeholder="Password" />
+                        <input name='password' onChange={ handleInput } type={ type ? 'password' : 'text' } placeholder="Password" />
+                        <AiOutlineEye onClick={ togglePassword } />
                     </div>
                     <div className="auth-form">
                         <button type="submit">Log In</button>
