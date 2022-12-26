@@ -181,7 +181,7 @@ export const logout = () => async (dispatch) => {
   }
   try {
     dispatch(loadStart())
-    const { data } = await axios.get('/api/v1/auth/logout', {
+    const { data } = await axios.delete('/api/v1/auth/logout', {
       headers : {
         authorization : token
       }

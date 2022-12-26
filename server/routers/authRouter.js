@@ -1,26 +1,26 @@
 import express from "express";
-import { userLogin, loggedInUser, verifyAccount, resentVerify, forgotPassword, resetPassword, userLogout, userRegEmail, userReEmail, verifyCode, findUser } from "../controllers/authController.js";
+import { login, resetPassword, userLogout, verifyCode, findUser, register, resendCode, isLoggedIn } from "../controllers/authController.js";
 
 
 // Router init
 const router = express.Router()
 
 // user auth routers
-router.post('/register/:auth', userRegEmail)
-router.post('/resend/:auth', userReEmail)
+router.post('/register/:auth', register)
+router.post('/resend/:auth', resendCode)
 router.post('/verify-code', verifyCode)
-router.get('/me', loggedInUser)
-router.post('/login', userLogin)
+router.get('/me', isLoggedIn)
+router.post('/login', login)
 router.post('/find-user', findUser)
 router.patch('/reset-password', resetPassword)
-router.get('/logout', userLogout)
+router.delete('/logout', userLogout)
 
 
 
 
-router.post('/verify', verifyAccount)
-router.post('/resent-verify', resentVerify)
-router.post('/forgot-password', forgotPassword)
+// router.post('/verify', verifyAccount)
+// router.post('/resent-verify', resentVerify)
+// router.post('/forgot-password', forgotPassword)
 
 
 // Export router

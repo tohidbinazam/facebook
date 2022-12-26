@@ -8,13 +8,14 @@ import createError from "../utility/error/createError.js";
 import passwordHash from "../utility/passwordHash.js";
 import createToken from "../utility/createToken.js";
 
+
+
 /**
- * @access Public 
- * @route /api/user/register-email
+ * @access private 
+ * @route /api/v1/user/register/:auth
  * @method POST
  */
-
-export const userRegEmail = async (req, res, next) => {
+export const register = async (req, res, next) => {
 
 
     const key = req.params.auth    
@@ -42,8 +43,13 @@ export const userRegEmail = async (req, res, next) => {
     }
 }
 
-// Code resend in email
-export const userReEmail = async (req, res, next) => {
+
+/**
+ * @access private 
+ * @route /api/v1/user/resend/:auth
+ * @method POST
+ */
+export const resendCode = async (req, res, next) => {
 
     const key = req.params.auth
     const { auth, reason } = req.body
@@ -62,7 +68,11 @@ export const userReEmail = async (req, res, next) => {
 }
 
 
-// verify code
+/**
+ * @access private 
+ * @route /api/v1/user/verify-code
+ * @method POST
+ */
 export const verifyCode = async (req, res, next) => {
 
     try {
@@ -97,11 +107,11 @@ export const verifyCode = async (req, res, next) => {
 
 
 /**
- * @access Private 
- * @route  /api/user/me
+ * @access private 
+ * @route  /api/v1/user/me
  * @method GET
  */
-export const loggedInUser = async (req, res, next) => {
+export const isLoggedIn = async (req, res, next) => {
 
     const token = req.headers.authorization
     
@@ -131,12 +141,11 @@ export const loggedInUser = async (req, res, next) => {
 
 
 /**
- * @access Public
- * @route /api/user/login
+ * @access private
+ * @route /api/v1/user/login
  * @method POST
  */
-
-export const userLogin = async (req, res, next) => {
+export const login = async (req, res, next) => {
 
     const { auth, password } = req.body
 
@@ -164,7 +173,11 @@ export const userLogin = async (req, res, next) => {
 }
 
 
-
+/**
+ * @access private
+ * @route /api/v1/user/find-user
+ * @method POST
+ */
 export const findUser = async (req, res, next) => {
 
     const { data } = req.body
@@ -183,10 +196,9 @@ export const findUser = async (req, res, next) => {
 }
 
 
-
 /**
- * @access public
- * @route /api/user/reset-password
+ * @access private
+ * @route /api/v1/user/reset-password
  * @method PATCH
  */
 export const resetPassword = async (req, res, next) => {
@@ -212,11 +224,10 @@ export const resetPassword = async (req, res, next) => {
 
 
 /**
- * @access Private 
+ * @access private 
  * @route  /api/v1/auth/logout
  * @method DELETE
  */
-
 export const userLogout = async (req, res, next) => {
 
     const token = req.headers.authorization
@@ -228,6 +239,9 @@ export const userLogout = async (req, res, next) => {
         next(error)
     }
 }
+
+
+
 
 
 

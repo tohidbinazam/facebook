@@ -23,7 +23,6 @@ const SignUp = ({ setShow }) => {
         
         return years
     }
-    
 
     // All days in a month
     const days = () => {
@@ -39,6 +38,7 @@ const SignUp = ({ setShow }) => {
     // All months
     const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 
+    // handle Input
     const handleInput = (e) => {
         setInput((prev) => ({
             ...prev,
@@ -48,10 +48,21 @@ const SignUp = ({ setShow }) => {
 
     // handle Input Error
     const handleError = (e) => {
-        if (!e.target.value) {
-            e.target.classList.add('error-border')
+        const target = e.target
+        if (!target.value) {
+            target.classList.add('error-border')
+            target.nextElementSibling.classList.remove('active')
         }else{
-            e.target.classList.remove('error-border')
+            target.nextElementSibling.classList.remove('active')
+        }
+    }
+
+    // handle Input Error Message
+    const handleErrorMsg = (e) => {
+        const target = e.target
+        if (target.classList.contains('error-border')) {
+            target.classList.remove('error-border')
+            target.nextElementSibling.classList.add('active')
         }
     }
 
@@ -86,15 +97,35 @@ const SignUp = ({ setShow }) => {
             <div className="sign-up-body">
             <form onSubmit={ handleSubmit }>
                 <div className="reg-form reg-form-inline">
-                <input onChange={ handleInput } onBlur={ handleError } name='fs_name' type="text" placeholder="First Name" />
-                <input onChange={ handleInput } onBlur={ handleError } name='sur_name' type="text" placeholder="Surname" />
+                    <div className='main-input'>
+                        <input onChange={ handleInput } onBlur={ handleError } onFocus={ handleErrorMsg } name='fs_name' type="text" placeholder="First Name" />
+                        <div className="error-msg">
+                            <p>What's your name?</p>
+                            <div className='arrow'></div>
+                        </div>
+                    </div>
+                    <div className='main-input'>
+                        <input onChange={ handleInput } onBlur={ handleError } onFocus={ handleErrorMsg } name='sur_name' type="text" placeholder="Surname" />
+                        <div className="error-msg surname">
+                            <p>What's your name?</p>
+                            <div className='arrow'></div>
+                        </div>
+                    </div>
                 </div>
                 <div className="reg-form">
-                <input onChange={ handleInput } onBlur={ handleError } name='auth' type="text" placeholder="Mobile number or email address" />
+                        <input onChange={ handleInput } onBlur={ handleError } onFocus={ handleErrorMsg } name='auth' type="text" placeholder="Mobile number or email address" />
+                        <div className="error-msg long">
+                            <p>You'll use this when you login and if you even need to reset your password</p>
+                            <div className='arrow'></div>
+                        </div>
                 </div>
                 <div className="reg-form">
-                <input onChange={ handleInput } onBlur={ handleError } name='pass' type={ type ? 'password' : 'text' } placeholder="New password" />
-                <AiOutlineEye onClick={ togglePassword } />
+                    <input onChange={ handleInput } onBlur={ handleError } onFocus={ handleErrorMsg } name='pass' type={ type ? 'password' : 'text' } placeholder="New password" />
+                    <div className="error-msg long">
+                        <p>Enter a combination of at least six numbers, letters and punctuation marks (such as ! and &).</p>
+                        <div className='arrow'></div>
+                    </div>
+                    <AiOutlineEye onClick={ togglePassword } />
                 </div>
                 <div className="reg-form">
                 <span>Date of birth</span>
