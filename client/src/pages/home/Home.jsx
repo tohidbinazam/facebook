@@ -1,28 +1,32 @@
 import React from 'react'
-import user_img from '../../assets/images/user.png'
 import StoryReels from '../../components/StoryReels/StoryReels';
 import CreatePost from '../../components/CreatePost/CreatePost';
 import Post from '../../components/Post/Post';
 import Header from '../../components/Header/Header';
+import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import avatar from '../../assets/images/profile_avatar.png'
 
 const Home = () => {
 
+  const { fs_name, sur_name, photo } = useSelector(state => state.auth.user)
+  const name = fs_name + ' ' + sur_name
 
   return (
     <div>
       {/* Main Header */}
-      <Header />
+      <Header name={ name } photo={ photo } />
       
       <div className="fb-home-body">
         <div className="fb-home-body-sidebar">
           <ul>
             <li>
-              <a href="http">
+              <Link to="/profile">
                 <div className="body-icon">
-                  <img src={ user_img } alt="" />
+                  <img src={ photo ?? avatar } alt="" />
                 </div>
-                <span>Asraful Haque</span>
-              </a>
+                <span>{ name }</span>
+              </Link>
             </li>
 
             <li>

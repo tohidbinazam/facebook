@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
 import logo from '../../assets/icons/favicon.ico'
-import user_img from '../../assets/images/user.png'
 import { logout } from '../../redux/auth/action';
+import avatar from '../../assets/images/profile_avatar.png'
 
-const Header = () => {
+const Header = ({ name, photo }) => {
 
     const dispatch = useDispatch()
     const [user, setUser] = useState(false)
@@ -180,8 +180,8 @@ const Header = () => {
                 <div className="user-menu-box">
                   <div className="user-data-box">
                     <div className="user-data-box-item">
-                      <img src={ user_img } alt="" />
-                      <span>Asraful Haque</span>
+                      <img src={ photo ?? avatar } alt="" />
+                      <span>{ name }</span>
                     </div>
                     <div className="divider-0"></div>
                     <a href="http">See all profiles</a>
@@ -233,7 +233,7 @@ const Header = () => {
                 </div>
               </div>
             }
-              <img onClick={ () => setUser(!user) } src={ user_img } alt="" />
+              <img onClick={ () => setUser(!user) } src={ photo ?? avatar } alt="" />
           </div>
         </div>
       </div>

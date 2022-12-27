@@ -12,6 +12,8 @@ import PasswordUser from './pages/PasswordUser/PasswordUser';
 import Profile from './pages/profile/Profile';
 import LoadingBar from 'react-top-loading-bar'
 import { loadEnd } from './redux/loading/action';
+import LoggedIn from './middlewares/LoggedIn';
+import LoggedOut from './middlewares/LoggedOut';
 
 
 function App() {
@@ -40,13 +42,17 @@ function App() {
       <Routes>
         <Route path='/' element={ <Index/> }/>
 
-        <Route path='/profile' element={ <Profile /> }/>
+        <Route element={ <LoggedIn /> }>
+          <Route path='/profile' element={ <Profile /> }/>
+        </Route>
 
-        <Route path='/find-account' element={ <FindAccount/> }/>
-        <Route path='/user-account' element={ <PasswordUser/> }/>
-        <Route path='/code-check' element={ <CodeCheck/> }/>
-        <Route path='/link-check' element={ <LinkCheck/> }/>
-        <Route path='/reset-password' element={  <ResetPassword/> }/>
+        <Route element={ <LoggedOut /> }>
+          <Route path='/find-account' element={ <FindAccount/> }/>
+          <Route path='/user-account' element={ <PasswordUser/> }/>
+          <Route path='/code-check' element={ <CodeCheck/> }/>
+          <Route path='/link-check' element={ <LinkCheck/> }/>
+          <Route path='/reset-password' element={  <ResetPassword/> }/>
+        </Route>
 
       </Routes>
     </div>
