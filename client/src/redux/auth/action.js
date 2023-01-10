@@ -131,10 +131,10 @@ export const verifyCode = (code, navigate) => async (dispatch, getState) => {
       navigate('/');
     }
     if (reason === 'forgot-password') {
-      // setTimeout(() => {
-      //   navigate(`/${data}`);
-      // }, 10);
-      navigate(`/${data}`);
+      setTimeout(() => {
+        navigate(`/${data}`);
+      }, 1);
+      // navigate(`/${data}`);
     }
 
   } catch (error) {

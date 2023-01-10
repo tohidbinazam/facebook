@@ -14,6 +14,8 @@ import LoadingBar from 'react-top-loading-bar'
 import { loadEnd } from './redux/loading/action';
 import LoggedIn from './middlewares/LoggedIn';
 import LoggedOut from './middlewares/LoggedOut';
+import CodeSendCheck from './middlewares/CodeSendCheck';
+import ResetPass from './middlewares/ResetPass';
 
 
 function App() {
@@ -29,7 +31,7 @@ function App() {
     }
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [token]);
+  }, []);
 
   return (
     <div className="App">
@@ -49,9 +51,13 @@ function App() {
         <Route element={ <LoggedOut /> }>
           <Route path='/find-account' element={ <FindAccount/> }/>
           <Route path='/user-account' element={ <PasswordUser/> }/>
+        </Route>
+        <Route element={ <CodeSendCheck /> }>
           <Route path='/code-check' element={ <CodeCheck/> }/>
           <Route path='/link-check' element={ <LinkCheck/> }/>
-          <Route path='/reset-password' element={  <ResetPassword/> }/>
+        </Route>
+        <Route element={ <ResetPass /> }>
+          <Route path='/reset-password' element={ <ResetPassword/> }/>
         </Route>
 
       </Routes>
