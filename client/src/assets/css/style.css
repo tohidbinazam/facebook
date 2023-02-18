@@ -1,128 +1,131 @@
 @font-face {
-  font-family: "Segoe UI Light";
-  src: local("Segoe UI Light"),
+  font-family: 'Segoe UI Light';
+  src: local('Segoe UI Light'),
     url(//c.s-microsoft.com/static/fonts/segoe-ui/west-european/light/latest.woff2)
-      format("woff2"),
+      format('woff2'),
     url(//c.s-microsoft.com/static/fonts/segoe-ui/west-european/light/latest.woff)
-      format("woff"),
+      format('woff'),
     url(//c.s-microsoft.com/static/fonts/segoe-ui/west-european/light/latest.ttf)
-      format("truetype");
+      format('truetype');
   font-weight: 100;
 }
 
 @font-face {
-  font-family: "Segoe UI Light";
-  src: local("Segoe UI Semilight"),
+  font-family: 'Segoe UI Light';
+  src: local('Segoe UI Semilight'),
     url(//c.s-microsoft.com/static/fonts/segoe-ui/west-european/semilight/latest.woff2)
-      format("woff2"),
+      format('woff2'),
     url(//c.s-microsoft.com/static/fonts/segoe-ui/west-european/semilight/latest.woff)
-      format("woff"),
+      format('woff'),
     url(//c.s-microsoft.com/static/fonts/segoe-ui/west-european/semilight/latest.ttf)
-      format("truetype");
+      format('truetype');
   font-weight: 200;
 }
 
 @font-face {
-  font-family: "Segoe UI Light";
-  src: local("Segoe UI"),
+  font-family: 'Segoe UI Light';
+  src: local('Segoe UI'),
     url(//c.s-microsoft.com/static/fonts/segoe-ui/west-european/normal/latest.woff2)
-      format("woff2"),
+      format('woff2'),
     url(//c.s-microsoft.com/static/fonts/segoe-ui/west-european/normal/latest.woff)
-      format("woff"),
+      format('woff'),
     url(//c.s-microsoft.com/static/fonts/segoe-ui/west-european/normal/latest.ttf)
-      format("truetype");
+      format('truetype');
   font-weight: 400;
 }
 
 @font-face {
   font-family: SegoeUI;
-  src: local("Segoe UI Light"),
+  src: local('Segoe UI Light'),
     url(//c.s-microsoft.com/static/fonts/segoe-ui/west-european/light/latest.woff2)
-      format("woff2"),
+      format('woff2'),
     url(//c.s-microsoft.com/static/fonts/segoe-ui/west-european/light/latest.woff)
-      format("woff"),
+      format('woff'),
     url(//c.s-microsoft.com/static/fonts/segoe-ui/west-european/light/latest.ttf)
-      format("truetype");
+      format('truetype');
   font-weight: 100;
 }
 
 @font-face {
   font-family: SegoeUI;
-  src: local("Segoe UI Semilight"),
+  src: local('Segoe UI Semilight'),
     url(//c.s-microsoft.com/static/fonts/segoe-ui/west-european/semilight/latest.woff2)
-      format("woff2"),
+      format('woff2'),
     url(//c.s-microsoft.com/static/fonts/segoe-ui/west-european/semilight/latest.woff)
-      format("woff"),
+      format('woff'),
     url(//c.s-microsoft.com/static/fonts/segoe-ui/west-european/semilight/latest.ttf)
-      format("truetype");
+      format('truetype');
   font-weight: 200;
 }
 
 @font-face {
   font-family: SegoeUI;
-  src: local("Segoe UI"),
+  src: local('Segoe UI'),
     url(//c.s-microsoft.com/static/fonts/segoe-ui/west-european/normal/latest.woff2)
-      format("woff2"),
+      format('woff2'),
     url(//c.s-microsoft.com/static/fonts/segoe-ui/west-european/normal/latest.woff)
-      format("woff"),
+      format('woff'),
     url(//c.s-microsoft.com/static/fonts/segoe-ui/west-european/normal/latest.ttf)
-      format("truetype");
+      format('truetype');
   font-weight: 400;
 }
 
 @font-face {
   font-family: SegoeUI;
-  src: local("Segoe UI Semibold"),
+  src: local('Segoe UI Semibold'),
     url(//c.s-microsoft.com/static/fonts/segoe-ui/west-european/semibold/latest.woff2)
-      format("woff2"),
+      format('woff2'),
     url(//c.s-microsoft.com/static/fonts/segoe-ui/west-european/semibold/latest.woff)
-      format("woff"),
+      format('woff'),
     url(//c.s-microsoft.com/static/fonts/segoe-ui/west-european/semibold/latest.ttf)
-      format("truetype");
+      format('truetype');
   font-weight: 600;
 }
 
 @font-face {
   font-family: SegoeUI;
-  src: local("Segoe UI Bold"),
+  src: local('Segoe UI Bold'),
     url(//c.s-microsoft.com/static/fonts/segoe-ui/west-european/bold/latest.woff2)
-      format("woff2"),
+      format('woff2'),
     url(//c.s-microsoft.com/static/fonts/segoe-ui/west-european/bold/latest.woff)
-      format("woff"),
+      format('woff'),
     url(//c.s-microsoft.com/static/fonts/segoe-ui/west-european/bold/latest.ttf)
-      format("truetype");
+      format('truetype');
   font-weight: 700;
 }
 
 /**
- * Basic Resetting code   
+ * Basic Reseting code   
 **/
 
 * {
+  margin: 0px;
+  padding: 0px;
   box-sizing: border-box;
 }
 
 body {
-  font-family: "Segoe UI Light";
+  font-family: 'Segoe UI Light' !important;
 }
+
 html {
   overflow-y: scroll;
 }
+
 a {
   text-decoration: none;
   color: inherit;
 }
+
 input:focus {
   outline: none;
 }
+
 li {
   list-style: none;
 }
 ul {
   margin-bottom: 0px;
-}
-p{
-  margin: 0px;
 }
 
 /**
@@ -178,351 +181,10 @@ Components
   bottom: 0px;
   right: 0px;
   left: 0px;
-  z-index: 9;
+  z-index: 9999;
 }
 
-/***
- *AUTH PAGE DESIGN 
-*/
-.fb-auth {
-  height: 85vh;
-  background-color: var(--bg-secondary);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.auth-wrapper {
-  display: flex;
-  width: 980px;
-}
-
-.auth-wrapper .auth-left {
-  transform: translate(0px, 60px);
-}
-
-.auth-wrapper .auth-left img {
-  width: 300px;
-  transform: translate(-35px, 0px);
-}
-
-.auth-wrapper .auth-left h2 {
-  width: 80%;
-  font-size: 200;
-  font-size: 28px;
-  font-family: inherit;
-  transform: translate(0px, -18px);
-}
-
-.auth-box {
-  width: 395px;
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 10%);
-  display: flex;
-  flex-direction: column;
-}
-
-.auth-box .auth-form {
-  margin-bottom: 15px;
-  position: relative;
-}
-.auth-box .auth-form svg {
-    position: absolute;
-    right: 5%;
-    top: 32%;
-    font-size: 20px;
-    cursor: pointer;
-}
-
-.auth-box .auth-form input {
-  width: 100%;
-  height: 50px;
-  font-size: 17px;
-  padding: 14px 16px;
-  border: 1px solid var(--bg-tertiary);
-  border-radius: 6px;
-  font-weight: 200;
-  font-family: inherit;
-}
-
-.auth-box .auth-form input:focus {
-  border-color: var(--blue-color);
-}
-
-.auth-box .auth-form button {
-  width: 100%;
-  height: 50px;
-  font-size: 17px;
-  border: 1px solid var(--bg-tertiary);
-  border-radius: 6px;
-  background-color: var(--blue-color);
-  color: #fff;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.1s;
-}
-
-.auth-box .auth-form button:hover {
-  background-color: var(--blue-color-hover);
-}
-
-.auth-box a {
-  text-align: center;
-  color: var(--blue-color);
-  font-weight: 600;
-}
-
-.auth-box > button {
-  width: 60%;
-  height: 50px;
-  font-size: 17px;
-  border: 1px solid var(--green-color);
-  border-radius: 6px;
-  background-color: var(--green-color);
-  color: #fff;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.1s;
-  margin: auto;
-}
-
-.auth-box > button:hover {
-  background-color: #36a420;
-  border: 1px solid #36a420;
-}
-
-.auth-right p {
-  text-align: center;
-  margin: 20px 0px;
-  font-size: 14px;
-}
-
-.auth-right p a {
-  font-weight: 700;
-  font-family: SegoeUI;
-}
-
-.fb-footer {
-  display: flex;
-  background-color: #fff;
-  justify-content: center;
-  align-items: flex-start;
-  padding: 30px 0px;
-}
-
-.footer-wrapper {
-  width: 980px;
-}
-
-.footer-wrapper .footer-top ul {
-  display: flex;
-  gap: 15px;
-  font-size: 13px;
-  color: #8a8d91;
-}
-
-.footer-wrapper .footer-bottom ul {
-  display: flex;
-  gap: 7px;
-  font-size: 13px;
-  color: #8a8d91;
-  flex-wrap: wrap;
-}
-
-.fb-footer p {
-  font-size: 13px;
-  color: #8a8d91;
-  margin-top: 25px;
-}
-
-/* SIGN UP  */
-.sign-up-card {
-  width: 432px;
-  background-color: #fff;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 10%);
-}
-
-.sign-up-header {
-  padding: 10px 16px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 1px solid #dadde1;
-}
-
-.sign-up-content span:first-child {
-  font-size: 32px;
-  font-weight: 700;
-  font-family: SegoeUI;
-  display: block;
-}
-
-.sign-up-content span:last-child {
-  font-size: 15px;
-  font-weight: 200;
-  display: block;
-}
-
-.sign-up-header button {
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-}
-
-.sign-up-body {
-  padding: 16px;
-}
-
-.reg-form {
-  margin-bottom: 10px;
-  display: flex;
-  flex-direction: column;
-  position: relative;
-}
-
-.reg-form svg {
-    position: absolute;
-    right: 5%;
-    top: 32%;
-    font-size: 18px;
-    cursor: pointer;
-}
-
-.reg-form input {
-  height: 40px;
-  border: 1px solid #ccd0d5;
-  border-radius: 5px;
-  padding: 10px;
-  background-color: #f5f6f7;
-}
-.main-input{
-  position: relative;
-  width: 49%;
-}
-
-/* Main error massage */
-.error-msg{
-  background: #be4b49;
-  position: absolute;
-  border-radius: 2px;
-  box-shadow: 0 0 0 1px rgb(139 3 0 / 75%), 0 1px 10px rgb(0 0 0 / 35%);
-  top: 0%;
-  right: 118%;
-  z-index: 999;
-  display: none;
-}
-
-.error-msg p{
-  color: #fff !important;
-  font-size: 13px !important;
-  padding: 13px;
-  width: 148px;
-}
-
-.error-msg .arrow{
-  position: absolute;
-  top: 16%;
-  left: 98.5%;
-  border-top: 15px solid #0000;
-  border-bottom: 15px solid #0000;
-  border-left: 15px solid #be4b49;
-}
-
-/* Surname part */
-.error-msg.surname{
-  top: 140%;
-  left: 0%;
-  right: auto;
-}
-.error-msg.surname .arrow{
-  bottom: 96%;
-  top: auto;
-  left: 10%;
-  border-left: 15px solid transparent;
-  border-right: 15px solid transparent;
-  border-bottom: 15px solid #be4b49;
-}
-
-/* Long error msg */
-.error-msg.long{
-  right: 109%;
-}
-.error-msg.long p{
-  width: 320px;
-}
-.error-msg.long .arrow{
-  left: 99.5%;
-}
-
-/* Active error msg */
-.error-msg.active {
-  display: block;
-}
-
-.reg-form-inline {
-  flex-direction: row;
-  justify-content: space-between;
-}
-
-.reg-form-select {
-  display: flex;
-  justify-content: space-between;
-}
-
-.reg-form-select select {
-  height: 40px;
-  border: 1px solid #ccd0d5;
-  border-radius: 5px;
-  padding: 10px;
-  width: 32%;
-  font-size: 16px;
-}
-
-.reg-form-select label {
-  height: 40px;
-  border: 1px solid #ccd0d5;
-  border-radius: 5px;
-  padding: 10px;
-  width: 32%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.reg-form p {
-  color: #777;
-  font-size: 11px;
-}
-
-.reg-form p a {
-  color: #385898;
-}
-
-.reg-form button {
-  width: fit-content;
-  margin: auto;
-  background-color: #00a400;
-  color: #fff;
-  border: none;
-  font-size: 18px;
-  border-radius: 6px;
-  cursor: pointer;
-  padding: 7px 60px;
-  margin-top: 20px;
-}
-
-.error-border{
-  border-color: red !important;
-}
-
-/* HOME PAGE DESIN  */
+/* HOME PAGE DESIGN  */
 .fb-home-header {
   background-color: #fff;
   box-shadow: 0 2px 3px rgb(0 0 0 / 10%), 0 0px 0px rgb(0 0 0 / 10%);
@@ -533,8 +195,9 @@ Components
   position: fixed;
   left: 0px;
   top: 0px;
+  top: 0px;
   width: 100%;
-  z-index: 9999;
+  z-index: 999;
 }
 
 .fb-home-menu ul {
@@ -567,7 +230,7 @@ Components
 }
 
 .fb-home-menu ul li.active::after {
-  content: "";
+  content: '';
   display: block;
   clear: both;
 
@@ -679,27 +342,27 @@ Components
 }
 
 .fb-home-body-sidebar ul li:nth-child(2) .body-icon {
-  background-image: url("../icons/home.png");
+  background-image: url('../icons/home.png');
   background-position: 0px -258px;
 }
 
 .fb-home-body-sidebar ul li:nth-child(3) .body-icon {
-  background-image: url("../icons/home.png");
+  background-image: url('../icons/home.png');
   background-position: 0px -71px;
 }
 
 .fb-home-body-sidebar ul li:nth-child(4) .body-icon {
-  background-image: url("../icons/home.png");
+  background-image: url('../icons/home.png');
   background-position: 0px -368px;
 }
 
 .fb-home-body-sidebar ul li:nth-child(5) .body-icon {
-  background-image: url("../icons/home.png");
+  background-image: url('../icons/home.png');
   background-position: 0px -479px;
 }
 
 .fb-home-body-sidebar ul li:nth-child(6) .body-icon {
-  background-image: url("../icons/home.png");
+  background-image: url('../icons/home.png');
   background-position: 0px -404px;
 }
 
@@ -761,21 +424,21 @@ Components
 .create-post-footer ul li:nth-child(1) .post-icon {
   width: 24px;
   height: 24px;
-  background-image: url("../icons/post.png");
+  background-image: url('../icons/post.png');
   background-position: 0px 0px;
 }
 
 .create-post-footer ul li:nth-child(2) .post-icon {
   width: 24px;
   height: 24px;
-  background-image: url("../icons/post.png");
+  background-image: url('../icons/post.png');
   background-position: 0px -176px;
 }
 
 .create-post-footer ul li:nth-child(3) .post-icon {
   width: 24px;
   height: 24px;
-  background-image: url("../icons/post.png");
+  background-image: url('../icons/post.png');
   background-position: 0px -125px;
 }
 
@@ -915,7 +578,7 @@ Components
 .comment-icon {
   width: 24px;
   height: 20px;
-  background-image: url("../icons/comments.png");
+  background-image: url('../icons/comments.png');
   display: block;
 }
 
@@ -968,7 +631,7 @@ Components
 }
 
 .post-menu .post-dropdown-menu::before {
-  content: "";
+  content: '';
   display: block;
   width: 0px;
   height: 0px;
@@ -1009,7 +672,7 @@ Components
 .post-menu .post-dropdown-menu .menu-icon {
   width: 20px;
   height: 20px;
-  background-image: url("../icons/post-menu.png");
+  background-image: url('../icons/post-menu.png');
 }
 
 .post-menu .post-dropdown-menu ul li:nth-child(1) .menu-icon {
@@ -1029,17 +692,17 @@ Components
 }
 
 .post-menu .post-dropdown-menu ul li:nth-child(6) .menu-icon {
-  background-image: url("../icons/port-icon-1.png");
+  background-image: url('../icons/port-icon-1.png');
   background-position: 0px -71px;
 }
 
 .post-menu .post-dropdown-menu ul li:nth-child(7) .menu-icon {
-  background-image: url("../icons/port-icon-1.png");
+  background-image: url('../icons/port-icon-1.png');
   background-position: 0px -428px;
 }
 
 .post-menu .post-dropdown-menu ul li:nth-child(8) .menu-icon {
-  background-image: url("../icons/port-icon-1.png");
+  background-image: url('../icons/port-icon-1.png');
   background-position: 0px -387px;
 }
 
@@ -1048,7 +711,7 @@ Components
 }
 
 .post-menu .post-dropdown-menu ul li:nth-child(11) .menu-icon {
-  background-image: url("../icons/port-icon-1.png");
+  background-image: url('../icons/port-icon-1.png');
   background-position: 0px -596px;
 }
 
@@ -1108,7 +771,7 @@ Components
 .fb-user-item .user-menu-dropdown .user-menu-list ul li .user-menu-icon {
   width: 22px;
   height: 22px;
-  background-image: url("../icons/port-icon-1.png");
+  background-image: url('../icons/port-icon-1.png');
 }
 
 .fb-user-item
@@ -1168,7 +831,7 @@ Components
   right: 0px;
 }
 
-.reset-header-wrapper {
+.reset-header-wraper {
   width: 97%;
   display: flex;
   justify-content: space-between;
@@ -1179,12 +842,12 @@ Components
   width: 150px;
   cursor: pointer;
 }
-.login-part{
+.reset-header-wraper .login-part {
   display: flex;
+  gap: 10px;
   align-items: center;
-  gap: 12px;
 }
-.reset-header-wrapper .login-part input {
+.reset-header-wraper .login-part input {
   height: 40px;
   border: 1px solid #ccc;
   padding: 10px;
@@ -1192,7 +855,7 @@ Components
   border-radius: 4px;
 }
 
-.reset-header-wrapper .login-part button {
+.reset-header-wraper .login-part button {
   height: 40px;
   border: 1px solid var(--blue-color);
   padding: 10px;
@@ -1204,12 +867,12 @@ Components
   font-weight: bold;
 }
 
-.reset-header-wrapper .login-part a {
+.reset-header-wraper .login-part a {
   color: var(--blue-color);
   font-size: 14px;
 }
 
-.reset-header-wrapper .login-part a:hover {
+.reset-header-wraper .login-part a:hover {
   text-decoration: underline;
 }
 
@@ -1221,7 +884,7 @@ Components
   align-items: center;
 }
 
-.reset-wrapper {
+.reset-wraper {
   width: 500px;
 }
 
@@ -1253,7 +916,6 @@ Components
   display: flex;
   justify-content: space-between;
   gap: 20px;
-  position: relative;
 }
 
 .code-box input {
@@ -1263,14 +925,6 @@ Components
   border: 1px solid #ccc;
   font-size: 24px;
   width: 50%;
-}
-
-.code-box svg {
-    position: absolute;
-    right: 5%;
-    top: 28%;
-    font-size: 22px;
-    cursor: pointer;
 }
 
 .reset-footer {
@@ -1289,29 +943,29 @@ Components
   text-decoration: underline;
 }
 
-.reset-btn {
+.reset-btns {
   display: flex;
   gap: 10px;
 }
 
-.reset-btn a {
+.reset-btns a {
   padding: 8px 20px;
   border-radius: 6px;
   display: inline-block;
   font-size: 14px;
 }
 
-.reset-btn a:hover {
+.reset-btns a:hover {
   text-decoration: none;
 }
 
-.reset-btn .cancel {
+.reset-btns .cancel {
   background-color: #e9ebee;
   color: #333;
   font-weight: bold;
 }
 
-.reset-btn .continue {
+.reset-btns .continue {
   background-color: var(--blue-color);
   color: #fff;
   font-weight: bold;
@@ -1340,7 +994,6 @@ Components
   color: #555;
 }
 
-/* 1px solid rgba(0, 0, 0, .1) */
 .story-box {
   width: 100%;
   background-color: #fff;
@@ -1429,7 +1082,7 @@ Components
 }
 
 .story-area .story-item:before {
-  content: "";
+  content: '';
   display: block;
 
   width: 100%;
@@ -1438,7 +1091,7 @@ Components
 }
 
 .story-area .story-item.auth-user-story:before {
-  content: "";
+  content: '';
   display: block;
 
   width: 100%;
@@ -1470,7 +1123,7 @@ Components
   position: absolute;
   left: 0px;
   right: 0px;
-  top: -13px;
+  top: -18px;
   background-color: #fff;
   width: 30px;
   height: 30px;

@@ -1,0 +1,184 @@
+/* SIGN UP  */
+.sign-up-card {
+  width: 432px;
+  background-color: #fff;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 10%);
+}
+
+.sign-up-header {
+  padding: 10px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #dadde1;
+}
+
+.sign-up-content span:first-child {
+  font-size: 32px;
+  font-weight: 700;
+  font-family: SegoeUI;
+  display: block;
+}
+
+.sign-up-content span:last-child {
+  font-size: 15px;
+  font-weight: 200;
+  display: block;
+}
+
+.sign-up-header button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.sign-up-body {
+  padding: 16px;
+}
+
+.reg-form {
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.reg-form svg {
+  position: absolute;
+  right: 5%;
+  top: 32%;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.reg-form input {
+  height: 40px;
+  border: 1px solid #ccd0d5;
+  border-radius: 5px;
+  padding: 10px;
+  background-color: #f5f6f7;
+}
+.main-input {
+  position: relative;
+  width: 49%;
+}
+
+/* Main error massage */
+.error-msg {
+  background: #be4b49;
+  position: absolute;
+  border-radius: 2px;
+  box-shadow: 0 0 0 1px rgb(139 3 0 / 75%), 0 1px 10px rgb(0 0 0 / 35%);
+  top: 0%;
+  right: 118%;
+  z-index: 999;
+  display: none;
+}
+
+.error-msg p {
+  color: #fff !important;
+  font-size: 13px !important;
+  padding: 13px;
+  width: 148px;
+}
+
+.error-msg .arrow {
+  position: absolute;
+  top: 16%;
+  left: 98.5%;
+  border-top: 15px solid #0000;
+  border-bottom: 15px solid #0000;
+  border-left: 15px solid #be4b49;
+}
+
+/* Surname part */
+.error-msg.surname {
+  top: 140%;
+  left: 0%;
+  right: auto;
+}
+.error-msg.surname .arrow {
+  bottom: 96%;
+  top: auto;
+  left: 10%;
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+  border-bottom: 15px solid #be4b49;
+}
+
+/* Long error msg */
+.error-msg.long {
+  right: 109%;
+}
+.error-msg.long p {
+  width: 320px;
+}
+.error-msg.long .arrow {
+  left: 99.5%;
+}
+
+/* Active error msg */
+.error-msg.active {
+  display: block;
+}
+
+.reg-form-inline {
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.reg-form-select {
+  display: flex;
+  justify-content: space-between;
+}
+
+.reg-form-select select {
+  height: 40px;
+  border: 1px solid #ccd0d5;
+  border-radius: 5px;
+  padding: 10px;
+  width: 32%;
+  font-size: 16px;
+}
+
+.reg-form-select label {
+  height: 40px;
+  border: 1px solid #ccd0d5;
+  border-radius: 5px;
+  padding: 10px;
+  width: 32%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.reg-form p {
+  color: #777;
+  font-size: 11px;
+}
+
+.reg-form p a {
+  color: #385898;
+}
+
+.reg-form button {
+  width: fit-content;
+  margin: auto;
+  background-color: #00a400;
+  color: #fff;
+  border: none;
+  font-size: 18px;
+  border-radius: 6px;
+  cursor: pointer;
+  padding: 7px 60px;
+  margin-top: 20px;
+}
+
+.error-border {
+  border-color: red !important;
+}

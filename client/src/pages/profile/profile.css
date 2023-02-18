@@ -1,0 +1,441 @@
+/* Facebook Profile  */
+.fb-profile-header {
+  margin-top: 57px;
+  background-color: #fff;
+  z-index: 999;
+  box-shadow: 0 2px 3px rgb(0 0 0 / 10%), 0 0px 0px rgb(0 0 0 / 10%);
+}
+
+.fb-header-shad {
+  width: 100%;
+  height: 300px;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0));
+  position: absolute;
+}
+
+.fb-profile-header .fb-cover-photo {
+  width: 77%;
+  height: 500px;
+  border-radius: 0px 0px 10px 10px;
+  overflow: hidden;
+  margin: 0px auto;
+  position: relative;
+}
+
+.fb-profile-header .fb-cover-photo::after {
+  content: '';
+  display: block;
+  clear: both;
+  width: 100%;
+  height: 100px;
+  background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.7));
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  margin: auto;
+}
+
+.fb-profile-header .fb-cover-photo img {
+  width: 100%;
+  height: auto;
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  margin: auto;
+}
+
+.fb-profile-header .fb-cover-photo button {
+  position: absolute;
+  bottom: 20px;
+  right: 30px;
+  padding: 6px 12px;
+  font-size: 14px;
+  font-weight: 900;
+  border: 0px;
+  border-radius: 5px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 3px;
+  background-color: #fff;
+  font-family: inherit;
+  z-index: 999;
+}
+
+.fb-profile-header .fb-cover-photo button:hover {
+  background-color: #f4f4f4;
+}
+
+span.camera-icon {
+  display: block;
+  width: 20px;
+  height: 20px;
+  background-image: url('https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/fcq9jLvLpnZ.png');
+  background-position: 0px 444px;
+}
+
+.fb-profile-details {
+  width: 73%;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  transform: translate(0px, -40px);
+}
+
+.fb-profile-details .profile-info {
+  width: 80%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-end;
+  gap: 10px;
+}
+.fb-profile-details .profile-info .profile-desc {
+  margin-bottom: 20px;
+}
+
+.fb-profile-details .profile-info .profile-desc h1 {
+  font-size: 36px;
+  font-family: inherit;
+}
+
+.fb-profile-details .profile-info .profile-desc .profile-friends-list ul {
+  display: flex;
+}
+
+.fb-profile-details .profile-info .profile-desc .profile-friends-list ul li {
+  margin-left: -5px;
+  cursor: pointer;
+}
+
+.fb-profile-details
+  .profile-info
+  .profile-desc
+  .profile-friends-list
+  ul
+  li
+  img {
+  width: 35px;
+  height: 35px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  border-radius: 50%;
+}
+
+.profile-photo img {
+  width: 180px;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 5px solid #fff;
+}
+
+.profile-action {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 10px;
+  width: 500px;
+}
+
+.profile-action button {
+  padding: 7px 12px;
+  font-size: 16px;
+  font-family: inherit;
+  background-color: #f0f2f5;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 5px;
+}
+
+.profile-action button span:first-child {
+  width: 18px;
+  height: 18px;
+  display: block;
+}
+
+.profile-action button:nth-child(1) span.follow-icon {
+  background-image: url('https://static.xx.fbcdn.net/rsrc.php/v3/yw/r/LJ8KuNpi23A.png');
+  background-position: 0px 126px;
+  background-size: cover;
+}
+
+.profile-action button:nth-child(2) span:first-child {
+  background-image: url('https://static.xx.fbcdn.net/rsrc.php/v3/y9/r/YjBUcSAL8TC.png');
+  background-position: 0px 126px;
+  background-size: cover;
+}
+
+.profile-action button:nth-child(3) span:first-child {
+  background-image: url('https://static.xx.fbcdn.net/rsrc.php/v3/yK/r/r2FA830xjtI.png');
+  background-position: 0px 126px;
+  background-size: cover;
+}
+
+.fb-profile-body {
+  min-height: 300px;
+  width: 100%;
+  background-color: #f0f2f5;
+}
+
+.fb-profile-menu {
+  width: 73%;
+  margin: auto;
+  border-top: 1px solid #ccced2;
+}
+
+.fb-profile-menu ul {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 5px;
+}
+
+.fb-profile-menu ul li a {
+  padding: 20px 20px;
+  display: block;
+  font-size: 16px;
+  font-family: inherit;
+}
+.main-bg {
+  background-color: #f0f2f5;
+}
+
+.main-section {
+  padding-top: 20px;
+  gap: 20px;
+  width: 73%;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+}
+.main-left {
+  width: 42%;
+}
+.main-right {
+  width: 58%;
+}
+
+.profile-intro-btn {
+  width: 100%;
+  padding: 9px 12px;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: inherit;
+  background-color: #e4e6eb;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 5px;
+}
+.fb-intro p {
+  font-size: 14px;
+  text-align: center;
+  margin: 15px 0px;
+}
+
+.bio-list ul li {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 20px 0px;
+  gap: 12px;
+}
+.bio-list ul li p {
+  font-size: 14px;
+}
+
+.bio-list ul li img {
+  filter: opacity(0.5);
+}
+
+.hobbies-section {
+  margin: 25px 0px 10px;
+  display: flex;
+  justify-content: flex-start;
+  gap: 13px;
+}
+
+.Hobbies-btn {
+  padding: 8px 12px;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: inherit;
+  background-color: #0000;
+  border: 1px solid #b4b4b485;
+  border-radius: 25px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 5px;
+}
+.Hobbies-btn img {
+  width: 20px;
+  height: 20px;
+  object-fit: cover;
+}
+
+.fb-feature {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 9px;
+  height: 250px;
+}
+.feature {
+  width: 33.3%;
+  height: 222px;
+}
+.feature img {
+  border-radius: 10px;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.photo-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 56px;
+}
+.photo-header button {
+  border: none;
+  background: #0000;
+  font-size: 15px;
+  color: #1876f2;
+  cursor: pointer;
+  padding: 10px 22px;
+  border-radius: 5px;
+  transition: 0.3s;
+}
+.photo-header button:hover {
+  background-color: #f4f4f4;
+}
+.photo-body {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+.photo-body img {
+  width: 129.5px;
+  height: 129px;
+}
+.photo-body img:nth-child(1) {
+  border-radius: 9px 0px 0px 0px;
+}
+.photo-body img:nth-child(3) {
+  border-radius: 0px 9px 0px 0px;
+}
+.photo-body img:nth-child(7) {
+  border-radius: 0px 0px 0px 9px;
+}
+.photo-body img:nth-child(9) {
+  border-radius: 0px 0px 9px 0px;
+}
+
+.upload-img {
+  width: 23%;
+  height: 200px;
+  position: relative;
+  cursor: pointer;
+}
+.single-ing img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  cursor: pointer;
+  border-radius: 10px;
+}
+.checkbox-design[type='checkbox'] {
+  position: absolute;
+  cursor: pointer;
+  opacity: 0;
+}
+.new-checkbox {
+  position: absolute;
+  top: 82%;
+  left: 74%;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  cursor: pointer;
+}
+.single-ing .new-checkbox:after {
+  content: '';
+  position: absolute;
+  left: 34%;
+  top: 10%;
+  width: 5px;
+  height: 12px;
+  border: solid #1b74e4;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+  display: none;
+}
+
+.single-ing input:checked ~ .new-checkbox {
+  background-color: white;
+}
+.single-ing input:checked ~ .new-checkbox:after {
+  display: block;
+}
+.All-image {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.upload-button {
+  background-color: #e7f3ff;
+  border-radius: 5px;
+  color: #1876f2;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  margin: 10px 0px;
+  display: block;
+  text-align: center;
+  padding: 10px 0px;
+}
+#upload-photo {
+  display: none;
+}
+
+.feature-title input {
+  padding: 10px;
+  border-radius: 7px;
+  margin: 7px 0px;
+  border-color: #1876f2;
+}
+.feature-title label {
+  color: #1876f2;
+  font-weight: 600;
+}
+.feature-title {
+  width: 40%;
+  margin: auto;
+}
+.add-more {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  text-align: center;
+  font-size: 18px;
+}

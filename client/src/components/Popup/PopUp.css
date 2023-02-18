@@ -1,0 +1,90 @@
+.Popup-canter {
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #000000;
+  z-index: 1000;
+}
+.Popup-body {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px 20px;
+  align-items: flex-start;
+}
+.Popup-header-left {
+  display: flex;
+  align-items: center;
+  width: 30%;
+}
+.Popup-header-left a svg {
+  cursor: pointer;
+  color: white;
+  font-size: 28px;
+  margin-right: 10px;
+}
+.Popup-header-left a img {
+  width: 38px;
+}
+.Popup-header-center {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 60%;
+}
+.Popup-header-right {
+  width: 30%;
+  margin-right: 10px;
+}
+.img-div {
+  height: 90vh;
+  width: 65%;
+  border-radius: 10px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.left-arrow {
+  width: 17.5;
+}
+.right-arrow {
+  width: 17.5;
+}
+.arrow svg {
+  cursor: pointer;
+  color: white;
+  font-size: 28px;
+}
+.img-switch-indicator {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 6px;
+  margin: 10px 12px;
+}
+
+.indicator {
+  width: 100%;
+  height: 5px;
+  background-color: #8c8d8f;
+  border-radius: 10px;
+}
+.indicator.active {
+  background-color: #ffffff;
+}
+
+.bar-progress {
+  width: 0%;
+  height: 5px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  animation: tohid 5s linear forwards;
+}
+@keyframes tohid {
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: 100%;
+  }
+}
