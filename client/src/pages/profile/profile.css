@@ -240,11 +240,6 @@ span.camera-icon {
   align-items: center;
   gap: 5px;
 }
-.fb-intro p {
-  font-size: 14px;
-  text-align: center;
-  margin: 15px 0px;
-}
 
 .bio-list ul li {
   display: flex;

@@ -4,11 +4,11 @@ import logo from '../../assets/icons/favicon.ico';
 import { RxCross2 } from 'react-icons/rx';
 import RightTop from '../RightTop/RightTop';
 import { AiOutlineLeft, AiOutlineRight } from 'react-icons/ai';
-import { features } from './array';
-const PopUp = () => {
+// import { features } from './array';
+
+const PopUp = ({ features, hide }) => {
   const [counter, setCounter] = useState(0);
 
-  //   Every five second the counter will increase by one
   useEffect(() => {
     const controlCounter = setInterval(() => {
       if (counter < features.length - 1) {
@@ -21,14 +21,15 @@ const PopUp = () => {
     return () => {
       clearInterval(controlCounter);
     };
-  }, [counter]);
+  }, [counter, features.length]);
 
   return (
     <div className='Popup-canter'>
       <div className='Popup'>
         <div className='Popup-body'>
           <div className='Popup-header-left'>
-            <a href='http'>
+            {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
+            <a onClick={() => hide(false)}>
               <RxCross2 />
             </a>
             <a href='http'>
@@ -43,7 +44,7 @@ const PopUp = () => {
                 </div>
               )}
             </div>
-            
+
             <div
               className='img-div'
               style={{

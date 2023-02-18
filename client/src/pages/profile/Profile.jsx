@@ -10,15 +10,21 @@ import ProfileIntroBtn from '../../utility/design/ProfileIntroBtn';
 import Modal from '../../components/Modal/Modal';
 import { BiAddToQueue } from 'react-icons/bi';
 import PopUp from '../../components/Popup/PopUp';
+import { features } from '../../components/Popup/array';
+import FbBio from '../../components/FbBio/FbBio';
 
 const Profile = () => {
   const { fs_name, sur_name, photo } = useSelector((state) => state.auth.user);
   const name = fs_name + ' ' + sur_name;
 
+  // Add Feature
   const [featureAdd, setFeatureAdd] = useState(false);
   const [featureUpload, setFeatureUpload] = useState(false);
   const [featurePhoto, setFeaturePhoto] = useState([]);
   const [checkedPhoto, setCheckedPhoto] = useState([]);
+
+  // Show Feature
+  const [showFeature, setShowFeature] = useState(false);
 
   const handleUpload = (e) => {
     const files = Array.from(e.target.files);
@@ -79,49 +85,49 @@ const Profile = () => {
                 <ul>
                   <li>
                     <img
-                      src='https://media.istockphoto.com/id/1309328823/photo/headshot-portrait-of-smiling-male-employee-in-office.jpg?b=1&s=170667a&w=0&k=20&c=MRMqc79PuLmQfxJ99fTfGqHL07EDHqHLWg0Tb4rPXQc='
+                      src='https://unitedthemes.com/wp-content/uploads/2018/09/team4.jpg'
                       alt=''
                     />
                   </li>
                   <li>
                     <img
-                      src='https://media.istockphoto.com/id/1309328823/photo/headshot-portrait-of-smiling-male-employee-in-office.jpg?b=1&s=170667a&w=0&k=20&c=MRMqc79PuLmQfxJ99fTfGqHL07EDHqHLWg0Tb4rPXQc='
+                      src='https://unitedthemes.com/wp-content/uploads/2018/09/team4.jpg'
                       alt=''
                     />
                   </li>
                   <li>
                     <img
-                      src='https://media.istockphoto.com/id/1309328823/photo/headshot-portrait-of-smiling-male-employee-in-office.jpg?b=1&s=170667a&w=0&k=20&c=MRMqc79PuLmQfxJ99fTfGqHL07EDHqHLWg0Tb4rPXQc='
+                      src='https://unitedthemes.com/wp-content/uploads/2018/09/team4.jpg'
                       alt=''
                     />
                   </li>
                   <li>
                     <img
-                      src='https://media.istockphoto.com/id/1309328823/photo/headshot-portrait-of-smiling-male-employee-in-office.jpg?b=1&s=170667a&w=0&k=20&c=MRMqc79PuLmQfxJ99fTfGqHL07EDHqHLWg0Tb4rPXQc='
+                      src='https://unitedthemes.com/wp-content/uploads/2018/09/team3.jpg'
                       alt=''
                     />
                   </li>
                   <li>
                     <img
-                      src='https://media.istockphoto.com/id/1309328823/photo/headshot-portrait-of-smiling-male-employee-in-office.jpg?b=1&s=170667a&w=0&k=20&c=MRMqc79PuLmQfxJ99fTfGqHL07EDHqHLWg0Tb4rPXQc='
+                      src='https://unitedthemes.com/wp-content/uploads/2018/09/team3.jpg'
                       alt=''
                     />
                   </li>
                   <li>
                     <img
-                      src='https://media.istockphoto.com/id/1309328823/photo/headshot-portrait-of-smiling-male-employee-in-office.jpg?b=1&s=170667a&w=0&k=20&c=MRMqc79PuLmQfxJ99fTfGqHL07EDHqHLWg0Tb4rPXQc='
+                      src='https://unitedthemes.com/wp-content/uploads/2018/09/team3.jpg'
                       alt=''
                     />
                   </li>
                   <li>
                     <img
-                      src='https://media.istockphoto.com/id/1309328823/photo/headshot-portrait-of-smiling-male-employee-in-office.jpg?b=1&s=170667a&w=0&k=20&c=MRMqc79PuLmQfxJ99fTfGqHL07EDHqHLWg0Tb4rPXQc='
+                      src='https://unitedthemes.com/wp-content/uploads/2018/09/team3.jpg'
                       alt=''
                     />
                   </li>
                   <li>
                     <img
-                      src='https://media.istockphoto.com/id/1309328823/photo/headshot-portrait-of-smiling-male-employee-in-office.jpg?b=1&s=170667a&w=0&k=20&c=MRMqc79PuLmQfxJ99fTfGqHL07EDHqHLWg0Tb4rPXQc='
+                      src='https://unitedthemes.com/wp-content/uploads/2018/09/team3.jpg'
                       alt=''
                     />
                   </li>
@@ -172,53 +178,43 @@ const Profile = () => {
         <div className='main-section'>
           <div className='main-left'>
             <FBCRUD>
-              <div className='fb-intro'>
-                <h3>Intro</h3>
-                <p>
-                  I'm MERN Developer. I study computer science & technology at
-                  KPI. Get more info to visit my website.
-                </p>
-                <ProfileIntroBtn> Edit bio </ProfileIntroBtn>
-              </div>
+              {/* FB Bio part */}
+              <FbBio />
               <div className='bio-list'>
                 <ul>
                   <li>
-                    {' '}
                     <img
                       src='https://static.xx.fbcdn.net/rsrc.php/v3/yS/r/jV4o8nAgIEh.png'
                       alt=''
-                    />{' '}
+                    />
                     <p>
-                      Studies Computer Science and Technology at{' '}
+                      Studies Computer Science and Technology at
                       <b>Khulna Polytechnic Institute, Khulna</b>
                     </p>
                   </li>
                   <li>
-                    {' '}
                     <img
                       src='https://static.xx.fbcdn.net/rsrc.php/v3/yS/r/jV4o8nAgIEh.png'
                       alt=''
-                    />{' '}
+                    />
                     <p>
-                      Went to <b>Govt. Model High School, Khulna</b>{' '}
+                      Went to <b>Govt. Model High School, Khulna</b>
                     </p>
                   </li>
                   <li>
-                    {' '}
                     <img
                       src='https://static.xx.fbcdn.net/rsrc.php/v3/y5/r/VMZOiSIJIwn.png'
                       alt=''
-                    />{' '}
+                    />
                     <p>
-                      Lives in <b>Khulna</b>{' '}
+                      Lives in <b>Khulna</b>
                     </p>
                   </li>
                   <li>
-                    {' '}
                     <img
                       src='https://static.xx.fbcdn.net/rsrc.php/v3/yc/r/-e1Al38ZrZL.png'
                       alt=''
-                    />{' '}
+                    />
                     <p>
                       From <b>Khulna</b>
                     </p>
@@ -227,27 +223,24 @@ const Profile = () => {
                 <ProfileIntroBtn> Edit details </ProfileIntroBtn>
                 <div className='hobbies-section'>
                   <button className='Hobbies-btn'>
-                    {' '}
                     <img
                       src='https://icons.iconarchive.com/icons/treetog/junior/128/earth-icon.png'
                       alt=''
-                    />{' '}
+                    />
                     Traveling
                   </button>
                   <button className='Hobbies-btn'>
-                    {' '}
                     <img
                       src='https://icons.iconarchive.com/icons/treetog/junior/128/earth-icon.png'
                       alt=''
-                    />{' '}
+                    />
                     Traveling
                   </button>
                   <button className='Hobbies-btn'>
-                    {' '}
                     <img
                       src='https://icons.iconarchive.com/icons/treetog/junior/128/earth-icon.png'
                       alt=''
-                    />{' '}
+                    />
                     Traveling
                   </button>
                 </div>
@@ -256,7 +249,7 @@ const Profile = () => {
 
               <div className='all-feature'>
                 <div className='fb-feature'>
-                  <div className='feature'>
+                  <div className='feature' onClick={() => setShowFeature(true)}>
                     <img
                       src='https://unitedthemes.com/wp-content/uploads/2018/09/team4.jpg'
                       alt=''
@@ -264,13 +257,13 @@ const Profile = () => {
                   </div>
                   <div className='feature'>
                     <img
-                      src='https://t4.ftcdn.net/jpg/03/64/21/11/360_F_364211147_1qgLVxv1Tcq0Ohz3FawUfrtONzz8nq3e.jpg'
+                      src='https://unitedthemes.com/wp-content/uploads/2018/09/team2.jpg'
                       alt=''
                     />
                   </div>
                   <div className='feature'>
                     <img
-                      src='https://t4.ftcdn.net/jpg/03/64/21/11/360_F_364211147_1qgLVxv1Tcq0Ohz3FawUfrtONzz8nq3e.jpg'
+                      src='https://unitedthemes.com/wp-content/uploads/2018/09/team3.jpg'
                       alt=''
                     />
                   </div>
@@ -281,7 +274,9 @@ const Profile = () => {
                 </ProfileIntroBtn>
 
                 {/* View Feature */}
-                <PopUp />
+                {showFeature && (
+                  <PopUp features={features} hide={setShowFeature} />
+                )}
 
                 {/* Feature Modal */}
                 {featureAdd && (
