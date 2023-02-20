@@ -1,24 +1,12 @@
-import express from "express";
-import { getAllUsers, getSingleUser, verifyAccount, resentVerify, forgotPassword, resetPassword, userLogout } from "../controllers/authController.js";
-import authMiddleware from "../middlewares/authMiddleware.js";
+import express from 'express';
+import { addFeatured, updateProfile } from '../controllers/userController.js';
 
 // Router init
-const router = express.Router()
+const router = express.Router();
 
-// user auth routers
-// router.post('/register', userRegister)
-// router.post('/login', userLogin)
-router.post('/logout', userLogout)
-// router.get('/me', loggedInUser)
-router.post('/verify', verifyAccount)
-router.post('/resent-verify', resentVerify)
-router.post('/forgot-password', forgotPassword)
-router.patch('/reset-password', resetPassword)
-
-// Router REST API
-router.route('/').get(getAllUsers)
-router.route('/:username').get(authMiddleware, getSingleUser)
-
+// Import controllers
+router.patch('/:id', updateProfile);
+router.post('/featured/:id', addFeatured);
 
 // Export router
 export default router;

@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { BiWorld } from 'react-icons/bi';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { updateProfile } from '../../redux/profile/action';
 import ProfileIntroBtn from '../../utility/design/ProfileIntroBtn';
 import './FbBio.css';
 
 const FbBio = () => {
-  const { bio } = useSelector((state) => state.auth.user);
+  const { _id, bio } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+
   const [showInput, setShowInput] = useState(false);
   const [bioData, setBioData] = useState('');
   const [character, setCharacter] = useState(101 - bioData.length);
@@ -17,6 +20,12 @@ const FbBio = () => {
       setBioData(data);
       setCharacter(101 - data.length);
     }
+  };
+
+  const handleSave = () => {
+    // Save bio to database
+    dispatch(updateProfile(_id, { bio: bioData }));
+    setShowInput(false);
   };
 
   useEffect(() => {
@@ -52,7 +61,9 @@ const FbBio = () => {
                   >
                     Cancel
                   </button>
-                  <button className='bio-button'>Save</button>
+                  <button className='bio-button' onClick={handleSave}>
+                    Save
+                  </button>
                 </div>
               </div>
             </div>
@@ -62,7 +73,7 @@ const FbBio = () => {
         {/* Output Bio */}
         {!showInput && (
           <>
-            <p className='bio'> {bio} </p>
+            <p className='bio'> {bioData} </p>
             <ProfileIntroBtn open={setShowInput}>
               {bio ? 'Edit bio' : 'Add bio'}
             </ProfileIntroBtn>
