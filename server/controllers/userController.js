@@ -1,12 +1,21 @@
 import User from '../models/userModel.js';
-// import uploadImage from '../utility/uploadImage.js';
-import { v2 as cloudinary } from 'cloudinary';
 
 export const updateProfile = async (req, res, next) => {
   const id = req.params.id;
   const data = req.body;
+  const { photo, cover_photo } = req.files;
 
   try {
+    if (photo) {
+      const profile_photo = photo[0].filename;
+      data.photo = profile_photo;
+    }
+    if (cover_photo) {
+      const cover = cover_photo[0].filename;
+      data.cover_photo = cover;
+    }
+
+    // update user
     const user = await User.findByIdAndUpdate(id, data, { new: true });
     res.status(200).json(user);
   } catch (error) {
@@ -17,21 +26,9 @@ export const updateProfile = async (req, res, next) => {
 export const addFeatured = async (req, res, next) => {
   const id = req.params.id;
   const title = req.body.title;
-  const doc = req.files.file;
-  const photos = [];
+  const photos = req.photos;
 
   try {
-    doc.forEach((file) => {
-      cloudinary.uploader
-        .upload(file.tempFilePath, {
-          folder: 'featured',
-        })
-        .then((result) => {
-          photos.push(result.secure_url);
-        });
-    });
-
-    // const photos = uploadImage(files, 'featured');
     const new_featured = { title, photos };
     const prev_featured = await User.findById(id).select('featured');
 

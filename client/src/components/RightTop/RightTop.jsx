@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../../redux/auth/action';
-import avatar from '../../assets/images/profile_avatar.png';
+import ShowProfile from '../ShowProfile/ShowProfile';
 
 const RightTop = () => {
-  const { fs_name, sur_name, photo } = useSelector((state) => state.auth.user);
+  const { fs_name, sur_name } = useSelector((state) => state.auth.user);
   const name = fs_name + ' ' + sur_name;
 
   const dispatch = useDispatch();
@@ -72,7 +72,7 @@ const RightTop = () => {
               <div className='user-menu-box'>
                 <div className='user-data-box'>
                   <div className='user-data-box-item'>
-                    <img src={photo ?? avatar} alt='' />
+                    <ShowProfile />
                     <span>{name}</span>
                   </div>
                   <div className='divider-0'></div>
@@ -125,7 +125,9 @@ const RightTop = () => {
               </div>
             </div>
           )}
-          <img onClick={() => setUser(!user)} src={photo ?? avatar} alt='' />
+          <div onClick={() => setUser(!user)}>
+            <ShowProfile />
+          </div>
         </div>
       </div>
     </div>

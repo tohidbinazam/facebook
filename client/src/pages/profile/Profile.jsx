@@ -1,7 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import Header from '../../components/Header/Header';
-import avatar from '../../assets/images/profile_avatar.png';
 import './profile.css';
 import Post from '../../components/Post/Post';
 import CreatePost from '../../components/CreatePost/CreatePost';
@@ -9,6 +8,7 @@ import FBCRUD from '../../utility/design/FBCRUD';
 import ProfileIntroBtn from '../../utility/design/ProfileIntroBtn';
 import FbBio from '../../components/FbBio/FbBio';
 import Featured from '../../components/featured/Featured';
+import UploadProfile from '../../components/UploadProfile/UploadProfile';
 
 const Profile = () => {
   const { fs_name, sur_name, photo } = useSelector((state) => state.auth.user);
@@ -32,9 +32,7 @@ const Profile = () => {
         </div>
         <div className='fb-profile-details'>
           <div className='profile-info'>
-            <div className='profile-photo'>
-              <img src={photo ?? avatar} alt='' />
-            </div>
+            <UploadProfile />
             <div className='profile-desc'>
               <h1>
                 {name}

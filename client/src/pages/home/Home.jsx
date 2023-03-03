@@ -5,10 +5,10 @@ import Post from '../../components/Post/Post';
 import Header from '../../components/Header/Header';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import avatar from '../../assets/images/profile_avatar.png';
+import ShowProfile from '../../components/ShowProfile/ShowProfile';
 
 const Home = () => {
-  const { fs_name, sur_name, photo } = useSelector((state) => state.auth.user);
+  const { fs_name, sur_name } = useSelector((state) => state.auth.user);
   const name = fs_name + ' ' + sur_name;
 
   return (
@@ -22,7 +22,7 @@ const Home = () => {
             <li>
               <Link to='/profile'>
                 <div className='body-icon'>
-                  <img src={photo ?? avatar} alt='' />
+                  <ShowProfile />
                 </div>
                 <span>{name}</span>
               </Link>

@@ -18,7 +18,6 @@ const app = express();
 // Body init
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(express.static('server/public'));
 
 app.use(
   fileUpload({
@@ -39,6 +38,9 @@ app.post('/api/v1/verify-token', verifyToken);
 
 // Express error handler
 app.use(errorHandler);
+
+// static folder
+app.use(express.static('server/public'));
 
 app.listen(port, () => {
   cloudinaryConfig();

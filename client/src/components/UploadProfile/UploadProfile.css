@@ -1,0 +1,65 @@
+.main-cropper {
+  position: relative;
+  width: auto;
+  height: 400px;
+}
+.reactEasyCrop_Container {
+  background-color: white;
+}
+.reactEasyCrop_CropArea {
+  color: #ffffff9c !important;
+}
+.reactEasyCrop_Container img {
+  object-fit: cover;
+}
+.range-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  margin-top: 20px;
+}
+.range-section button {
+  background: none;
+  border: none;
+  font-size: 32px;
+  cursor: pointer;
+}
+
+.range-section input {
+  appearance: none;
+  width: 60%;
+  height: 5px;
+  background: #ced0d4;
+  outline: none;
+  border-radius: 6px;
+}
+.range-section input::-webkit-slider-thumb {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 0.5px solid rgba(0, 0, 0, 0.215);
+  background: white;
+  cursor: pointer;
+}
+.crop-ing {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 10px 0px;
+}
+.crop-ing button {
+  border: none;
+  background: #e4e6eb;
+  width: 22%;
+  padding: 10px 0px;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+}
+.crop-ing svg {
+  font-size: 15px;
+  transform: translate(-2px, 3px);
+}

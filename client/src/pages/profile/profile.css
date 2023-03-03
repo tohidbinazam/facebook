@@ -84,7 +84,8 @@ span.camera-icon {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  transform: translate(0px, -40px);
+  margin-top: -40px;
+  margin-bottom: 20px;
 }
 
 .fb-profile-details .profile-info {
@@ -126,6 +127,9 @@ span.camera-icon {
   border: 2px solid #fff;
   border-radius: 50%;
 }
+.profile-photo {
+  position: relative;
+}
 
 .profile-photo img {
   width: 180px;
@@ -133,6 +137,18 @@ span.camera-icon {
   object-fit: cover;
   border-radius: 50%;
   border: 5px solid #fff;
+}
+
+.profile-photo svg {
+  position: absolute;
+  background-color: #e7f3ff;
+  top: 72%;
+  right: 14%;
+  width: 22%;
+  height: 22%;
+  padding: 7px 5px;
+  border-radius: 50%;
+  cursor: pointer;
 }
 
 .profile-action {

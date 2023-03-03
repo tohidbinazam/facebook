@@ -55,6 +55,7 @@ const Featured = () => {
       formData.append('file', photo);
     });
     dispatch(addFeatured(formData));
+    setFeatureUpload(false);
   };
 
   return (
