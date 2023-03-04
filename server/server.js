@@ -6,7 +6,7 @@ import userRouter from './routers/userRouter.js';
 import errorHandler from './middlewares/errorHandler.js';
 import cookieParser from 'cookie-parser';
 import verifyToken from './controllers/verifyToken.js';
-import fileUpload from 'express-fileupload';
+// import fileUpload from 'express-fileupload';
 import cloudinaryConfig from './config/cloudinary.js';
 
 dotenv.config();
@@ -19,11 +19,11 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-app.use(
-  fileUpload({
-    useTempFiles: true,
-  })
-);
+// app.use(
+//   fileUpload({
+//     useTempFiles: true,
+//   })
+// );
 
 // cookie parser init
 app.use(cookieParser());

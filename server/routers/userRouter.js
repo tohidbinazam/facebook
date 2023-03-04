@@ -1,11 +1,12 @@
 import express from 'express';
 import { addFeatured, updateProfile } from '../controllers/userController.js';
 import multer from 'multer';
-import uploadImage from '../middlewares/uploadImage.js';
+import { multer_upload, uploadImage } from '../middlewares/uploadImage.js';
 
 // Router init
 const router = express.Router();
 
+// For Multer disk storage
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     if (file.fieldname == 'photo') {
@@ -20,7 +21,6 @@ const storage = multer.diskStorage({
   },
 });
 
-// Multer init
 const upload = multer({
   storage: storage,
   limits: {
@@ -42,7 +42,7 @@ const uploadFiles = upload.fields([
 
 // Import controllers
 router.patch('/:id', uploadFiles, updateProfile);
-router.post('/featured/:id', uploadImage, addFeatured);
+router.post('/featured/:id', multer_upload, uploadImage, addFeatured);
 
 // Export router
 export default router;
