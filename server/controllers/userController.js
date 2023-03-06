@@ -30,11 +30,15 @@ export const addFeatured = async (req, res, next) => {
 
   try {
     const new_featured = { title, photos };
-    const prev_featured = await User.findById(id).select('featured');
+    // const prev_featured = await User.findById(id).select('featured');
 
-    const featured = [...prev_featured.featured, new_featured];
+    // const featured = [...prev_featured.featured, new_featured];
 
-    const user = await User.findByIdAndUpdate(id, { featured }, { new: true });
+    const user = await User.findByIdAndUpdate(
+      id,
+      { $push: { featured: new_featured } },
+      { new: true }
+    );
     res.status(200).json(user);
   } catch (error) {
     next(error);

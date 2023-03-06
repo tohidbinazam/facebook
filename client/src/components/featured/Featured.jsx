@@ -3,12 +3,16 @@ import { BiAddToQueue } from 'react-icons/bi';
 import ProfileIntroBtn from '../../utility/design/ProfileIntroBtn';
 import Modal from '../Modal/Modal';
 import PopUp from '../Popup/PopUp';
-import { features } from '../../components/Popup/array';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addFeatured } from '../../redux/profile/action';
 
 const Featured = () => {
+  const { featured } = useSelector((state) => state.user);
   const dispatch = useDispatch();
+
+  // from redux
+  const [features, setFeatures] = useState([]);
+
   // Add Feature
   const [featureAdd, setFeatureAdd] = useState(false);
   const [featureUpload, setFeatureUpload] = useState(false);
@@ -55,34 +59,42 @@ const Featured = () => {
       formData.append('file', photo);
     });
     dispatch(addFeatured(formData));
+
+    // Reset
     setFeatureUpload(false);
+    setTitle('');
+    setFeaturePhoto([]);
+    setCheckedPhoto([]);
+  };
+
+  const handleFeatured = (photos) => {
+    setShowFeature(true);
+    setFeatures(photos);
   };
 
   return (
     <>
       <div className='all-feature'>
         <div className='fb-feature'>
-          <div className='feature' onClick={() => setShowFeature(true)}>
-            <img
-              src='https://unitedthemes.com/wp-content/uploads/2018/09/team4.jpg'
-              alt=''
-            />
-          </div>
-          <div className='feature'>
-            <img
-              src='https://unitedthemes.com/wp-content/uploads/2018/09/team2.jpg'
-              alt=''
-            />
-          </div>
-          <div className='feature'>
-            <img
-              src='https://unitedthemes.com/wp-content/uploads/2018/09/team3.jpg'
-              alt=''
-            />
-          </div>
+          {featured
+            .slice(-3)
+            .reverse()
+            .map((item, index) => {
+              return (
+                <div
+                  className='feature'
+                  onClick={() => handleFeatured(item.photos)}
+                  key={index}
+                >
+                  <img src={item.photos[0]} alt='' />
+                </div>
+              );
+            })}
         </div>
         {/* Feature Button */}
-        <ProfileIntroBtn open={setFeatureAdd}>Edit featured</ProfileIntroBtn>
+        <ProfileIntroBtn open={setFeatureAdd}>
+          {featured.length ? 'Edit' : 'Add'} featured
+        </ProfileIntroBtn>
 
         {/* View Feature */}
         {showFeature && <PopUp features={features} hide={setShowFeature} />}

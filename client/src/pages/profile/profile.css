@@ -255,6 +255,7 @@ span.camera-icon {
   justify-content: space-around;
   align-items: center;
   gap: 5px;
+  margin-top: 12px;
 }
 
 .bio-list ul li {
@@ -301,10 +302,10 @@ span.camera-icon {
 
 .fb-feature {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
   gap: 9px;
-  height: 250px;
+  margin-top: 16px;
 }
 .feature {
   width: 33.3%;
@@ -429,16 +430,26 @@ span.camera-icon {
 }
 
 .feature-title input {
-  padding: 10px;
-  border-radius: 7px;
-  margin: 7px 0px;
+  margin: 6px 0px 15px;
   border-color: #1876f2;
+  width: 100%;
+  border: 1px solid #c7c7c7;
+  background-color: white;
+  border-radius: 6px;
+  padding: 10px;
+  font-size: 16px;
+  text-align: center;
+}
+.feature-title input:focus {
+  outline: none;
+  border: 1.5px solid #1b74e4;
 }
 .feature-title label {
   color: #1876f2;
   font-weight: 600;
 }
 .feature-title {
+  text-align: center;
   width: 40%;
   margin: auto;
 }
