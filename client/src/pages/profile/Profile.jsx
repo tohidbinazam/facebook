@@ -270,12 +270,84 @@ const Profile = () => {
                 </div>
                 <div className='fb-friend-body'>
                   <div className='fb-friend-block'>
-                    {/* <img
+                    <img
                       src='https://unitedthemes.com/wp-content/uploads/2018/09/team4.jpg'
                       alt=''
-                    /> */}
+                    />
                     <div className='fb-friend-name'>
-                      <h4>John Doe</h4>
+                      <h5>John Doe</h5>
+                    </div>
+                  </div>
+                  <div className='fb-friend-block'>
+                    <img
+                      src='https://unitedthemes.com/wp-content/uploads/2018/09/team4.jpg'
+                      alt=''
+                    />
+                    <div className='fb-friend-name'>
+                      <h5>John Doe</h5>
+                    </div>
+                  </div>
+                  <div className='fb-friend-block'>
+                    <img
+                      src='https://unitedthemes.com/wp-content/uploads/2018/09/team4.jpg'
+                      alt=''
+                    />
+                    <div className='fb-friend-name'>
+                      <h5>John Doe</h5>
+                    </div>
+                  </div>
+                  <div className='fb-friend-block'>
+                    <img
+                      src='https://unitedthemes.com/wp-content/uploads/2018/09/team4.jpg'
+                      alt=''
+                    />
+                    <div className='fb-friend-name'>
+                      <h5>John Doe</h5>
+                    </div>
+                  </div>
+                  <div className='fb-friend-block'>
+                    <img
+                      src='https://unitedthemes.com/wp-content/uploads/2018/09/team4.jpg'
+                      alt=''
+                    />
+                    <div className='fb-friend-name'>
+                      <h5>John Doe</h5>
+                    </div>
+                  </div>
+                  <div className='fb-friend-block'>
+                    <img
+                      src='https://unitedthemes.com/wp-content/uploads/2018/09/team4.jpg'
+                      alt=''
+                    />
+                    <div className='fb-friend-name'>
+                      <h5>John Doe</h5>
+                    </div>
+                  </div>
+                  <div className='fb-friend-block'>
+                    <img
+                      src='https://unitedthemes.com/wp-content/uploads/2018/09/team4.jpg'
+                      alt=''
+                    />
+                    <div className='fb-friend-name'>
+                      <h5>John Doe</h5>
+                    </div>
+                  </div>
+                  <div className='fb-friend-block'>
+                    <img
+                      src='https://unitedthemes.com/wp-content/uploads/2018/09/team4.jpg'
+                      alt=''
+                    />
+                    <div className='fb-friend-name'>
+                      <h5>John Doe</h5>
+                    </div>
+                  </div>
+                  <div className='fb-friend-block'>
+                    <img
+                      src='https://unitedthemes.com/wp-content/uploads/2018/09/team4.jpg'
+                      alt=''
+                    />
+                    <div className='fb-friend-name'>
+                      <h5>John Doe</h5>
                     </div>
                   </div>
                 </div>

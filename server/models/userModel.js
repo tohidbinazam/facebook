@@ -56,6 +56,27 @@ const userModel = mongoose.Schema(
       type: String,
       default: null,
     },
+    friend_list: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        default: [],
+      },
+    ],
+    follower: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        default: [],
+      },
+    ],
+    following: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        default: [],
+      },
+    ],
     isVerified: {
       type: Boolean,
       default: false,

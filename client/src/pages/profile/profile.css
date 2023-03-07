@@ -461,3 +461,44 @@ span.camera-icon {
   text-align: center;
   font-size: 18px;
 }
+
+.fb-friend-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 15px;
+}
+.friend-left-part h5 {
+  font-weight: 600;
+}
+.friend-right-part button {
+  border: none;
+  background: #0000;
+  font-size: 15px;
+  color: #1876f2;
+  cursor: pointer;
+  padding: 10px 22px;
+  border-radius: 5px;
+  transition: 0.3s;
+}
+.friend-right-part button:hover {
+  background-color: #f4f4f4;
+}
+.fb-friend-body {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+  row-gap: 20px;
+}
+.fb-friend-block {
+  width: 31%;
+}
+.fb-friend-block img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+}

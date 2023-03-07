@@ -1,4 +1,5 @@
 import User from '../models/userModel.js';
+import mongoose from 'mongoose';
 
 export const updateProfile = async (req, res, next) => {
   const id = req.params.id;
@@ -40,6 +41,45 @@ export const addFeatured = async (req, res, next) => {
       { new: true }
     );
     res.status(200).json(user);
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const findFriend = async (req, res, next) => {
+  // Get ids with Array
+  const { excludedIds } = req.body;
+
+  // example
+  const ids = ['63ab1f73e6710db2c607cb47', '63bda619c88e1fe7b272332e'];
+
+  try {
+    const find_friend = await User.find()
+      .where('_id')
+      .nin(ids)
+      .select('fs_name sur_name photo');
+    res.status(200).json(find_friend);
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const friendRequest = async (req, res, next) => {
+  const id = req.params.id;
+
+  try {
+    // find a user by id and populate the followers array and select only fs_name and photo
+    const request = await User.findById(id)
+      .populate(
+        'follower following friend_list',
+        'fs_name sur_name photo',
+        null,
+        {
+          limit: 10,
+        }
+      )
+      .select('isVerified');
+    res.status(200).json(request);
   } catch (error) {
     next(error);
   }
