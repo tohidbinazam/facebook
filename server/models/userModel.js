@@ -60,21 +60,18 @@ const userModel = mongoose.Schema(
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
-        default: [],
       },
     ],
     follower: [
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
-        default: [],
       },
     ],
     following: [
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
-        default: [],
       },
     ],
     isVerified: {
