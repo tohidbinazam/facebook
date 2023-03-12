@@ -29,10 +29,10 @@ const Home = () => {
             </li>
 
             <li>
-              <a href='http'>
+              <Link to='/friends'>
                 <div className='body-icon'></div>
                 <span>Friends</span>
-              </a>
+              </Link>
             </li>
 
             <li>

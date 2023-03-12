@@ -1,8 +1,6 @@
 /* Facebook Profile  */
 .fb-profile-header {
-  margin-top: 57px;
   background-color: #fff;
-  z-index: 999;
   box-shadow: 0 2px 3px rgb(0 0 0 / 10%), 0 0px 0px rgb(0 0 0 / 10%);
 }
 
@@ -142,8 +140,8 @@ span.camera-icon {
 .profile-photo svg {
   position: absolute;
   background-color: #e7f3ff;
-  top: 72%;
-  right: 14%;
+  top: 75%;
+  right: 10%;
   width: 22%;
   height: 22%;
   padding: 7px 5px;

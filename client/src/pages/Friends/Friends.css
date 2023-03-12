@@ -1,0 +1,69 @@
+/* Left option */
+.main-friend {
+  margin: auto;
+  display: flex;
+  height: 100%;
+}
+.left-colum {
+  width: 25%;
+  padding: 18px 22px 0px;
+  height: 100vh;
+}
+.left-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.left-header h2 {
+  font-size: 26px;
+}
+.left-header button {
+  border: none;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  background: #e4e6eb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.left-header button svg {
+  font-size: 21px;
+}
+
+.tabs-option {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: 10px;
+  border-radius: 8px;
+  padding: 8px 8px;
+  cursor: pointer;
+}
+
+.tabs-option button {
+  width: 36px;
+  height: 36px;
+  border: none;
+  background: #e4e6eb;
+  border-radius: 50%;
+  margin-right: 12px;
+}
+.tabs-option button svg {
+  font-size: 22px;
+}
+
+/* Active tabs */
+.tabs-option:hover {
+  background: #f0f2f5;
+}
+.tabs-option.active {
+  background: #f0f2f5;
+}
+.tabs-option.active button {
+  background: #1877f2;
+}
+.tabs-option.active button svg {
+  color: white;
+}

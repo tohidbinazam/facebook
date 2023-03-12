@@ -1,0 +1,56 @@
+.right-colum {
+  padding: 25px 25px;
+  width: 75%;
+  background: #f0f2f5;
+}
+.right-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.right-header a {
+  color: #1877f2;
+}
+.all-friend {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin: 18px 0px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.friend {
+  width: 24%;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0px 0px 5px 0px #00000060;
+}
+.friend img {
+  width: 100%;
+  height: 245px;
+  object-fit: cover;
+}
+.info {
+  padding: 4px 10px 10px;
+}
+.info h5 {
+  color: #65676bb5;
+}
+.info button {
+  border: none;
+  width: 100%;
+  border-radius: 5px;
+  text-align: center;
+  padding: 10px 0px;
+  margin-top: 8px;
+  cursor: pointer;
+  font-weight: 700;
+}
+.confirm-btn {
+  background: #1877f2;
+  color: white;
+}
+.delete-btn {
+  background: #e4e6eb;
+  color: black;
+}

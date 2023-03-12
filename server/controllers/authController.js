@@ -145,11 +145,10 @@ export const isLoggedIn = async (req, res, next) => {
  */
 export const login = async (req, res, next) => {
   const { auth, password } = req.body;
+  console.log(req.body);
 
   try {
-    const user = await User.findOne()
-      .or([{ email: auth }, { mobile: auth }])
-      .select('-password');
+    const user = await User.findOne().or([{ email: auth }, { mobile: auth }]);
     if (!user) {
       return next(createError(404, 'Wrong Email or Number'));
     }

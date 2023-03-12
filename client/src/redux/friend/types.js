@@ -1,0 +1,6 @@
+export const ADD_FRIEND = 'ADD_FRIEND';
+export const FRIEND_REQUEST = 'FRIEND_REQUEST';
+export const FIND_FRIEND = 'FIND_FRIEND';
+export const PROFILE_FRIEND = 'PROFILE_FRIEND';
+export const CONFIRM_FRIEND = 'CONFIRM_FRIEND';
+export const REMOVE_FRIEND = 'REMOVE_FRIEND';

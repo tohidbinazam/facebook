@@ -192,9 +192,8 @@ Components
   justify-content: space-between;
   align-items: center;
   padding: 3px 20px;
-  position: fixed;
+  position: sticky;
   left: 0px;
-  top: 0px;
   top: 0px;
   width: 100%;
   z-index: 999;
@@ -305,7 +304,7 @@ Components
   background-color: #f0f2f5;
   display: flex;
   min-height: 100vh;
-  padding-top: 80px;
+  padding-top: 20px;
   padding-left: 15px;
 }
 

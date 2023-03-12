@@ -10,56 +10,54 @@ import { isLoggedIn } from './redux/auth/action';
 import Index from './pages/Index';
 import PasswordUser from './pages/PasswordUser/PasswordUser';
 import Profile from './pages/profile/Profile';
-import LoadingBar from 'react-top-loading-bar'
+import LoadingBar from 'react-top-loading-bar';
 import { loadEnd } from './redux/loading/action';
 import LoggedIn from './middlewares/LoggedIn';
 import LoggedOut from './middlewares/LoggedOut';
 import CodeSendCheck from './middlewares/CodeSendCheck';
 import ResetPass from './middlewares/ResetPass';
-
+import Friends from './pages/Friends/Friends';
 
 function App() {
-
-  const dispatch = useDispatch()
-  const token = Cookies.get('fbstk')
-  const progress = useSelector(state => state.progress)
+  const dispatch = useDispatch();
+  const token = Cookies.get('fbstk');
+  const progress = useSelector((state) => state.progress);
 
   useEffect(() => {
-    
     if (token) {
-      dispatch(isLoggedIn(token))
+      dispatch(isLoggedIn(token));
     }
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
-    <div className="App">
+    <div className='App'>
       <LoadingBar
         color='#2998ff'
         progress={progress}
         height='3px'
         onLoaderFinished={() => dispatch(loadEnd())}
-        />
+      />
       <Routes>
-        <Route path='/' element={ <Index/> }/>
+        <Route path='/' element={<Index />} />
 
-        <Route element={ <LoggedIn /> }>
-          <Route path='/profile' element={ <Profile /> }/>
-        </Route>
-
-        <Route element={ <LoggedOut /> }>
-          <Route path='/find-account' element={ <FindAccount/> }/>
-          <Route path='/user-account' element={ <PasswordUser/> }/>
-        </Route>
-        <Route element={ <CodeSendCheck /> }>
-          <Route path='/code-check' element={ <CodeCheck/> }/>
-          <Route path='/link-check' element={ <LinkCheck/> }/>
-        </Route>
-        <Route element={ <ResetPass /> }>
-          <Route path='/reset-password' element={ <ResetPassword/> }/>
+        <Route element={<LoggedIn />}>
+          <Route path='/profile' element={<Profile />} />
+          <Route path='/friends' element={<Friends />} />
         </Route>
 
+        <Route element={<LoggedOut />}>
+          <Route path='/find-account' element={<FindAccount />} />
+          <Route path='/user-account' element={<PasswordUser />} />
+        </Route>
+        <Route element={<CodeSendCheck />}>
+          <Route path='/code-check' element={<CodeCheck />} />
+          <Route path='/link-check' element={<LinkCheck />} />
+        </Route>
+        <Route element={<ResetPass />}>
+          <Route path='/reset-password' element={<ResetPassword />} />
+        </Route>
       </Routes>
     </div>
   );

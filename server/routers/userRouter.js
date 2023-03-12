@@ -1,8 +1,10 @@
 import express from 'express';
 import {
   addFeatured,
+  addFriend,
   findFriend,
   friendRequest,
+  profileFriend,
   updateProfile,
 } from '../controllers/userController.js';
 import multer from 'multer';
@@ -48,8 +50,9 @@ const uploadFiles = upload.fields([
 // Import controllers
 router.patch('/:id', uploadFiles, updateProfile);
 router.post('/featured/:id', multer_upload, uploadImage, addFeatured);
-router.get('/find-friend', findFriend);
+router.post('/find-friend', findFriend);
 router.get('/friend-request/:id', friendRequest);
+router.route('/friend/:id').get(profileFriend).patch(addFriend);
 
 // Export router
 export default router;

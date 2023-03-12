@@ -1,5 +1,5 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import Header from '../../components/Header/Header';
 import './profile.css';
 import Post from '../../components/Post/Post';
@@ -9,10 +9,19 @@ import ProfileIntroBtn from '../../utility/design/ProfileIntroBtn';
 import FbBio from '../../components/FbBio/FbBio';
 import Featured from '../../components/featured/Featured';
 import UploadProfile from '../../components/UploadProfile/UploadProfile';
+import { profileFriend } from '../../redux/friend/actions';
 
 const Profile = () => {
-  const { fs_name, sur_name, photo } = useSelector((state) => state.auth.user);
+  const dispatch = useDispatch();
+
+  const { _id, fs_name, sur_name, photo } = useSelector(
+    (state) => state.auth.user
+  );
   const name = fs_name + ' ' + sur_name;
+
+  useEffect(() => {
+    dispatch(profileFriend(_id));
+  }, [_id, dispatch]);
 
   return (
     <div>
