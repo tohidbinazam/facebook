@@ -4,6 +4,7 @@ import numOrEmail from '../../utility/numOrEmail';
 import toaster from '../../utility/toaster';
 import { loadStart } from '../loading/action';
 import { updateData } from '../profile/action';
+import { LOGOUT } from '../profile/type';
 import { DATA_ADD, LOGGED_IN, LOGGED_OUT, REASON_ADD } from './types';
 
 // Add reason to redux store
@@ -184,6 +185,7 @@ export const logout = () => async (dispatch) => {
       },
     });
     dispatch(loggedOut());
+    dispatch({ type: LOGOUT });
     toaster(data, 'success');
   } catch ({ response }) {
     toaster(response.data.message);

@@ -2,9 +2,11 @@ import express from 'express';
 import {
   addFeatured,
   addFriend,
+  confirmFriend,
   findFriend,
   friendRequest,
   profileFriend,
+  removeFriend,
   updateProfile,
 } from '../controllers/userController.js';
 import multer from 'multer';
@@ -52,7 +54,13 @@ router.patch('/:id', uploadFiles, updateProfile);
 router.post('/featured/:id', multer_upload, uploadImage, addFeatured);
 router.post('/find-friend', findFriend);
 router.get('/friend-request/:id', friendRequest);
-router.route('/friend/:id').get(profileFriend).patch(addFriend);
+
+router
+  .route('/friend/:id')
+  .get(profileFriend)
+  .patch(addFriend)
+  .post(confirmFriend);
+router.post('/remove-friend/:id', removeFriend);
 
 // Export router
 export default router;

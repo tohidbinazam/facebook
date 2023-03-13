@@ -1,5 +1,5 @@
 import initialState from './initialState';
-import { DATA_UPDATE } from './type';
+import { DATA_UPDATE, LOGOUT } from './type';
 
 const profileReducer = (state = initialState, { type, payload }) => {
   switch (type) {
@@ -8,6 +8,8 @@ const profileReducer = (state = initialState, { type, payload }) => {
         ...state,
         ...payload,
       };
+    case LOGOUT:
+      return null;
     default:
       return state;
   }

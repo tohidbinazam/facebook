@@ -111,10 +111,61 @@ export const addFriend = async (req, res, next) => {
       sender_id,
       { $push: { following: { $each: [receiver_id], $position: 0 } } },
       { new: true }
-    );
+    ).select('following -_id');
     res.status(200).json(sender);
+
     await User.findByIdAndUpdate(receiver_id, {
       $push: { follower: { $each: [sender_id], $position: 0 } },
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const confirmFriend = async (req, res, next) => {
+  const sender_id = req.params.id;
+  const receiver_id = req.body.id;
+
+  try {
+    const profile = await User.findByIdAndUpdate(
+      sender_id,
+      {
+        $pull: { follower: { $in: [receiver_id] } },
+        $push: { friend_list: { $each: [receiver_id], $position: 0 } },
+      },
+      { new: true }
+    )
+      .populate({
+        path: 'follower',
+        select: 'fs_name sur_name photo',
+        options: { limit: 8 },
+      })
+      .select('follower -_id');
+    res.status(200).json(profile);
+
+    await User.findByIdAndUpdate(receiver_id, {
+      $pull: { following: sender_id },
+      $push: { friend_list: { $each: [sender_id], $position: 0 } },
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const removeFriend = async (req, res, next) => {
+  const sender_id = req.params.id;
+  const receiver_id = req.body.id;
+
+  try {
+    const profile = await User.findByIdAndUpdate(
+      sender_id,
+      { $push: { blocked: receiver_id } },
+      { new: true }
+    ).select('blocked -_id');
+    res.status(200).json(profile);
+
+    await User.findByIdAndUpdate(receiver_id, {
+      $push: { blocked: sender_id },
     });
   } catch (error) {
     next(error);

@@ -1,0 +1,55 @@
+.reset-header {
+  background-color: #fff;
+  box-shadow: 0px 3px 5px rgba(52, 72, 84, 0.2);
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+}
+
+.reset-header-wrapper {
+  width: 97%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.reset-header .reset-logo img {
+  width: 150px;
+  cursor: pointer;
+}
+.login-part {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.reset-header-wrapper .login-part input {
+  height: 40px;
+  border: 1px solid #ccc;
+  padding: 10px;
+  width: 185px;
+  border-radius: 4px;
+}
+
+.reset-header-wrapper .login-part button {
+  height: 40px;
+  border: 1px solid var(--blue-color);
+  padding: 10px;
+  width: fit-content;
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: var(--blue-color);
+  color: #fff;
+  font-weight: bold;
+}
+
+.reset-header-wrapper .login-part a {
+  color: var(--blue-color);
+  font-size: 14px;
+}
+
+.reset-header-wrapper .login-part a:hover {
+  text-decoration: underline;
+}

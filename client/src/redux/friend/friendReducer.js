@@ -22,6 +22,7 @@ const friendReducer = (state = initialState, { type, payload }) => {
         ...state,
         find_friend: payload,
       };
+
     case ADD_FRIEND:
       return {
         ...state,
