@@ -91,3 +91,15 @@ export const removeFriend = (id) => (dispatch, getState) => {
     console.log(error);
   }
 };
+
+export const deleteFriend = (id) => (dispatch, getState) => {
+  const { _id } = getState().user;
+  try {
+    axios.patch(`/api/v1/user/remove-friend/${_id}`, { id }).then((res) => {
+      toaster('Friend Remove Successfully', 'success');
+      dispatch({ type: FRIEND_REQUEST, payload: res.data.follower });
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};

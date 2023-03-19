@@ -56,6 +56,30 @@ const userModel = mongoose.Schema(
       type: String,
       default: null,
     },
+    company: {
+      type: String,
+    },
+    position: {
+      type: String,
+    },
+    college: {
+      type: String,
+    },
+    subject: {
+      type: String,
+    },
+    school: {
+      type: String,
+    },
+    city: {
+      type: String,
+    },
+    hometown: {
+      type: String,
+    },
+    relationship: {
+      type: String,
+    },
     friend_list: [
       {
         type: mongoose.Schema.Types.ObjectId,

@@ -28,3 +28,13 @@ export const addFeatured = (data) => async (dispatch, getState) => {
     console.log(err);
   }
 };
+
+export const updateDetails = (id, data) => async (dispatch) => {
+  try {
+    const res = await axios.patch(`/api/v1/user/details/${id}`, data);
+    dispatch(updateData(res.data));
+    toaster('Profile info updated', 'success');
+  } catch (err) {
+    console.log(err);
+  }
+};

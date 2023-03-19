@@ -2,13 +2,17 @@ import React from 'react';
 import './ConfirmFriend.css';
 import avatar from '../../../assets/images/profile_avatar.png';
 import { useDispatch } from 'react-redux';
-import { confirmFriend } from '../../../redux/friend/actions';
+import { confirmFriend, deleteFriend } from '../../../redux/friend/actions';
 
 const ConfirmFriend = ({ friend }) => {
   const dispatch = useDispatch();
 
   const handleFriend = (id) => {
     dispatch(confirmFriend(id));
+  };
+
+  const handleDelete = (id) => {
+    dispatch(deleteFriend(id));
   };
   return (
     <>
@@ -27,7 +31,12 @@ const ConfirmFriend = ({ friend }) => {
             >
               Confirm
             </button>
-            <button className='delete-btn'>Delete</button>
+            <button
+              className='delete-btn'
+              onClick={() => handleDelete(data._id)}
+            >
+              Delete
+            </button>
           </div>
         </div>
       ))}

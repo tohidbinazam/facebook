@@ -24,8 +24,8 @@
   padding: 15px 20px;
 }
 .header-left {
-  width: 68%;
-  text-align: right;
+  width: 100%;
+  text-align: center;
 }
 .header-right button {
   background: #e4e6eb;

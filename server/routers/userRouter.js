@@ -3,10 +3,12 @@ import {
   addFeatured,
   addFriend,
   confirmFriend,
+  deleteFriend,
   findFriend,
   friendRequest,
   profileFriend,
   removeFriend,
+  updateDetails,
   updateProfile,
 } from '../controllers/userController.js';
 import multer from 'multer';
@@ -60,7 +62,8 @@ router
   .get(profileFriend)
   .patch(addFriend)
   .post(confirmFriend);
-router.post('/remove-friend/:id', removeFriend);
+router.route('/remove-friend/:id').post(removeFriend).patch(deleteFriend);
+router.patch('/details/:id', updateDetails);
 
 // Export router
 export default router;

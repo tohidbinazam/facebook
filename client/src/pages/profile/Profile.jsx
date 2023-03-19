@@ -10,13 +10,25 @@ import FbBio from '../../components/FbBio/FbBio';
 import Featured from '../../components/featured/Featured';
 import UploadProfile from '../../components/UploadProfile/UploadProfile';
 import { profileFriend } from '../../redux/friend/actions';
+import Details from '../../components/Details/Details';
 
 const Profile = () => {
   const dispatch = useDispatch();
 
-  const { _id, fs_name, sur_name, photo } = useSelector(
-    (state) => state.auth.user
-  );
+  const {
+    _id,
+    fs_name,
+    sur_name,
+    photo,
+    company,
+    position,
+    college,
+    subject,
+    school,
+    city,
+    hometown,
+    relationship,
+  } = useSelector((state) => state.user);
   const name = fs_name + ' ' + sur_name;
 
   useEffect(() => {
@@ -152,45 +164,77 @@ const Profile = () => {
               <FbBio />
               <div className='bio-list'>
                 <ul>
-                  <li>
-                    <img
-                      src='https://static.xx.fbcdn.net/rsrc.php/v3/yS/r/jV4o8nAgIEh.png'
-                      alt=''
-                    />
-                    <p>
-                      Studies Computer Science and Technology at
-                      <b>Khulna Polytechnic Institute, Khulna</b>
-                    </p>
-                  </li>
-                  <li>
-                    <img
-                      src='https://static.xx.fbcdn.net/rsrc.php/v3/yS/r/jV4o8nAgIEh.png'
-                      alt=''
-                    />
-                    <p>
-                      Went to <b>Govt. Model High School, Khulna</b>
-                    </p>
-                  </li>
-                  <li>
-                    <img
-                      src='https://static.xx.fbcdn.net/rsrc.php/v3/y5/r/VMZOiSIJIwn.png'
-                      alt=''
-                    />
-                    <p>
-                      Lives in <b>Khulna</b>
-                    </p>
-                  </li>
-                  <li>
-                    <img
-                      src='https://static.xx.fbcdn.net/rsrc.php/v3/yc/r/-e1Al38ZrZL.png'
-                      alt=''
-                    />
-                    <p>
-                      From <b>Khulna</b>
-                    </p>
-                  </li>
+                  {company && (
+                    <li>
+                      <img
+                        src='https://static.xx.fbcdn.net/rsrc.php/v3/yp/r/Q9Qu4uLgzdm.png'
+                        alt=''
+                      />
+                      <p>
+                        {position} at
+                        <b> {company}</b>
+                      </p>
+                    </li>
+                  )}
+
+                  {college && (
+                    <li>
+                      <img
+                        src='https://static.xx.fbcdn.net/rsrc.php/v3/yS/r/jV4o8nAgIEh.png'
+                        alt=''
+                      />
+                      <p>
+                        Studies {subject} at
+                        <b> {college}</b>
+                      </p>
+                    </li>
+                  )}
+                  {school && (
+                    <li>
+                      <img
+                        src='https://static.xx.fbcdn.net/rsrc.php/v3/yS/r/jV4o8nAgIEh.png'
+                        alt=''
+                      />
+                      <p>
+                        Went to <b>{school}</b>
+                      </p>
+                    </li>
+                  )}
+                  {city && (
+                    <li>
+                      <img
+                        src='https://static.xx.fbcdn.net/rsrc.php/v3/y5/r/VMZOiSIJIwn.png'
+                        alt=''
+                      />
+                      <p>
+                        Lives in <b>{city}</b>
+                      </p>
+                    </li>
+                  )}
+                  {hometown && (
+                    <li>
+                      <img
+                        src='https://static.xx.fbcdn.net/rsrc.php/v3/yc/r/-e1Al38ZrZL.png'
+                        alt=''
+                      />
+                      <p>
+                        From <b>{hometown}</b>
+                      </p>
+                    </li>
+                  )}
+                  {relationship && (
+                    <li>
+                      <img
+                        src='https://static.xx.fbcdn.net/rsrc.php/v3/yq/r/S0aTxIHuoYO.png'
+                        alt=''
+                      />
+                      <p>{relationship}</p>
+                    </li>
+                  )}
                 </ul>
-                <ProfileIntroBtn> Edit details </ProfileIntroBtn>
+                {/* Edit Details */}
+                <Details />
+
                 <div className='hobbies-section'>
                   <button className='Hobbies-btn'>
                     <img

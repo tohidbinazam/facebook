@@ -1,9 +1,8 @@
 import User from '../models/userModel.js';
-import mongoose from 'mongoose';
 
 export const updateProfile = async (req, res, next) => {
   const id = req.params.id;
-  const data = req.body;
+  const data = {};
   const { photo, cover_photo } = req.files;
 
   try {
@@ -130,6 +129,7 @@ export const confirmFriend = async (req, res, next) => {
     const profile = await User.findByIdAndUpdate(
       sender_id,
       {
+        // You can use $in in $pull when remove multiple values from an array otherwise, directly set value in array
         $pull: { follower: { $in: [receiver_id] } },
         $push: { friend_list: { $each: [receiver_id], $position: 0 } },
       },
@@ -167,6 +167,47 @@ export const removeFriend = async (req, res, next) => {
     await User.findByIdAndUpdate(receiver_id, {
       $push: { blocked: sender_id },
     });
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const deleteFriend = async (req, res, next) => {
+  const sender_id = req.params.id;
+  const receiver_id = req.body.id;
+
+  try {
+    const profile = await User.findByIdAndUpdate(
+      sender_id,
+      {
+        $pull: { follower: { $in: [receiver_id] } },
+        $push: { blocked: receiver_id },
+      },
+      { new: true }
+    )
+      .populate({
+        path: 'follower',
+        select: 'fs_name sur_name photo',
+        options: { limit: 8 },
+      })
+      .select('follower -_id');
+    res.status(200).json(profile);
+
+    await User.findByIdAndUpdate(receiver_id, {
+      $pull: { following: sender_id },
+      $push: { blocked: sender_id },
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const updateDetails = async (req, res, next) => {
+  const id = req.params.id;
+
+  try {
+    const user = await User.findByIdAndUpdate(id, req.body, { new: true });
+    res.status(200).json(user);
   } catch (error) {
     next(error);
   }

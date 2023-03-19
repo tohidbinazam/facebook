@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { BiWorld } from 'react-icons/bi';
 import { useDispatch, useSelector } from 'react-redux';
-import { updateProfile } from '../../redux/profile/action';
+import { updateDetails } from '../../redux/profile/action';
 import ProfileIntroBtn from '../../utility/design/ProfileIntroBtn';
 import './FbBio.css';
 
@@ -24,7 +24,7 @@ const FbBio = () => {
 
   const handleSave = () => {
     // Save bio to database
-    dispatch(updateProfile(_id, { bio: bioData }));
+    dispatch(updateDetails(_id, { bio: bioData }));
     setShowInput(false);
   };
 
