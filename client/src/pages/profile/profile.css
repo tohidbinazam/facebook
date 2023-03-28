@@ -2,6 +2,7 @@
 .fb-profile-header {
   background-color: #fff;
   box-shadow: 0 2px 3px rgb(0 0 0 / 10%), 0 0px 0px rgb(0 0 0 / 10%);
+  position: relative;
 }
 
 .fb-header-shad {
@@ -13,7 +14,7 @@
 
 .fb-profile-header .fb-cover-photo {
   width: 77%;
-  height: 500px;
+  height: 495px;
   border-radius: 0px 0px 10px 10px;
   overflow: hidden;
   margin: 0px auto;
@@ -45,7 +46,7 @@
   margin: auto;
 }
 
-.fb-profile-header .fb-cover-photo button {
+.fb-profile-header .fb-cover-photo label {
   position: absolute;
   bottom: 20px;
   right: 30px;
@@ -177,19 +178,19 @@ span.camera-icon {
   display: block;
 }
 
-.profile-action button:nth-child(1) span.follow-icon {
+/* .profile-action button:nth-child() span.follow-icon {
   background-image: url('https://static.xx.fbcdn.net/rsrc.php/v3/yw/r/LJ8KuNpi23A.png');
   background-position: 0px 126px;
   background-size: cover;
-}
+} */
 
-.profile-action button:nth-child(2) span:first-child {
+.profile-action button:nth-child(1) span:first-child {
   background-image: url('https://static.xx.fbcdn.net/rsrc.php/v3/y9/r/YjBUcSAL8TC.png');
   background-position: 0px 126px;
   background-size: cover;
 }
 
-.profile-action button:nth-child(3) span:first-child {
+.profile-action button:nth-child(2) span:first-child {
   background-image: url('https://static.xx.fbcdn.net/rsrc.php/v3/yK/r/r2FA830xjtI.png');
   background-position: 0px 126px;
   background-size: cover;

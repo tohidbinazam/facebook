@@ -1,14 +1,11 @@
 import React from 'react';
-import ShowProfile from '../ShowProfile/ShowProfile';
+import NewPost from '../NewPost/NewPost';
 
 const CreatePost = () => {
   return (
     <div>
       <div className='create-post'>
-        <div className='create-post-header'>
-          <ShowProfile />
-          <button>Whats on your mind ?</button>
-        </div>
+        <NewPost />
         <div className='divider-0'></div>
         <div className='create-post-footer'>
           <ul>

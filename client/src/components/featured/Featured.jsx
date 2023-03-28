@@ -54,6 +54,7 @@ const Featured = () => {
     // init from data object
     const formData = new FormData();
     formData.append('title', title);
+    formData.append('folder', 'featured');
 
     checkedPhoto.forEach((photo) => {
       formData.append('file', photo);

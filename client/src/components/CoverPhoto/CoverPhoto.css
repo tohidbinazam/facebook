@@ -1,0 +1,26 @@
+#cover-photo {
+  display: none;
+}
+.main-cover {
+  position: absolute;
+  z-index: 9;
+  top: 0px;
+  left: 0px;
+  background: #0000005e;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px 14px;
+}
+.left-cover {
+  color: white;
+  display: flex;
+  align-items: center;
+}
+.left-cover h4 {
+  margin-left: 10px;
+}
+.left-cover svg {
+  font-size: 24px;
+}

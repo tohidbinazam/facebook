@@ -17,6 +17,7 @@ const dataUri = (file) => {
 
 export const uploadImage = async (req, res, next) => {
   const files = req.files;
+  const folder = req.body.folder;
   const photos = [];
 
   files.forEach(async (file) => {
@@ -24,7 +25,7 @@ export const uploadImage = async (req, res, next) => {
 
     await cloudinary.uploader
       .upload(file64, {
-        folder: 'featured',
+        folder,
       })
       .then((result) => {
         photos.push(result.secure_url);

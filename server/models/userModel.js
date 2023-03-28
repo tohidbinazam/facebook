@@ -56,6 +56,10 @@ const userModel = mongoose.Schema(
       type: String,
       default: null,
     },
+    cover_photo: {
+      type: String,
+      default: null,
+    },
     company: {
       type: String,
     },

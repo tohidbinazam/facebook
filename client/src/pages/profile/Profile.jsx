@@ -11,6 +11,7 @@ import Featured from '../../components/featured/Featured';
 import UploadProfile from '../../components/UploadProfile/UploadProfile';
 import { profileFriend } from '../../redux/friend/actions';
 import Details from '../../components/Details/Details';
+import CoverPhoto from '../../components/CoverPhoto/CoverPhoto';
 
 const Profile = () => {
   const dispatch = useDispatch();
@@ -41,16 +42,7 @@ const Profile = () => {
 
       {/* Cover Photo   */}
       <div className='fb-profile-header'>
-        <div className='fb-header-shad'></div>
-        <div className='fb-cover-photo'>
-          <img
-            src='https://images.pexels.com/photos/1323206/pexels-photo-1323206.jpeg?cs=srgb&dl=pexels-mixu-1323206.jpg&fm=jpg'
-            alt=''
-          />
-          <button>
-            <span className='camera-icon'></span> Edit cover photo
-          </button>
-        </div>
+        <CoverPhoto />
         <div className='fb-profile-details'>
           <div className='profile-info'>
             <UploadProfile />
@@ -118,9 +110,9 @@ const Profile = () => {
             </div>
           </div>
           <div className='profile-action'>
-            <button>
+            {/* <button>
               <span className='follow-icon'></span> <span>Follow</span>
-            </button>
+            </button> */}
             <button>
               <span className='message-icon'></span> <span>Message</span>
             </button>
