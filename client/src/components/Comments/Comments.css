@@ -1,0 +1,34 @@
+.comments {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+.comment {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 8px;
+}
+.comment-left {
+  width: 8.5%;
+}
+.comment-left img {
+  width: 100%;
+  border-radius: 50%;
+}
+
+.commenter-name {
+  background: #f0f2f5;
+  padding: 8px 10px;
+  border-radius: 15px;
+}
+
+.comment-time {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 20px;
+  margin-left: 10px;
+}
