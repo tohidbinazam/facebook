@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import {
   addComment,
+  addCommentLike,
   addLike,
   allUserPost,
   createPost,
@@ -20,6 +21,6 @@ router
   .delete(deletePost);
 router.route('/all/:userId').get(allUserPost);
 router.route('/like/:postId').post(addLike);
-router.route('/comment/:postId').post(addComment);
+router.route('/comment/:postId').post(addComment).patch(addCommentLike);
 
 export default router;

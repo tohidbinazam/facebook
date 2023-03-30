@@ -108,3 +108,33 @@ export const addComment = async (req, res, next) => {
     next(error);
   }
 };
+
+export const addCommentLike = async (req, res, next) => {
+  const { postId } = req.params;
+  const { commentId, userId } = req.body;
+
+  try {
+    // push a comment like in a specific commentId of a userId in likes array, if userId not exist in likes array
+    const post = await Post.findByIdAndUpdate(
+      postId,
+      {
+        $push: {
+          'comments.$[comment].likes': {
+            $each: [userId],
+            $position: 0,
+          },
+        },
+      },
+      {
+        new: true,
+        arrayFilters: [{ 'comment._id': commentId }],
+      }
+    )
+      .populate('comments.user', 'fs_name sur_name photo')
+      .select('comments');
+
+    res.status(201).json(post);
+  } catch (error) {
+    next(error);
+  }
+};

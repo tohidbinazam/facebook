@@ -31,6 +31,13 @@ const Post = Schema(
           type: String,
           required: true,
         },
+        likes: [
+          {
+            type: Schema.Types.ObjectId,
+            ref: 'User',
+            unique: true,
+          },
+        ],
         date: {
           type: Date,
           default: Date.now,
