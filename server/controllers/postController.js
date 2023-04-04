@@ -7,7 +7,11 @@ export const createPost = async (req, res, next) => {
   const images = req.photos;
 
   try {
-    const post = await Post.create({ text, images, userId });
+    await Post.create({ text, images, userId });
+    const post = await Post.find({ userId }).populate(
+      'userId',
+      'fs_name sur_name photo'
+    );
     res.status(201).json(post);
   } catch (error) {
     next(error);
@@ -45,7 +49,10 @@ export const myAllPost = async (req, res, next) => {
   const { userId } = req.params;
 
   try {
-    const post = await Post.find({ userId });
+    const post = await Post.find({ userId }).populate(
+      'userId',
+      'fs_name sur_name photo'
+    );
     res.status(201).json(post);
   } catch (error) {
     next(error);
@@ -114,7 +121,6 @@ export const addCommentLike = async (req, res, next) => {
   const { commentId, userId } = req.body;
 
   try {
-    // push a comment like in a specific commentId of a userId in likes array, if userId not exist in likes array
     const post = await Post.findByIdAndUpdate(
       postId,
       {

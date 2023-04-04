@@ -12,9 +12,12 @@ import UploadProfile from '../../components/UploadProfile/UploadProfile';
 import { profileFriend } from '../../redux/friend/actions';
 import Details from '../../components/Details/Details';
 import CoverPhoto from '../../components/CoverPhoto/CoverPhoto';
+import { getMyPost } from '../../redux/post/action';
 
 const Profile = () => {
   const dispatch = useDispatch();
+
+  const { user, post } = useSelector((state) => state);
 
   const {
     _id,
@@ -29,11 +32,12 @@ const Profile = () => {
     city,
     hometown,
     relationship,
-  } = useSelector((state) => state.user);
+  } = user;
   const name = fs_name + ' ' + sur_name;
 
   useEffect(() => {
     dispatch(profileFriend(_id));
+    dispatch(getMyPost(_id));
   }, [_id, dispatch]);
 
   return (
@@ -401,7 +405,12 @@ const Profile = () => {
           </div>
           <div className='main-right'>
             <CreatePost />
-            <Post />
+
+            {/* User all post */}
+            {post.my_post &&
+              [...post.my_post]
+                .reverse()
+                .map((post, index) => <Post post={post} key={index} />)}
           </div>
         </div>
       </div>

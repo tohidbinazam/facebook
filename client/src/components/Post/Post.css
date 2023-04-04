@@ -74,10 +74,6 @@
   padding: 0px 15px 20px;
 }
 
-.user-post .post-media img {
-  width: 100%;
-}
-
 .post-comments {
   padding: 15px;
 }
@@ -101,9 +97,11 @@
   height: 18px;
 }
 
-.counts {
+.counts button {
   font-size: 14px;
   color: #65676b;
+  border: none;
+  background: none;
 }
 
 .comment-icon {

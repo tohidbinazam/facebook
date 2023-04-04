@@ -1,15 +1,23 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import StoryReels from '../../components/StoryReels/StoryReels';
 import CreatePost from '../../components/CreatePost/CreatePost';
 import Post from '../../components/Post/Post';
 import Header from '../../components/Header/Header';
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import ShowProfile from '../../components/ShowProfile/ShowProfile';
+import { getFriendPost } from '../../redux/post/action';
 
 const Home = () => {
-  const { fs_name, sur_name } = useSelector((state) => state.auth.user);
+  const { user, post } = useSelector((state) => state);
+  const dispatch = useDispatch();
+
+  const { _id, fs_name, sur_name } = user;
   const name = fs_name + ' ' + sur_name;
+
+  useEffect(() => {
+    dispatch(getFriendPost(_id));
+  }, [_id, dispatch]);
 
   return (
     <div>
@@ -74,7 +82,10 @@ const Home = () => {
             <CreatePost />
 
             {/* User Post */}
-            <Post />
+            {post.friends_post &&
+              post.friends_post.map((post, index) => (
+                <Post post={post} key={index} />
+              ))}
           </div>
         </div>
       </div>

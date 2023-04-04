@@ -1,22 +1,45 @@
 import React, { useState } from 'react';
-import user_img from '../../assets/images/user.png';
 import { BsThreeDots } from 'react-icons/bs';
 import { AiOutlineLike } from 'react-icons/ai';
 import { BiWorld } from 'react-icons/bi';
 import Comments from '../Comments/Comments';
+import avatar from '../../assets/images/profile_avatar.png';
 import './Post.css';
 
-const Post = () => {
+const Post = ({ post }) => {
   const [option, setOptions] = useState(false);
+  const images = post.images.length;
+
+  const [show, setShow] = useState(false);
+
+  const handleWidth = (number) => {
+    if (images % 2 !== 0) {
+      if (number === 0) {
+        return 'full';
+      } else {
+        return 'half';
+      }
+    } else {
+      return 'half';
+    }
+  };
+
   return (
     <div>
       <div className='user-post'>
         <div className='user-post-header'>
           <div className='post-info'>
-            <img src={user_img} alt='' />
+            <img
+              src={
+                post.userId.photo
+                  ? `/profile_photos/${post.userId.photo}`
+                  : avatar
+              }
+              alt=''
+            />
             <div className='user-details'>
               <a className='author' href='http'>
-                Asraful Haque
+                {`${post.userId.fs_name} ${post.userId.sur_name}`}
               </a>
               <span>
                 10m
@@ -94,17 +117,19 @@ const Post = () => {
         </div>
         <div className='post-body'>
           <div className='post-content'>
-            <p>
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Impedit
-              optio necessitatibus id nemo iste quod?
-            </p>
+            <p>{post.text}</p>
           </div>
         </div>
-        <div className='post-media'>
-          <img
-            src='https://embedsocial.com/wp-content/uploads/2020/10/add-links-instagram-posts.jpg'
-            alt=''
-          />
+        <div className='allImg'>
+          {post.images.map((img, index) => (
+            <img
+              className={`${handleWidth(index)}`}
+              src={img}
+              alt=''
+              key={index}
+            />
+          ))}
+          {/* https://i.pinimg.com/474x/30/5c/5a/305c5a457807ba421ed67495c93198d3--cover-pics-cover-art.jpg */}
         </div>
         <div className='post-comments'>
           <div className='comments-header'>
@@ -113,7 +138,8 @@ const Post = () => {
               <a href='http'>Kajal Datta, Sufia Sepu and 550 others</a>
             </div>
             <div className='counts'>
-              <a href='http'>95 Comments</a>
+              {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
+              <button onClick={() => setShow(true)}>95 Comments</button>
             </div>
           </div>
           <div className='comments-menu'>
@@ -123,7 +149,11 @@ const Post = () => {
             </button>
 
             {/* Comment Box */}
-            <Comments />
+            <button className='comment-btn'>
+              <span className='comment-icon'></span>
+              <span>Comment</span>
+            </button>
+            {show && <Comments post={post} setShow={setShow} />}
 
             <button className='share-btn'>
               <span className='comment-icon'></span>

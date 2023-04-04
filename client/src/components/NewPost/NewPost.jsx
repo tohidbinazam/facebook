@@ -4,15 +4,52 @@ import ShowProfile from '../ShowProfile/ShowProfile';
 import { BiCaretDown, BiWorld } from 'react-icons/bi';
 import { FcPicture } from 'react-icons/fc';
 import './NewPost.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { createPost } from '../../redux/post/action';
 
 const NewPost = () => {
-  const [show, setShow] = useState(false);
+  const { _id, fs_name, sur_name } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
 
-  const createPost = () => {
-    console.log('create post');
-  };
+  const [show, setShow] = useState(false);
+  const [input, setInput] = useState({
+    text: '',
+    file: '',
+  });
+
   const hideModal = () => {
     setShow(false);
+    setInput({
+      text: '',
+      file: '',
+    });
+  };
+
+  const handleFile = (e) => {
+    const pre_file = input.file;
+    const new_file = e.target.files;
+    const file = [...pre_file, ...new_file];
+    setInput((prev) => ({ ...prev, file }));
+  };
+
+  const handleWidth = (number) => {
+    if (input.file.length % 2 !== 0) {
+      if (number === 0) {
+        return 'full';
+      } else {
+        return 'half';
+      }
+    } else {
+      return 'half';
+    }
+  };
+
+  const postCreate = () => {
+    const data = new FormData();
+    data.append('text', input.text);
+    input.file.map((file) => data.append('file', file));
+    dispatch(createPost(_id, data));
+    hideModal();
   };
 
   return (
@@ -26,14 +63,14 @@ const NewPost = () => {
           title='Create Post'
           close={hideModal}
           button='Post'
-          next={createPost}
+          next={postCreate}
         >
           <div className='create-header'>
             <div className='create-left'>
               <ShowProfile />
             </div>
             <div className='create-center'>
-              <h5>Tohid Bin Azam</h5>
+              <h5>{`${fs_name} ${sur_name}`}</h5>
               <button>
                 <BiWorld /> public <BiCaretDown />
               </button>
@@ -42,27 +79,23 @@ const NewPost = () => {
           <div className='all-content'>
             <div className='text-content'>
               <textarea
-                name=''
-                id=''
+                name='text'
                 placeholder="What's on your mind?"
+                onChange={(e) =>
+                  setInput((prev) => ({ ...prev, text: e.target.value }))
+                }
               ></textarea>
             </div>
-            <div className='allImg'>
-              <img
-                className='full'
-                src='https://i.pinimg.com/474x/30/5c/5a/305c5a457807ba421ed67495c93198d3--cover-pics-cover-art.jpg'
-                alt=''
-              />
-              <img
-                className='half'
-                src='https://i.pinimg.com/474x/30/5c/5a/305c5a457807ba421ed67495c93198d3--cover-pics-cover-art.jpg'
-                alt=''
-              />
-              <img
-                className='half'
-                src='https://i.pinimg.com/474x/30/5c/5a/305c5a457807ba421ed67495c93198d3--cover-pics-cover-art.jpg'
-                alt=''
-              />
+            <div className='allImg round'>
+              {input.file &&
+                Array.from(input.file).map((file, index) => (
+                  <img
+                    className={`${handleWidth(index)}`}
+                    src={URL.createObjectURL(file)}
+                    alt=''
+                    key={index}
+                  />
+                ))}
             </div>
           </div>
           <div className='create-bottom'>
@@ -70,7 +103,16 @@ const NewPost = () => {
               <h4>Add to your post</h4>
             </div>
             <div className='addImg-right'>
-              <FcPicture onClick={() => alert('Hello')} />
+              <input
+                type='file'
+                name='file'
+                id='photo'
+                multiple
+                onChange={handleFile}
+              />
+              <label htmlFor='photo'>
+                <FcPicture />
+              </label>
             </div>
           </div>
         </PostModal>

@@ -21,7 +21,8 @@
   border-radius: 6px;
 }
 .text-content textarea {
-  width: 100%;
+  max-width: 100%;
+  min-height: 20vh;
   border: none;
   font-family: inherit;
   outline: none;
@@ -40,6 +41,9 @@
   padding: 0px 21px;
   border-radius: 6px;
 }
+.addImg-right input {
+  display: none;
+}
 .addImg-right svg {
   font-size: 32px;
   margin-top: 7px;
@@ -54,6 +58,10 @@
   gap: 5px;
 }
 .allImg img {
+  height: 100%;
+  object-fit: cover;
+}
+.allImg.round img {
   height: 100%;
   object-fit: cover;
   border-radius: 8px;
