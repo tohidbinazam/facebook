@@ -5,6 +5,7 @@ import { BiWorld } from 'react-icons/bi';
 import Comments from '../Comments/Comments';
 import avatar from '../../assets/images/profile_avatar.png';
 import './Post.css';
+import timeAgo from '../../utility/timeAgo/timeAgo';
 
 const Post = ({ post }) => {
   const [option, setOptions] = useState(false);
@@ -42,7 +43,7 @@ const Post = ({ post }) => {
                 {`${post.userId.fs_name} ${post.userId.sur_name}`}
               </a>
               <span>
-                10m
+                {timeAgo(post.createdAt)}
                 <BiWorld />
               </span>
             </div>
