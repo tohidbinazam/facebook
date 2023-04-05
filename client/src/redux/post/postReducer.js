@@ -3,7 +3,7 @@ import {
   ADD_POST_LIKE,
   DELETE_POST,
   GET_DATA,
-  SET_COMMENT,
+  SET_COMMENTS,
   SET_FRI_POST,
   SET_MY_POST,
 } from './type';
@@ -39,10 +39,10 @@ const postReducer = (state = initialState, action) => {
         friends_post: payload,
         loading: false,
       };
-    case SET_COMMENT:
+    case SET_COMMENTS:
       return {
         ...state,
-        comment: payload,
+        comments: payload,
         loading: false,
       };
     default:

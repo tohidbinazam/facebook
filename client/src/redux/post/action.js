@@ -3,10 +3,10 @@ import {
   SET_MY_POST,
   GET_DATA,
   SET_FRI_POST,
-  SET_COMMENT,
   ADD_MY_POST,
   DELETE_POST,
   ADD_POST_LIKE,
+  SET_COMMENTS,
 } from './type';
 
 import toaster from '../../utility/toaster';
@@ -98,12 +98,13 @@ export const addPostLike = () => async (dispatch, getState) => {
   }
 };
 
-export const getComment = () => async (dispatch) => {
+// complete
+export const getComment = (id) => async (dispatch) => {
   try {
     dispatch(sentRequest());
-    const res = await axios.get('/api/v1/post/me');
+    const res = await axios.get(`/api/v1/post/comment/${id}`);
     dispatch({
-      type: SET_COMMENT,
+      type: SET_COMMENTS,
       payload: res.data,
     });
   } catch (err) {
@@ -115,7 +116,7 @@ export const postComment = () => async (dispatch) => {
   try {
     const res = await axios.post('/api/v1/post/me');
     dispatch({
-      type: SET_COMMENT,
+      type: SET_COMMENTS,
       payload: res.data,
     });
   } catch (err) {

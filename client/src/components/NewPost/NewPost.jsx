@@ -47,7 +47,7 @@ const NewPost = () => {
   const postCreate = () => {
     const data = new FormData();
     data.append('text', input.text);
-    input.file.map((file) => data.append('file', file));
+    input.file && input.file.map((file) => data.append('file', file));
     dispatch(createPost(_id, data));
     hideModal();
   };

@@ -7,6 +7,7 @@ import {
   createPost,
   deletePost,
   editPost,
+  getComment,
   myAllPost,
 } from '../controllers/postController.js';
 import { multer_upload, uploadImage } from '../middlewares/uploadImage.js';
@@ -21,6 +22,10 @@ router
   .delete(deletePost);
 router.route('/all/:userId').get(allUserPost);
 router.route('/like/:postId').post(addLike);
-router.route('/comment/:postId').post(addComment).patch(addCommentLike);
+router
+  .route('/comment/:postId')
+  .get(getComment)
+  .post(addComment)
+  .patch(addCommentLike);
 
 export default router;

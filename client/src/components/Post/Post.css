@@ -75,7 +75,7 @@
 }
 
 .post-comments {
-  padding: 15px;
+  padding: 0px 15px 15px 15px;
 }
 
 .comments-header {
@@ -102,6 +102,7 @@
   color: #65676b;
   border: none;
   background: none;
+  cursor: pointer;
 }
 
 .comment-icon {

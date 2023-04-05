@@ -91,6 +91,18 @@ export const addLike = async (req, res, next) => {
   }
 };
 
+export const getComment = async (req, res, next) => {
+  const { postId } = req.params;
+  try {
+    const post = await Post.findById(postId)
+      .populate('comments.user', 'fs_name sur_name photo')
+      .select('comments');
+    res.status(201).json(post.comments);
+  } catch (error) {
+    next(error);
+  }
+};
+
 export const addComment = async (req, res, next) => {
   const { postId } = req.params;
   const { userId, text } = req.body;

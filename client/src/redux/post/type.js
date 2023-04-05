@@ -7,4 +7,4 @@ export const DELETE_POST = 'DELETE_POST';
 export const ADD_POST_LIKE = 'ADD_POST_LIKE';
 
 export const SET_FRI_POST = 'SET_FRI_POST';
-export const SET_COMMENT = 'SET_COMMENT';
+export const SET_COMMENTS = 'SET_COMMENTS';
