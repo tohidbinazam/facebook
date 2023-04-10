@@ -12,12 +12,15 @@ import UploadProfile from '../../components/UploadProfile/UploadProfile';
 import { profileFriend } from '../../redux/friend/actions';
 import Details from '../../components/Details/Details';
 import CoverPhoto from '../../components/CoverPhoto/CoverPhoto';
-import { getMyPost } from '../../redux/post/action';
+import { getMyPost, postPhotos } from '../../redux/post/action';
+import avatar from '../../assets/images/profile_avatar.png';
 
 const Profile = () => {
   const dispatch = useDispatch();
 
-  const { user, post } = useSelector((state) => state);
+  const { user, post, friend } = useSelector((state) => state);
+  const { friend_list } = friend;
+  const { my_post, post_photos } = post;
 
   const {
     _id,
@@ -36,6 +39,7 @@ const Profile = () => {
   const name = fs_name + ' ' + sur_name;
 
   useEffect(() => {
+    dispatch(postPhotos(_id));
     dispatch(profileFriend(_id));
     dispatch(getMyPost(_id));
   }, [_id, dispatch]);
@@ -267,42 +271,10 @@ const Profile = () => {
                   <button>See All Photos</button>
                 </div>
                 <div className='photo-body'>
-                  <img
-                    src='https://unitedthemes.com/wp-content/uploads/2018/09/team3.jpg'
-                    alt=''
-                  />
-                  <img
-                    src='https://unitedthemes.com/wp-content/uploads/2018/09/team2.jpg'
-                    alt=''
-                  />
-                  <img
-                    src='https://unitedthemes.com/wp-content/uploads/2018/09/team4.jpg'
-                    alt=''
-                  />
-                  <img
-                    src='https://unitedthemes.com/wp-content/uploads/2018/09/team1.jpg'
-                    alt=''
-                  />
-                  <img
-                    src='https://unitedthemes.com/wp-content/uploads/2018/09/team2.jpg'
-                    alt=''
-                  />
-                  <img
-                    src='https://unitedthemes.com/wp-content/uploads/2018/09/team3.jpg'
-                    alt=''
-                  />
-                  <img
-                    src='https://unitedthemes.com/wp-content/uploads/2018/09/team1.jpg'
-                    alt=''
-                  />
-                  <img
-                    src='https://unitedthemes.com/wp-content/uploads/2018/09/team2.jpg'
-                    alt=''
-                  />
-                  <img
-                    src='https://unitedthemes.com/wp-content/uploads/2018/09/team4.jpg'
-                    alt=''
-                  />
+                  {post_photos &&
+                    post_photos.map((image, index) => (
+                      <img src={image} key={index} alt='' />
+                    ))}
                 </div>
               </div>
             </FBCRUD>
@@ -318,87 +290,20 @@ const Profile = () => {
                   </div>
                 </div>
                 <div className='fb-friend-body'>
-                  <div className='fb-friend-block'>
-                    <img
-                      src='https://unitedthemes.com/wp-content/uploads/2018/09/team4.jpg'
-                      alt=''
-                    />
-                    <div className='fb-friend-name'>
-                      <h5>John Doe</h5>
-                    </div>
-                  </div>
-                  <div className='fb-friend-block'>
-                    <img
-                      src='https://unitedthemes.com/wp-content/uploads/2018/09/team4.jpg'
-                      alt=''
-                    />
-                    <div className='fb-friend-name'>
-                      <h5>John Doe</h5>
-                    </div>
-                  </div>
-                  <div className='fb-friend-block'>
-                    <img
-                      src='https://unitedthemes.com/wp-content/uploads/2018/09/team4.jpg'
-                      alt=''
-                    />
-                    <div className='fb-friend-name'>
-                      <h5>John Doe</h5>
-                    </div>
-                  </div>
-                  <div className='fb-friend-block'>
-                    <img
-                      src='https://unitedthemes.com/wp-content/uploads/2018/09/team4.jpg'
-                      alt=''
-                    />
-                    <div className='fb-friend-name'>
-                      <h5>John Doe</h5>
-                    </div>
-                  </div>
-                  <div className='fb-friend-block'>
-                    <img
-                      src='https://unitedthemes.com/wp-content/uploads/2018/09/team4.jpg'
-                      alt=''
-                    />
-                    <div className='fb-friend-name'>
-                      <h5>John Doe</h5>
-                    </div>
-                  </div>
-                  <div className='fb-friend-block'>
-                    <img
-                      src='https://unitedthemes.com/wp-content/uploads/2018/09/team4.jpg'
-                      alt=''
-                    />
-                    <div className='fb-friend-name'>
-                      <h5>John Doe</h5>
-                    </div>
-                  </div>
-                  <div className='fb-friend-block'>
-                    <img
-                      src='https://unitedthemes.com/wp-content/uploads/2018/09/team4.jpg'
-                      alt=''
-                    />
-                    <div className='fb-friend-name'>
-                      <h5>John Doe</h5>
-                    </div>
-                  </div>
-                  <div className='fb-friend-block'>
-                    <img
-                      src='https://unitedthemes.com/wp-content/uploads/2018/09/team4.jpg'
-                      alt=''
-                    />
-                    <div className='fb-friend-name'>
-                      <h5>John Doe</h5>
-                    </div>
-                  </div>
-                  <div className='fb-friend-block'>
-                    <img
-                      src='https://unitedthemes.com/wp-content/uploads/2018/09/team4.jpg'
-                      alt=''
-                    />
-                    <div className='fb-friend-name'>
-                      <h5>John Doe</h5>
-                    </div>
-                  </div>
+                  {friend_list &&
+                    friend_list.map((friend, index) => (
+                      <div className='fb-friend-block' key={index}>
+                        <img
+                          src={
+                            friend.photo ? `/profile_photos/${photo}` : avatar
+                          }
+                          alt=''
+                        />
+                        <div className='fb-friend-name'>
+                          <h5>{`${friend.fs_name} ${friend.sur_name}`}</h5>
+                        </div>
+                      </div>
+                    ))}
                 </div>
               </div>
             </FBCRUD>
@@ -407,8 +312,8 @@ const Profile = () => {
             <CreatePost />
 
             {/* User all post */}
-            {post.my_post &&
-              [...post.my_post]
+            {my_post &&
+              [...my_post]
                 .reverse()
                 .map((post, index) => <Post post={post} key={index} />)}
           </div>

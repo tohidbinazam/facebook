@@ -5,11 +5,13 @@ import {
   SET_FRI_POST,
   ADD_MY_POST,
   DELETE_POST,
-  ADD_POST_LIKE,
+  // UPDATE_COMMENT,
   SET_COMMENTS,
+  POST_PHOTOS,
 } from './type';
 
 import toaster from '../../utility/toaster';
+import replaceData from '../../utility/replaceData/replaceData';
 
 const sentRequest = () => ({
   type: GET_DATA,
@@ -83,15 +85,54 @@ export const getFriendPost = (id) => async (dispatch) => {
   }
 };
 
-export const addPostLike = () => async (dispatch, getState) => {
-  const post = getState().post.my_post;
+export const addRemoveLike =
+  (postId, userId, method) => async (dispatch, getState) => {
+    try {
+      const { my_post, friends_post } = getState().post;
+      const res = await axios({
+        method: method,
+        url: `/api/v1/post/like/${postId}`,
+        data: { userId },
+      });
+      if (userId === res.data.userId._id) {
+        const data = replaceData(my_post, res.data);
+        dispatch({
+          type: SET_MY_POST,
+          payload: data,
+        });
+      } else {
+        const data = replaceData(friends_post, res.data);
+        dispatch({
+          type: SET_FRI_POST,
+          payload: data,
+        });
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+// complete
+export const addCommentLike = (postId, data) => async (dispatch) => {
   try {
-    const res = await axios.post('/api/v1/post/me');
-    const index = post.findIndex((post) => post._id === res.data._id);
-    post[index] = res.data;
+    const res = await axios.patch(`/api/v1/post/comment/${postId}`, data);
     dispatch({
-      type: ADD_POST_LIKE,
-      payload: post,
+      type: SET_COMMENTS,
+      payload: res.data,
+    });
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+// complete
+// little bit change in Api url
+export const removeCommentLike = (postId, data) => async (dispatch) => {
+  try {
+    const res = await axios.patch(`/api/v1/post/comment/like/${postId}`, data);
+    dispatch({
+      type: SET_COMMENTS,
+      payload: res.data,
     });
   } catch (err) {
     console.log(err);
@@ -112,11 +153,24 @@ export const getComment = (id) => async (dispatch) => {
   }
 };
 
-export const postComment = () => async (dispatch) => {
+// complete
+export const postComment = (id, comment) => async (dispatch) => {
   try {
-    const res = await axios.post('/api/v1/post/me');
+    const res = await axios.post(`/api/v1/post/comment/${id}`, comment);
     dispatch({
       type: SET_COMMENTS,
+      payload: res.data,
+    });
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const postPhotos = (userId) => async (dispatch) => {
+  try {
+    const res = await axios.get(`/api/v1/post/photos/${userId}`);
+    dispatch({
+      type: POST_PHOTOS,
       payload: res.data,
     });
   } catch (err) {

@@ -31,7 +31,12 @@
   gap: 20px;
   margin-left: 10px;
 }
-
+.like {
+  cursor: pointer;
+}
+.like.active {
+  color: var(--blue-color);
+}
 .send-comment {
   display: flex;
   justify-content: space-between;

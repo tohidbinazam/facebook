@@ -6,8 +6,14 @@ import Comments from '../Comments/Comments';
 import avatar from '../../assets/images/profile_avatar.png';
 import './Post.css';
 import timeAgo from '../../utility/timeAgo/timeAgo';
+import { ReactComponent as Like } from '../../assets/svg/like.svg';
+import { useDispatch, useSelector } from 'react-redux';
+import findId from '../../utility/findId/findId';
+import { addRemoveLike } from '../../redux/post/action';
 
 const Post = ({ post }) => {
+  const { _id } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
   const [option, setOptions] = useState(false);
   const images = post.images.length;
 
@@ -23,6 +29,12 @@ const Post = ({ post }) => {
     } else {
       return 'half';
     }
+  };
+
+  const handleLike = (e) => {
+    const { classList } = e.target;
+    const check = classList.contains('active');
+    dispatch(addRemoveLike(post._id, _id, check ? 'patch' : 'post'));
   };
 
   return (
@@ -144,10 +156,19 @@ const Post = ({ post }) => {
             </div>
           </div>
           <div className='comments-menu'>
-            <button className='like-btn'>
-              <span className='comment-icon'></span>
-              <span>Like</span>
-            </button>
+            <div className='like-div'>
+              {findId(_id, post.likes) ? (
+                <button className='like-btn active' onClick={handleLike}>
+                  <Like />
+                  <span>Like</span>
+                </button>
+              ) : (
+                <button className='like-btn' onClick={handleLike}>
+                  <span className='comment-icon'></span>
+                  <span>Like</span>
+                </button>
+              )}
+            </div>
 
             {/* Comment Box */}
             <button className='comment-btn'>

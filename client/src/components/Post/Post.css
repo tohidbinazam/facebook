@@ -24,6 +24,7 @@
   width: 40px;
   height: 40px;
   border-radius: 50%;
+  object-fit: cover;
 }
 
 .user-post-header .post-info .user-details {
@@ -107,7 +108,7 @@
 
 .comment-icon {
   width: 24px;
-  height: 20px;
+  height: 19px;
   background-image: url('../../assets/icons/comments.png');
   display: block;
 }
@@ -124,7 +125,7 @@
   background-position: 0px -269px;
 }
 
-.comments-menu {
+/* .comments-menu {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -148,6 +149,61 @@
   border-radius: 6px;
   width: calc(100% / 3);
   margin: auto;
+}
+.like-btn span {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.like-btn span svg {
+  width: 12%;
+}
+
+.like-btn:hover,
+.comment-btn:hover,
+.share-btn:hover {
+  background-color: #f4f4f4;
+} */
+
+.comments-menu {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  margin: 12px 0px;
+  padding: 6px 0px;
+  border-top: 1px solid var(--bg-tertiary);
+  border-bottom: 1px solid var(--bg-tertiary);
+}
+.like-div,
+.comment-btn,
+.share-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2px;
+  background: none;
+  border: none;
+  height: 42px;
+  border-radius: 6px;
+  width: calc(100% / 3);
+  cursor: pointer;
+}
+.like-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2px;
+  background: none;
+  border: none;
+  height: 42px;
+  width: 100%;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.like-btn svg {
+  width: 12%;
 }
 
 .like-btn:hover,

@@ -3,6 +3,7 @@ const initialState = {
   friends_post: null,
   comments: null,
   loading: false,
+  post_photos: null,
 };
 
 export default initialState;

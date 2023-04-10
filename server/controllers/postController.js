@@ -1,3 +1,4 @@
+import mongoose from 'mongoose';
 import Post from '../models/Post.js';
 import User from '../models/userModel.js';
 
@@ -53,7 +54,7 @@ export const myAllPost = async (req, res, next) => {
       'userId',
       'fs_name sur_name photo'
     );
-    res.status(201).json(post);
+    res.status(200).json(post);
   } catch (error) {
     next(error);
   }
@@ -69,7 +70,7 @@ export const allUserPost = async (req, res, next) => {
     const allPost = await Post.find({
       userId: { $in: [...following, ...friend_list] },
     }).populate('userId', 'fs_name sur_name photo');
-    res.status(201).json(allPost);
+    res.status(200).json(allPost);
   } catch (error) {
     next(error);
   }
@@ -84,8 +85,24 @@ export const addLike = async (req, res, next) => {
       postId,
       { $push: { likes: { $each: [userId], $position: 0 } } },
       { new: true }
-    );
+    ).populate('userId', 'fs_name sur_name photo');
     res.status(201).json(post);
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const removeLike = async (req, res, next) => {
+  const { postId } = req.params;
+  const userId = req.body.userId;
+
+  try {
+    const post = await Post.findByIdAndUpdate(
+      postId,
+      { $pull: { likes: userId } },
+      { new: true }
+    ).populate('userId', 'fs_name sur_name photo');
+    res.status(200).json(post);
   } catch (error) {
     next(error);
   }
@@ -97,7 +114,7 @@ export const getComment = async (req, res, next) => {
     const post = await Post.findById(postId)
       .populate('comments.user', 'fs_name sur_name photo')
       .select('comments');
-    res.status(201).json(post.comments);
+    res.status(200).json(post.comments);
   } catch (error) {
     next(error);
   }
@@ -112,17 +129,14 @@ export const addComment = async (req, res, next) => {
     const post = await Post.findByIdAndUpdate(
       postId,
       {
-        $push: {
-          comments: {
-            $each: [{ user: userId, text }],
-            $position: 0,
-          },
-        },
+        $push: { comments: { user: userId, text } },
       },
       { new: true }
-    ).populate('comments.user', 'fs_name sur_name photo');
+    )
+      .populate('comments.user', 'fs_name sur_name photo')
+      .select('comments');
 
-    res.status(201).json(post);
+    res.status(201).json(post.comments);
   } catch (error) {
     next(error);
   }
@@ -151,7 +165,59 @@ export const addCommentLike = async (req, res, next) => {
       .populate('comments.user', 'fs_name sur_name photo')
       .select('comments');
 
-    res.status(201).json(post);
+    // const commentId = 'your-comment-id-here';
+    // const userId = 'your-user-id-here';
+
+    // Post.findOneAndUpdate(
+    //   { 'comments._id': commentId },
+    //   { $push: { 'comments.$.likes': { $each: [userId], $position: 0 } } },
+    //   { new: true }
+    // );
+    res.status(200).json(post.comments);
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const removeCommentLike = async (req, res, next) => {
+  const { postId } = req.params;
+  const { commentId, userId } = req.body;
+
+  try {
+    const post = await Post.findByIdAndUpdate(
+      postId,
+      {
+        $pull: {
+          'comments.$[comment].likes': userId,
+        },
+      },
+      {
+        new: true,
+        arrayFilters: [{ 'comment._id': commentId }],
+      }
+    )
+      .populate('comments.user', 'fs_name sur_name photo')
+      .select('comments');
+    res.status(200).json(post.comments);
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const postImages = async (req, res, next) => {
+  const { userId } = req.params;
+
+  try {
+    const latestPosts = await Post.aggregate([
+      { $match: { userId: mongoose.Types.ObjectId(userId) } },
+      { $sort: { createdAt: -1 } },
+      { $limit: 12 },
+      { $unwind: '$images' },
+      { $group: { _id: null, images: { $push: '$images' } } },
+      { $project: { _id: 0, images: { $slice: ['$images', 9] } } },
+    ]);
+    const allImages = latestPosts.length ? latestPosts[0].images : [];
+    res.status(200).json(allImages);
   } catch (error) {
     next(error);
   }

@@ -74,7 +74,7 @@ export const profileFriend = async (req, res, next) => {
         'fs_name sur_name photo',
         null,
         {
-          limit: 8,
+          limit: 9,
         }
       )
       .select('isVerified');

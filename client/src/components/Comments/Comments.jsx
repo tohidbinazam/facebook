@@ -5,16 +5,39 @@ import { MdSend } from 'react-icons/md';
 import './Comments.css';
 import ShowProfile from '../ShowProfile/ShowProfile';
 import { useDispatch, useSelector } from 'react-redux';
-import { getComment } from '../../redux/post/action';
+import {
+  addCommentLike,
+  getComment,
+  postComment,
+  removeCommentLike,
+} from '../../redux/post/action';
 import timeAgo from '../../utility/timeAgo/timeAgo';
+import findId from '../../utility/findId/findId';
 
 const Comments = ({ post, setShow }) => {
   const { fs_name } = post.userId;
 
   const { comments, loading } = useSelector((state) => state.post);
+  const { _id } = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
   const [text, setText] = useState('');
+
+  const handleComment = (e) => {
+    dispatch(postComment(post._id, { userId: _id, text }));
+    setText('');
+  };
+
+  const handleLike = (e, commentId) => {
+    const { classList } = e.target;
+    const check = classList.contains('active');
+    const data = { commentId, userId: _id };
+    if (check) {
+      dispatch(removeCommentLike(post._id, data));
+    } else {
+      dispatch(addCommentLike(post._id, data));
+    }
+  };
 
   useEffect(() => {
     dispatch(getComment(post._id));
@@ -55,7 +78,14 @@ const Comments = ({ post, setShow }) => {
                         <p>{comment.text}</p>
                       </div>
                       <div className='comment-time'>
-                        <h6 className='like'>{comment.likes.length} Like</h6>
+                        <h6
+                          className={`like ${
+                            findId(_id, comment.likes) && 'active'
+                          }`}
+                          onClick={(e) => handleLike(e, comment._id)}
+                        >
+                          {comment.likes.length} Like
+                        </h6>
                         <h6 className='time'>{timeAgo(comment.date)}</h6>
                       </div>
                     </div>
@@ -72,10 +102,11 @@ const Comments = ({ post, setShow }) => {
               type='text'
               name='text'
               value={text}
+              onKeyUp={(e) => e.keyCode === 13 && handleComment()}
               onChange={(e) => setText(e.target.value)}
               placeholder='Write a comment...'
             />
-            <button>
+            <button onClick={handleComment}>
               <MdSend />
             </button>
           </div>

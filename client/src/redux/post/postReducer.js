@@ -1,11 +1,12 @@
 import initialState from './initialState';
 import {
-  ADD_POST_LIKE,
+  UPDATE_COMMENT,
   DELETE_POST,
   GET_DATA,
   SET_COMMENTS,
   SET_FRI_POST,
   SET_MY_POST,
+  POST_PHOTOS,
 } from './type';
 
 const postReducer = (state = initialState, action) => {
@@ -28,7 +29,7 @@ const postReducer = (state = initialState, action) => {
         ...state,
         my_post: state.my_post.filter((post) => post._id !== payload),
       };
-    case ADD_POST_LIKE:
+    case UPDATE_COMMENT:
       return {
         ...state,
         my_post: payload,
@@ -43,6 +44,12 @@ const postReducer = (state = initialState, action) => {
       return {
         ...state,
         comments: payload,
+        loading: false,
+      };
+    case POST_PHOTOS:
+      return {
+        ...state,
+        post_photos: payload,
         loading: false,
       };
     default:
