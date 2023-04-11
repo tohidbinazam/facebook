@@ -7,6 +7,7 @@ import {
   SET_FRI_POST,
   SET_MY_POST,
   POST_PHOTOS,
+  SINGLE_POST,
 } from './type';
 
 const postReducer = (state = initialState, action) => {
@@ -22,6 +23,12 @@ const postReducer = (state = initialState, action) => {
       return {
         ...state,
         my_post: payload,
+        loading: false,
+      };
+    case SINGLE_POST:
+      return {
+        ...state,
+        single_post: payload,
         loading: false,
       };
     case DELETE_POST:

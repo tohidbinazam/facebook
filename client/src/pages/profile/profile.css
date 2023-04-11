@@ -195,6 +195,9 @@ span.camera-icon {
   background-position: 0px 126px;
   background-size: cover;
 }
+.profile-followers {
+  margin-right: 15px;
+}
 
 .fb-profile-body {
   min-height: 300px;

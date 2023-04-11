@@ -53,7 +53,7 @@ const PopUp = ({ features, hide }) => {
             >
               <div className='img-switch-indicator'>
                 {features.map((item, index) => (
-                  <div className={`indicator ${index < counter && 'active'}`}>
+                  <div className={`indicator ${index < counter && 'active'}`} key={index}>
                     {index === counter && <div className='bar-progress'></div>}
                   </div>
                 ))}

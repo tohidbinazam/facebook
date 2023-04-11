@@ -20,24 +20,26 @@ export const uploadImage = async (req, res, next) => {
   const folder = req.body.folder;
   const photos = [];
 
-  files != []
-    ? files.forEach(async (file) => {
-        const file64 = dataUri(file);
+  if (files.length == 0) {
+    req.photos = photos;
+    next();
+  }
 
-        await cloudinary.uploader
-          .upload(file64, {
-            folder,
-          })
-          .then((result) => {
-            photos.push(result.secure_url);
-          });
+  files.forEach(async (file) => {
+    const file64 = dataUri(file);
 
-        // Check for all files uploaded
-        if (photos.length == files.length) {
-          req.photos = photos;
-          next();
-        }
+    await cloudinary.uploader
+      .upload(file64, {
+        folder,
       })
-    : (req.photos = photos);
-  next();
+      .then((result) => {
+        photos.push(result.secure_url);
+      });
+
+    // Check for all files uploaded
+    if (photos.length == files.length) {
+      req.photos = photos;
+      next();
+    }
+  });
 };

@@ -19,7 +19,7 @@ const Profile = () => {
   const dispatch = useDispatch();
 
   const { user, post, friend } = useSelector((state) => state);
-  const { friend_list } = friend;
+  const { friend_list, follower, following } = friend;
   const { my_post, post_photos } = post;
 
   const {
@@ -55,64 +55,31 @@ const Profile = () => {
           <div className='profile-info'>
             <UploadProfile />
             <div className='profile-desc'>
-              <h1>
-                {name}
-                <span> ( neooo inc )</span>
-              </h1>
+              <h1>{name}</h1>
               <div className='profile-follow-details'>
-                <span className='profile-followers'>15k follower</span>
-                <span className='profile-following'>1k following</span>
+                <span className='profile-followers'>
+                  {follower && follower.length} follower
+                </span>
+                <span className='profile-following'>
+                  {following && following.length} following
+                </span>
               </div>
+              {/* https://unitedthemes.com/wp-content/uploads/2018/09/team4.jpg */}
               <div className='profile-friends-list'>
                 <ul>
-                  <li>
-                    <img
-                      src='https://unitedthemes.com/wp-content/uploads/2018/09/team4.jpg'
-                      alt=''
-                    />
-                  </li>
-                  <li>
-                    <img
-                      src='https://unitedthemes.com/wp-content/uploads/2018/09/team4.jpg'
-                      alt=''
-                    />
-                  </li>
-                  <li>
-                    <img
-                      src='https://unitedthemes.com/wp-content/uploads/2018/09/team4.jpg'
-                      alt=''
-                    />
-                  </li>
-                  <li>
-                    <img
-                      src='https://unitedthemes.com/wp-content/uploads/2018/09/team3.jpg'
-                      alt=''
-                    />
-                  </li>
-                  <li>
-                    <img
-                      src='https://unitedthemes.com/wp-content/uploads/2018/09/team3.jpg'
-                      alt=''
-                    />
-                  </li>
-                  <li>
-                    <img
-                      src='https://unitedthemes.com/wp-content/uploads/2018/09/team3.jpg'
-                      alt=''
-                    />
-                  </li>
-                  <li>
-                    <img
-                      src='https://unitedthemes.com/wp-content/uploads/2018/09/team3.jpg'
-                      alt=''
-                    />
-                  </li>
-                  <li>
-                    <img
-                      src='https://unitedthemes.com/wp-content/uploads/2018/09/team3.jpg'
-                      alt=''
-                    />
-                  </li>
+                  {follower &&
+                    follower.map((follower) => (
+                      <li>
+                        <img
+                          src={
+                            follower.photo
+                              ? `/profile_photos/${follower.photo}`
+                              : avatar
+                          }
+                          alt=''
+                        />
+                      </li>
+                    ))}
                 </ul>
               </div>
             </div>

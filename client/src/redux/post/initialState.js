@@ -1,6 +1,7 @@
 const initialState = {
   my_post: null,
   friends_post: null,
+  single_post: null,
   comments: null,
   loading: false,
   post_photos: null,

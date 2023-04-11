@@ -8,6 +8,7 @@ import {
   deletePost,
   editPost,
   getComment,
+  getSinglePost,
   myAllPost,
   postImages,
   removeCommentLike,
@@ -23,6 +24,7 @@ router
   .get(myAllPost)
   .patch(multer_upload, uploadImage, editPost)
   .delete(deletePost);
+router.route('/single/:postId').get(getSinglePost);
 router.route('/all/:userId').get(allUserPost);
 router.route('/like/:postId').post(addLike).patch(removeLike);
 router

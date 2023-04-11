@@ -19,6 +19,20 @@ export const createPost = async (req, res, next) => {
   }
 };
 
+export const getSinglePost = async (req, res, next) => {
+  const { postId } = req.params;
+
+  try {
+    const post = await Post.findById(postId).populate(
+      'userId',
+      'fs_name sur_name photo'
+    );
+    res.status(200).json(post);
+  } catch (error) {
+    next(error);
+  }
+};
+
 export const editPost = async (req, res, next) => {
   const postId = req.params.userId;
   const images = req.photos;

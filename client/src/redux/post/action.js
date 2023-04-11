@@ -8,6 +8,7 @@ import {
   // UPDATE_COMMENT,
   SET_COMMENTS,
   POST_PHOTOS,
+  SINGLE_POST,
 } from './type';
 
 import toaster from '../../utility/toaster';
@@ -38,6 +39,20 @@ export const getMyPost = (id) => async (dispatch) => {
     const res = await axios.get(`/api/v1/post/${id}`);
     dispatch({
       type: SET_MY_POST,
+      payload: res.data,
+    });
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+// complete
+export const getSinglePost = (postId) => async (dispatch) => {
+  try {
+    dispatch(sentRequest());
+    const res = await axios.get(`/api/v1/post/single/${postId}`);
+    dispatch({
+      type: SINGLE_POST,
       payload: res.data,
     });
   } catch (err) {

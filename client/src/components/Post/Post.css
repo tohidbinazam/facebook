@@ -250,7 +250,7 @@
   font-size: 14px;
 }
 
-.post-menu .post-dropdown-menu ul li.divid {
+.post-menu .post-dropdown-menu ul li.divide {
   height: 1px;
   width: 95%;
   background-color: #ced0d4;
@@ -298,16 +298,16 @@
   background-position: 0px -428px;
 }
 
-.post-menu .post-dropdown-menu ul li:nth-child(8) .menu-icon {
+.post-menu .post-dropdown-menu ul li:nth-child(1) .menu-icon {
   background-image: url('../../assets/icons/port-icon-1.png');
   background-position: 0px -387px;
 }
 
-.post-menu .post-dropdown-menu ul li:nth-child(9) .menu-icon {
+.post-menu .post-dropdown-menu ul li:nth-child(3) .menu-icon {
   background-position: 0px -105px;
 }
 
-.post-menu .post-dropdown-menu ul li:nth-child(11) .menu-icon {
+.post-menu .post-dropdown-menu ul li:nth-child(5) .menu-icon {
   background-image: url('../../assets/icons/port-icon-1.png');
   background-position: 0px -596px;
 }

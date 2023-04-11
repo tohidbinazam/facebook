@@ -43,6 +43,7 @@
   border-radius: 10px;
   background-repeat: no-repeat;
   background-position: center;
+  background-size: cover;
 }
 .left-arrow {
   width: 17.5;

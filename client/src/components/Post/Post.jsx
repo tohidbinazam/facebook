@@ -10,17 +10,21 @@ import { ReactComponent as Like } from '../../assets/svg/like.svg';
 import { useDispatch, useSelector } from 'react-redux';
 import findId from '../../utility/findId/findId';
 import { addRemoveLike } from '../../redux/post/action';
+import toaster from '../../utility/toaster';
 
 const Post = ({ post }) => {
   const { _id } = useSelector((state) => state.user);
+  // const _id = '63ab1f73e6710db2c607cb47';
   const dispatch = useDispatch();
+  const { userId, comments, text, images, createdAt, likes } = post;
+
   const [option, setOptions] = useState(false);
-  const images = post.images.length;
+  const photos = images.length;
 
   const [show, setShow] = useState(false);
 
   const handleWidth = (number) => {
-    if (images % 2 !== 0) {
+    if (photos % 2 !== 0) {
       if (number === 0) {
         return 'full';
       } else {
@@ -37,25 +41,27 @@ const Post = ({ post }) => {
     dispatch(addRemoveLike(post._id, _id, check ? 'patch' : 'post'));
   };
 
+  const handleCopy = (e) => {
+    e.preventDefault();
+    navigator.clipboard.writeText(`http://localhost:3000/post/${post._id}`);
+    toaster('Link copied to clipboard', 'success');
+  };
+
   return (
     <div>
       <div className='user-post'>
         <div className='user-post-header'>
           <div className='post-info'>
             <img
-              src={
-                post.userId.photo
-                  ? `/profile_photos/${post.userId.photo}`
-                  : avatar
-              }
+              src={userId.photo ? `/profile_photos/${userId.photo}` : avatar}
               alt=''
             />
             <div className='user-details'>
               <a className='author' href='http'>
-                {`${post.userId.fs_name} ${post.userId.sur_name}`}
+                {`${userId.fs_name} ${userId.sur_name}`}
               </a>
               <span>
-                {timeAgo(post.createdAt)}
+                {timeAgo(createdAt)}
                 <BiWorld />
               </span>
             </div>
@@ -65,59 +71,24 @@ const Post = ({ post }) => {
               <div className='post-dropdown-menu'>
                 <ul>
                   <li>
-                    <a href='http'>
-                      <div className='menu-icon'></div>
-                      <span>Save post</span>
-                    </a>
-                  </li>
-                  <li className='divid'></li>
-                  <li>
-                    <a href='http'>
-                      <div className='menu-icon'></div>
-                      <span>Embed</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href='http'>
-                      <div className='menu-icon'></div>
-                      <span>Who can comment on this post ?</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href='http'>
-                      <div className='menu-icon'></div>
-                      <span>Edit view history</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href='http'>
-                      <div className='menu-icon'></div>
-                      <span>Turn off notification</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href='http'>
-                      <div className='menu-icon'></div>
-                      <span>turn off translation</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href='http'>
+                    {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
+                    <a href='#' onClick={handleCopy}>
                       <div className='menu-icon'></div>
                       <span>Copy link</span>
                     </a>
                   </li>
+                  <li className='divide'></li>
                   <li>
                     <a href='http'>
                       <div className='menu-icon'></div>
                       <span>Edit post</span>
                     </a>
                   </li>
-                  <li className='divid'></li>
+                  <li className='divide'></li>
                   <li>
                     <a href='http'>
                       <div className='menu-icon'></div>
-                      <span>Move trash</span>
+                      <span>Delete Post</span>
                     </a>
                   </li>
                 </ul>
@@ -130,11 +101,11 @@ const Post = ({ post }) => {
         </div>
         <div className='post-body'>
           <div className='post-content'>
-            <p>{post.text}</p>
+            <p>{text}</p>
           </div>
         </div>
         <div className='allImg'>
-          {post.images.map((img, index) => (
+          {images.map((img, index) => (
             <img
               className={`${handleWidth(index)}`}
               src={img}
@@ -152,12 +123,14 @@ const Post = ({ post }) => {
             </div>
             <div className='counts'>
               {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-              <button onClick={() => setShow(true)}>95 Comments</button>
+              <button onClick={() => setShow(true)}>
+                {comments && `${comments.length} Comments`}
+              </button>
             </div>
           </div>
           <div className='comments-menu'>
             <div className='like-div'>
-              {findId(_id, post.likes) ? (
+              {findId(_id, likes) ? (
                 <button className='like-btn active' onClick={handleLike}>
                   <Like />
                   <span>Like</span>

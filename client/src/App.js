@@ -17,6 +17,7 @@ import LoggedOut from './middlewares/LoggedOut';
 import CodeSendCheck from './middlewares/CodeSendCheck';
 import ResetPass from './middlewares/ResetPass';
 import Friends from './pages/Friends/Friends';
+import SinglePost from './pages/SinglePost/SinglePost';
 
 function App() {
   const dispatch = useDispatch();
@@ -46,6 +47,7 @@ function App() {
           <Route path='/profile' element={<Profile />} />
           <Route path='/friends' element={<Friends />} />
         </Route>
+        <Route path='/post/:postId' element={<SinglePost />} />
 
         <Route element={<LoggedOut />}>
           <Route path='/find-account' element={<FindAccount />} />
