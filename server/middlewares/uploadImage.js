@@ -20,7 +20,7 @@ export const uploadImage = async (req, res, next) => {
   const folder = req.body.folder;
   const photos = [];
 
-  files
+  files != []
     ? files.forEach(async (file) => {
         const file64 = dataUri(file);
 
@@ -38,5 +38,6 @@ export const uploadImage = async (req, res, next) => {
           next();
         }
       })
-    : next();
+    : (req.photos = photos);
+  next();
 };

@@ -6,6 +6,7 @@ import { FcPicture } from 'react-icons/fc';
 import './NewPost.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { createPost } from '../../redux/post/action';
+import toaster from '../../utility/toaster';
 
 const NewPost = () => {
   const { _id, fs_name, sur_name } = useSelector((state) => state.user);
@@ -45,6 +46,9 @@ const NewPost = () => {
   };
 
   const postCreate = () => {
+    if (!input.text) {
+      return toaster('Please write something', 'error');
+    }
     const data = new FormData();
     data.append('text', input.text);
     input.file && input.file.map((file) => data.append('file', file));

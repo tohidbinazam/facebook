@@ -38,7 +38,9 @@ const CoverPhoto = () => {
   }, [croppedAreaPixels, file]);
 
   const photoUpload = async () => {
+    // it would be close for hide edit bar
     showCroppedImage();
+
     // manage blob file
     const blob = await fetch(file).then((res) => res.blob());
     const photo = new File([blob], `${name}_profile.jpg`, {
