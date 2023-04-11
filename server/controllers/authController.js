@@ -93,7 +93,7 @@ export const verifyCode = async (req, res, next) => {
       res
         .cookie('fbstk', token, { expires: new Date(Date.now() + 10368000000) })
         .status(200)
-        .json(reason);
+        .json({ user, reason });
     }
 
     if (check.reason == 'forgot-password') {

@@ -16,8 +16,8 @@ const ConfirmFriend = ({ friend }) => {
   };
   return (
     <>
-      {friend.map((data) => (
-        <div className='friend'>
+      {friend.map((data, index) => (
+        <div className='friend' key={index}>
           <img
             src={data.photo ? `/profile_photos/${data.photo}` : avatar}
             alt=''

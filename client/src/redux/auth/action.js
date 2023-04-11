@@ -113,7 +113,7 @@ export const resendCode = (reason) => async (dispatch, getState) => {
   }
 };
 
-// Verify code for account account verification, forgot password etc
+// Verify code for account verification, forgot password etc
 export const verifyCode = (code, navigate) => async (dispatch, getState) => {
   const { user, reason } = getState().auth;
 
@@ -124,7 +124,8 @@ export const verifyCode = (code, navigate) => async (dispatch, getState) => {
     });
     toaster('Code verify successfully', 'success');
 
-    dispatch(reasonAdd(data));
+    dispatch(reasonAdd(data.reason));
+    dispatch(updateData(data.user));
     if (reason === 'verify-account') {
       navigate('/');
     }

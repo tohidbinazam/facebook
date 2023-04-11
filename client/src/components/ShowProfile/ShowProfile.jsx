@@ -4,7 +4,13 @@ import avatar from '../../assets/images/profile_avatar.png';
 
 const ShowProfile = () => {
   const { photo } = useSelector((state) => state.user);
-  return <img src={photo ? `/profile_photos/${photo}` : avatar} alt='' />;
+  return (
+    <img
+      style={{ objectFit: 'cover' }}
+      src={photo ? `/profile_photos/${photo}` : avatar}
+      alt=''
+    />
+  );
 };
 
 export default ShowProfile;
