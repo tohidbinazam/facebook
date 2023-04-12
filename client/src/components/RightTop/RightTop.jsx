@@ -4,7 +4,7 @@ import { logout } from '../../redux/auth/action';
 import ShowProfile from '../ShowProfile/ShowProfile';
 
 const RightTop = () => {
-  const { fs_name, sur_name } = useSelector((state) => state.auth.user);
+  const { fs_name, sur_name } = useSelector((state) => state.user);
   const name = fs_name + ' ' + sur_name;
 
   const dispatch = useDispatch();
