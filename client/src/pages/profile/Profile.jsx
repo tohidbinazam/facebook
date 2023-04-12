@@ -198,6 +198,17 @@ const Profile = () => {
                       <p>{relationship}</p>
                     </li>
                   )}
+                  {follower && (
+                    <li>
+                      <img
+                        src='https://static.xx.fbcdn.net/rsrc.php/v3/yJ/r/OyWm6cSjuMt.png'
+                        alt=''
+                      />
+                      <p>
+                        Followed by <b>{follower.length} people</b>
+                      </p>
+                    </li>
+                  )}
                 </ul>
                 {/* Edit Details */}
                 <Details />
@@ -250,7 +261,7 @@ const Profile = () => {
                 <div className='fb-friend-header'>
                   <div className='friend-left-part'>
                     <h3>Friends</h3>
-                    <span>2804 friends</span>
+                    <span>{friend_list && friend_list.length} friends</span>
                   </div>
                   <div className='friend-right-part'>
                     <button>See all friends</button>
@@ -262,7 +273,9 @@ const Profile = () => {
                       <div className='fb-friend-block' key={index}>
                         <img
                           src={
-                            friend.photo ? `/profile_photos/${photo}` : avatar
+                            friend.photo
+                              ? `/profile_photos/${friend.photo}`
+                              : avatar
                           }
                           alt=''
                         />

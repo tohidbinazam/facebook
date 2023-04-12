@@ -72,9 +72,10 @@ export const editPost = () => async (dispatch) => {
   }
 };
 
+// complete
 export const deletePost = (postId) => async (dispatch) => {
   try {
-    await axios.delete('/api/v1/post/me').then((res) => {
+    await axios.delete(`/api/v1/post/single/${postId}`).then((res) => {
       toaster(res.data, 'success');
       dispatch({
         type: DELETE_POST,
@@ -100,6 +101,7 @@ export const getFriendPost = (id) => async (dispatch) => {
   }
 };
 
+// complete
 export const addRemoveLike =
   (postId, userId, method) => async (dispatch, getState) => {
     try {
@@ -130,7 +132,7 @@ export const addRemoveLike =
 // complete
 export const addCommentLike = (postId, data) => async (dispatch) => {
   try {
-    const res = await axios.patch(`/api/v1/post/comment/${postId}`, data);
+    const res = await axios.post(`/api/v1/post/comment/like/${postId}`, data);
     dispatch({
       type: SET_COMMENTS,
       payload: res.data,
@@ -141,7 +143,6 @@ export const addCommentLike = (postId, data) => async (dispatch) => {
 };
 
 // complete
-// little bit change in Api url
 export const removeCommentLike = (postId, data) => async (dispatch) => {
   try {
     const res = await axios.patch(`/api/v1/post/comment/like/${postId}`, data);
@@ -181,6 +182,7 @@ export const postComment = (id, comment) => async (dispatch) => {
   }
 };
 
+// complete
 export const postPhotos = (userId) => async (dispatch) => {
   try {
     const res = await axios.get(`/api/v1/post/photos/${userId}`);

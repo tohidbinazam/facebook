@@ -2,12 +2,14 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../../redux/auth/action';
 import ShowProfile from '../ShowProfile/ShowProfile';
+import { useNavigate } from 'react-router-dom';
 
 const RightTop = () => {
   const { fs_name, sur_name } = useSelector((state) => state.user);
   const name = fs_name + ' ' + sur_name;
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [user, setUser] = useState(false);
 
   const handleLogout = (e) => {
@@ -71,7 +73,10 @@ const RightTop = () => {
             <div className='user-menu-dropdown'>
               <div className='user-menu-box'>
                 <div className='user-data-box'>
-                  <div className='user-data-box-item'>
+                  <div
+                    className='user-data-box-item'
+                    onClick={() => navigate('/profile')}
+                  >
                     <ShowProfile />
                     <span>{name}</span>
                   </div>

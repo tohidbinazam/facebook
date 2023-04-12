@@ -9,7 +9,7 @@ import timeAgo from '../../utility/timeAgo/timeAgo';
 import { ReactComponent as Like } from '../../assets/svg/like.svg';
 import { useDispatch, useSelector } from 'react-redux';
 import findId from '../../utility/findId/findId';
-import { addRemoveLike } from '../../redux/post/action';
+import { addRemoveLike, deletePost } from '../../redux/post/action';
 import toaster from '../../utility/toaster';
 
 const Post = ({ post }) => {
@@ -45,6 +45,12 @@ const Post = ({ post }) => {
     e.preventDefault();
     navigator.clipboard.writeText(`http://localhost:3000/post/${post._id}`);
     toaster('Link copied to clipboard', 'success');
+  };
+
+  const handleDelete = (e) => {
+    e.preventDefault();
+    dispatch(deletePost(post._id));
+    setOptions(false);
   };
 
   return (
@@ -86,7 +92,8 @@ const Post = ({ post }) => {
                   </li>
                   <li className='divide'></li>
                   <li>
-                    <a href='http'>
+                    {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
+                    <a href='#' onClick={handleDelete}>
                       <div className='menu-icon'></div>
                       <span>Delete Post</span>
                     </a>

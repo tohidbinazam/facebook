@@ -22,17 +22,19 @@ router
   .route('/:userId')
   .post(multer_upload, uploadImage, createPost)
   .get(myAllPost)
-  .patch(multer_upload, uploadImage, editPost)
-  .delete(deletePost);
-router.route('/single/:postId').get(getSinglePost);
+  .patch(multer_upload, uploadImage, editPost);
+
+router.route('/single/:postId').get(getSinglePost).delete(deletePost);
 router.route('/all/:userId').get(allUserPost);
 router.route('/like/:postId').post(addLike).patch(removeLike);
+
+router.route('/comment/:postId').get(getComment).post(addComment);
+
 router
-  .route('/comment/:postId')
-  .get(getComment)
-  .post(addComment)
-  .patch(addCommentLike);
-router.patch('/comment/like/:postId', removeCommentLike);
+  .route('/comment/like/:postId')
+  .post(addCommentLike)
+  .patch(removeCommentLike);
+
 router.route('/photos/:userId').get(postImages);
 
 export default router;
