@@ -14,8 +14,8 @@ Result: Auto past it.
 ### 2. Open terminal in project root folder 'Instagram' and run those commands
 
 ```html
-npm install <br />
-cd client <br />
+npm install
+cd client
 npm install
 ```
 
@@ -38,23 +38,22 @@ start .env
 ```
 
 ```html
-PORT = `Give a server port example 5050`<br />
-APP_URL = http://localhost:3000<br />
-MONGO_STRING = `Hear is your MongoDB database string`<br />
-SECRET_KEY = `JWT secret key`<br />
+PORT = `Give a server port example 5050`
+APP_URL = http://localhost:3000
+MONGO_STRING = `Hear is your MongoDB database string`
+SECRET_KEY = `JWT secret key`
 
-mail service with Gmail:<br />
-MAIL_USER = <br />
-MAIL_PASS = <br />
+mail service with Gmail:
+MAIL_USER = 
+MAIL_PASS = 
 
-BulkSMS BD info:<br />
-SMS_API_KEY = cxVzYEy04o7WVqpJOf77<br />
-SENDER_ID = 8809601004500<br />
-# SENDER_ID = 03590002777<br />
+BulkSMS BD info:
+SMS_API_KEY = 
+SENDER_ID = 
 
-Cloudinary info:<br />
-CLOUD_NAME = <br />
-CLOUD_API_KEY = <br />
+Cloudinary info:
+CLOUD_NAME = 
+CLOUD_API_KEY = 
 CLOUD_API_SECRET =
 ```
 
