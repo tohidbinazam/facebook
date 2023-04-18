@@ -14,7 +14,7 @@ Result: Auto past it.
 ### 2. Open terminal in project root folder 'Instagram' and run those commands
 
 ```html
-npm install cd client npm install
+npm install__ cd client__ npm install__
 ```
 
 and 👇
