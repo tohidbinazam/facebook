@@ -14,7 +14,9 @@ Result: Auto past it.
 ### 2. Open terminal in project root folder 'Instagram' and run those commands
 
 ```html
-npm install__ cd client__ npm install__
+npm install <br />
+cd client <br />
+npm install
 ```
 
 and 👇
@@ -36,13 +38,27 @@ start .env
 ```
 
 ```html
-SERVER_NAME = Instagram SEVER_PORT = 5050 APP_MOOD = Development APP_URL =
-http://localhost:3000 MONGO_STRING = ``Hear is your MongoDB database string``
-SECRET_KEY = ``JWT secret key`` SENDGRID_API_KEY = `Create SendGrid account or
-knock me on messenger`
+PORT = `Give a server port example 5050`<br />
+APP_URL = http://localhost:3000<br />
+MONGO_STRING = `Hear is your MongoDB database string`<br />
+SECRET_KEY = `JWT secret key`<br />
+
+mail service with Gmail:<br />
+MAIL_USER = <br />
+MAIL_PASS = <br />
+
+BulkSMS BD info:<br />
+SMS_API_KEY = cxVzYEy04o7WVqpJOf77<br />
+SENDER_ID = 8809601004500<br />
+# SENDER_ID = 03590002777<br />
+
+Cloudinary info:<br />
+CLOUD_NAME = <br />
+CLOUD_API_KEY = <br />
+CLOUD_API_SECRET =
 ```
 
-Use SendGrid or use by default Gmail service
+to Use Mail service with Gmail, you have to go on Security > App passwords > select option and click generate in your Google account.
 
 Note: [Tohid Bin Azam](https://www.facebook.com/tohidbinazam/) Fb account you can knock me from here
 
